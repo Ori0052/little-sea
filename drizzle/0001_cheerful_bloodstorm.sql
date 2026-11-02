@@ -1,0 +1,1 @@
+ALTER TABLE `presence` ADD `state` text;

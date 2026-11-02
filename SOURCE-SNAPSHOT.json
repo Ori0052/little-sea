@@ -1,0 +1,12 @@
+{
+  "source_commit": "eb3b5826b747c7b0c47c7b75ed8dba6529529549",
+  "sites_version": 34,
+  "live_url": "https://your-little-sea-k29.rhfenrdltkfk.chatgpt.site/",
+  "validation": {
+    "typescript": "passed",
+    "production_build": "passed",
+    "webgl_normal_and_forced_failure_modes": "passed",
+    "no_webgl_arrival_and_map": "passed"
+  },
+  "export_notes": "README updated for GitHub; original starter documentation preserved in docs/STARTER.md. Runtime data and secrets excluded."
+}
