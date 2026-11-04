@@ -1,38 +1,47 @@
 # 나의 작은 바다
 
-바다를 산책하고 다른 방문자들과 쉬어가는 웹사이트입니다.
+파도 소리를 들으며 쉬고, 섬을 탐험하고, 함께 낚시하는 온라인 바다입니다.
 
-- 운영 사이트: https://your-little-sea-k29.rhfenrdltkfk.chatgpt.site/
-- 배포 소스 기준: `eb3b5826b747c7b0c47c7b75ed8dba6529529549` (Sites v34)
-- 달빛 수평선과 파도 해변은 같은 월드 좌표를 공유합니다.
-- 바위섬, 10인 불멍 자리, 장작·오로라 가루·군고구마, 먼 캠핑 섬을 포함합니다.
-- WebGL 실패 시 두 섬을 Canvas 2D로 표시하고 실패 단계를 세션에 기록합니다.
+- 웹: https://little-sea.rhfenrdltkfk.chatgpt.site
+- 앱인토스 appName: `little-sea`
+- 6개 섬, 최대 6인 나무배, 낚시와 모닥불 요리, 텐트 휴식
+- 보물 6종과 각각의 왕관, 종이 카드 부적 10종
+- 서버 세션 인증과 방문자·네트워크별 접속/점유 제한
 
-## 개발
+## 로컬 개발
 
-Node.js 22.13.0 이상이 필요합니다.
+Node.js 24 LTS를 권장합니다. 웹은 Cloudflare Workers/Vinext, 토스는 게임 화면을 공유하는 Vite SPA입니다.
 
 ```sh
 npm ci
+npm ci --prefix apps-in-toss
 npm run dev
 ```
 
-터미널에 표시되는 로컬 주소로 접속합니다. 상세 실행·저장소 설정은 [기존 프로젝트 안내](docs/STARTER.md)를 참고하세요.
+웹 서버가 켜진 뒤 토스 브라우저 미리보기가 필요하면 별도 터미널에서 `npm run dev --prefix apps-in-toss`를 실행합니다. 실제 토스 네이티브 저장·공유·뒤로가기는 콘솔 QR 테스트가 필요합니다.
+
+## 검사와 빌드
 
 ```sh
 npx tsc --noEmit
+node tests/sea-session.test.mjs
 npm run build
+npm run build --prefix apps-in-toss
+node apps-in-toss/tests/platform.test.mjs
 ```
 
-React 19, Vinext/Vite, Cloudflare Workers와 D1을 사용합니다. `db/schema.ts`와 `drizzle/`는 실시간 방문자·자리·모닥불 상태의 스키마와 마이그레이션입니다. 별도 호스팅으로 옮길 때는 D1 `DB` 바인딩과 마이그레이션 적용이 필요합니다. 정적 파일만으로 모든 실시간 기능을 실행할 수는 없습니다.
+GitHub Actions의 **Build Little Sea**가 main 업데이트·PR·수동 실행 시 이 과정을 검사하고 웹 `dist/`와 `little-sea.ait`를 빌드 아티팩트로 보관합니다. GitHub에 소스·그래픽·마이그레이션만 저장하며, 빌드 결과·실행 DB·비밀값은 커밋하지 않습니다.
 
-## 소스 구조
+빌드는 공개 배포나 토스 심사 요청을 자동 실행하지 않습니다. 웹 백엔드는 D1과 보안 세션을 사용하므로 GitHub Pages에 정적 파일만 올려서는 전체 기능이 동작하지 않습니다. 토스 콘솔에는 새 `.ait`와 등록 이미지를 별도로 업로드해야 합니다.
 
-- `app/`: 화면, 스타일과 API
-- `components/`: 바다·섬·캐릭터 렌더링과 상호작용
-- `hooks/`: 실시간 상태와 오디오
-- `db/`, `drizzle/`: 데이터베이스 스키마와 마이그레이션
-- `public/`: 실행에 사용하는 이미지·글꼴 등 에셋
-- `.openai/hosting.json`: 기존 Sites 배포 대상 설정
+## 그래픽
 
-이 복사본은 소스와 실행 에셋을 포함합니다. 비밀키, 로컬 환경 설정, 방문자 데이터베이스, 설치 패키지와 임시 빌드는 포함하지 않습니다. GitHub 업로드만으로 운영 사이트의 배포나 공개 범위가 변경되지는 않습니다.
+보물·왕관은 승인된 진주빛 입체 시안을 투명 PNG로 제작했습니다. `public/treasure-art/`의 원본과 프레임 메타데이터를 수집함·착용 캐릭터가 공유합니다. 수집품 ID를 바꾸지 않으므로 기존 획득 기록과 왕관 선택을 유지합니다. 아직 획득하지 않은 보물과 왕관은 수집함에서 숨깁니다.
+
+로고·부적·보물 및 왕관 일러스트에는 생성형 AI로 제작한 그래픽이 포함되어 있습니다. 이 저장소의 공개 여부가 제3자 의존성이나 에셋의 별도 라이선스를 바꾸지는 않습니다.
+
+## 운영 안내
+
+보안 세션과 네트워크 한도, 토스 연결·등록·실기기 점검은 [토스 안내](apps-in-toss/README.md)를 확인하세요. 새 백엔드를 배포할 때 `drizzle/` 마이그레이션을 함께 적용해야 합니다. 토큰·복구 비밀·네트워크 해시·이용자 저장값은 이 저장소에 포함하지 않습니다.
+
+저장소에는 원래 프로젝트의 Sites 설정과 Worker 빌드 구성이 유지되어 있습니다. 개발 템플릿 안내는 [docs/STARTER.md](docs/STARTER.md)에 보관합니다.

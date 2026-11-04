@@ -1,0 +1,3 @@
+'use client';
+import {useEffect,useRef} from 'react';
+export function SeaIdleNotice({idle,remaining,onResume}:{idle:boolean;remaining:number|null;onResume:()=>void}){const ref=useRef<HTMLDialogElement>(null);useEffect(()=>{if(idle)ref.current?.showModal();return()=>ref.current?.close()},[idle]);return <>{remaining!==null&&!idle&&<div className="sea-idle-warning ui" role="status">조작이 없어 {remaining}초 뒤 접속이 종료돼요.<button onClick={onResume}>계속 머무르기</button></div>}{idle&&<dialog ref={ref} className="sea-idle-dialog" aria-labelledby="sea-idle-title" onCancel={e=>e.preventDefault()}><h2 id="sea-idle-title">잠시 바다를 비워뒀어요.</h2><p>10분 동안 조작이 없어 접속을 종료했어요.<br/>배와 쉬던 자리는 다른 사람이 이용할 수 있어요.<br/>모은 수집품은 그대로 보관돼요.</p><button onClick={onResume}>다시 바다에 들어가기</button></dialog>}</>}

@@ -1,0 +1,52 @@
+name: Build Little Sea
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: little-sea-build-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CI: true
+      SHARP_IGNORE_GLOBAL_LIBVIPS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            apps-in-toss/package-lock.json
+      - name: Install web dependencies
+        run: npm ci --include=dev --include=optional --no-audit --no-fund
+      - name: Install Toss dependencies
+        run: npm ci --prefix apps-in-toss --no-audit --no-fund
+      - name: Type check
+        run: npx tsc --noEmit
+      - name: Security regression checks
+        run: node tests/sea-session.test.mjs
+      - name: Build web
+        run: npm run build
+      - name: Build Apps in Toss
+        run: npm run build --prefix apps-in-toss
+      - name: Check native adapters and bundled assets
+        run: node apps-in-toss/tests/platform.test.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: little-sea-build-${{ github.sha }}
+          path: |
+            dist/
+            apps-in-toss/little-sea.ait
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7

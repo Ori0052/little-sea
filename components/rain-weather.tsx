@@ -1,0 +1,2 @@
+'use client';
+export function RainWeather(){return <div className="rain-weather" aria-hidden="true"><div className="rain-mist"/>{Array.from({length:68},(_,i)=><i className="rain-drop" key={i} style={{left:`${(i*37)%103}%`,animationDelay:`${-i*.17}s`,animationDuration:`${.75+(i%7)*.09}s`,height:14+i%4*4,opacity:.18+i%4*.055}}/>)}<div className="rain-ripples">{Array.from({length:18},(_,i)=><b key={i} style={{left:`${8+i*29%87}%`,top:`${55+i*17%40}%`,animationDelay:`${-i*.37}s`}}/>)}</div></div>}

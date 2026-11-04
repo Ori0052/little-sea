@@ -43,6 +43,27 @@
       "when": 1793590998424,
       "tag": "0005_sweet_hawkeye",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1793628175357,
+      "tag": "0006_abandoned_mysterio",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1793686717464,
+      "tag": "0007_many_firestar",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1793699568535,
+      "tag": "0008_salty_korvac",
+      "breakpoints": true
     }
   ]
 }

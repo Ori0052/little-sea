@@ -1,0 +1,146 @@
+{
+  "royal-pearl": {
+    "treasure": {
+      "file": "royal-pearl.png",
+      "width": 1254,
+      "height": 1254,
+      "frame": [
+        108,
+        115,
+        1024,
+        1030
+      ]
+    },
+    "crown": {
+      "file": "crowns.png",
+      "width": 1536,
+      "height": 1024,
+      "frame": [
+        61,
+        141,
+        402,
+        286
+      ]
+    }
+  },
+  "coral-jewel": {
+    "treasure": {
+      "file": "coral-jewel.png",
+      "width": 1254,
+      "height": 1254,
+      "frame": [
+        179,
+        189,
+        865,
+        921
+      ]
+    },
+    "crown": {
+      "file": "crowns.png",
+      "width": 1536,
+      "height": 1024,
+      "frame": [
+        563,
+        122,
+        421,
+        305
+      ]
+    }
+  },
+  "moon-compass": {
+    "treasure": {
+      "file": "moon-compass.png",
+      "width": 1254,
+      "height": 1254,
+      "frame": [
+        182,
+        71,
+        865,
+        1074
+      ]
+    },
+    "crown": {
+      "file": "crowns.png",
+      "width": 1536,
+      "height": 1024,
+      "frame": [
+        1063,
+        150,
+        435,
+        277
+      ]
+    }
+  },
+  "ancient-key": {
+    "treasure": {
+      "file": "ancient-key.png",
+      "width": 1254,
+      "height": 1254,
+      "frame": [
+        189,
+        80,
+        882,
+        1089
+      ]
+    },
+    "crown": {
+      "file": "crowns.png",
+      "width": 1536,
+      "height": 1024,
+      "frame": [
+        71,
+        645,
+        382,
+        248
+      ]
+    }
+  },
+  "sun-chalice": {
+    "treasure": {
+      "file": "sun-chalice.png",
+      "width": 1254,
+      "height": 1254,
+      "frame": [
+        51,
+        163,
+        1127,
+        952
+      ]
+    },
+    "crown": {
+      "file": "crowns.png",
+      "width": 1536,
+      "height": 1024,
+      "frame": [
+        571,
+        610,
+        392,
+        283
+      ]
+    }
+  },
+  "ocean-heart": {
+    "treasure": {
+      "file": "ocean-heart.png",
+      "width": 1254,
+      "height": 1254,
+      "frame": [
+        126,
+        206,
+        996,
+        869
+      ]
+    },
+    "crown": {
+      "file": "crowns.png",
+      "width": 1536,
+      "height": 1024,
+      "frame": [
+        1062,
+        647,
+        436,
+        246
+      ]
+    }
+  }
+}

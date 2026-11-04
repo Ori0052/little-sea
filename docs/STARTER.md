@@ -131,3 +131,7 @@ The portable build runs Vinext directly without a host `timeout` command. The ma
 
 - [vinext Documentation](https://github.com/cloudflare/vinext)
 - [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+
+## 온라인 바다 앱인토스 빌드
+
+기존 웹 버전과 같은 게임 소스를 사용하는 별도 앱인토스 타깃은 [apps-in-toss/README.md](apps-in-toss/README.md)를 참고하세요. 등록 appName은 `little-sea`이며, 해당 디렉터리에서 빌드하면 콘솔 업로드용 `little-sea.ait`가 생성됩니다.

@@ -1,0 +1,12 @@
+[
+ {"id":"calm-tide","title":"잔잔한 항해의 부적","message":"오늘도, 너의 속도로.","kind":"wave","color":"#9fc5ba","light":"#e7f0e4","accent":"#b69860","result":"행운"},
+ {"id":"sunshine","title":"따뜻한 햇살의 부적","message":"너에게 따뜻한 하루가 오길.","kind":"sun","color":"#efd080","light":"#fff5d9","accent":"#b79152","result":"행운"},
+ {"id":"clover","title":"작은 행운의 부적","message":"작은 좋은 일이 찾아올 거야.","kind":"clover","color":"#9fbd8d","light":"#eef3df","accent":"#79945d","result":"행운"},
+ {"id":"starlight","title":"별빛 용기의 부적","message":"네 안의 작은 빛을 믿어봐.","kind":"star","color":"#b3a6d1","light":"#efebf8","accent":"#8c7aa9","result":"행운"},
+ {"id":"seashell","title":"다정한 인연의 부적","message":"다정한 마음이 너에게 닿기를.","kind":"shell","color":"#d9adb3","light":"#f8e9e8","accent":"#b68a90","result":"행운"},
+ {"id":"silver-fish","title":"풍요로운 바다의 부적","message":"오늘의 작은 수확을 축하해.","kind":"fish","color":"#94bccc","light":"#e4f1f5","accent":"#7298a8","result":"행운"},
+ {"id":"sea-breeze","title":"가벼운 마음의 부적","message":"무거운 마음은 바람에 실어봐.","kind":"feather","color":"#a9c8ca","light":"#eaf4ef","accent":"#81a3a1","result":"행운"},
+ {"id":"golden-treasure","title":"반짝 보물의 부적","message":"오늘은 네가 찾은 보물 같은 날.","kind":"chest","color":"#dfbd73","light":"#faf1d5","accent":"#b29550","result":"보물"},
+ {"id":"rest-ticket","title":"꽝! 쉬어가기 한 장","message":"당첨 대신, 잠깐 쉴 시간을 줄게.","kind":"cloud","color":"#b4c4bb","light":"#eff2eb","accent":"#879b90","result":"꽝"},
+ {"id":"next-wave","title":"꽝! 다음 파도에 다시","message":"괜찮아, 다음 파도가 오고 있어.","kind":"boat","color":"#b0c8dc","light":"#edf3f8","accent":"#829cb3","result":"꽝"}
+]

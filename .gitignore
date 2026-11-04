@@ -43,3 +43,8 @@ yarn-error.log*
 
 # OS metadata
 .DS_Store
+
+# Separate Apps in Toss outputs
+/apps-in-toss/node_modules/
+/apps-in-toss/dist/
+/apps-in-toss/*.ait
