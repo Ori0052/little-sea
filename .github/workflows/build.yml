@@ -34,7 +34,9 @@ jobs:
       - name: Type check
         run: npx tsc --noEmit
       - name: Security regression checks
-        run: node tests/sea-session.test.mjs
+        run: |
+          node tests/sea-session.test.mjs
+          node tests/sea-presence.test.mjs
       - name: Build web
         run: npm run build
       - name: Build Apps in Toss
