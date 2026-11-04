@@ -1,3 +1,4 @@
+import {guardSeaRequest} from '../../../lib/sea-request-guard';
 import {cleanupSeaPresence} from '../../../lib/sea-maintenance';
 import {authorizeSea} from '../../../lib/sea-session';
 import {isSeaOriginAllowed} from '../../../lib/sea-origin';
@@ -5,8 +6,9 @@ import {env} from 'cloudflare:workers';
 import {validAvatar} from '../../../components/avatar-state';
 import {json,presenceSnapshot,ttl,uuid} from '../../../lib/sea-api';
 export const dynamic='force-dynamic';
-export async function GET(){try{return await presenceSnapshot()}catch{return json({error:'unavailable'},503)}}
-export async function POST(request:Request){if(!isSeaOriginAllowed(request))return json({error:'origin'},403);if(Number(request.headers.get('content-length')||0)>1200)return json({error:'size'},413);
+// No anonymous snapshots: the game refreshes through authenticated POST only.
+export async function GET(){return Response.json({error:'method_not_allowed'},{status:405,headers:{'Allow':'POST','Cache-Control':'no-store'}})}
+export async function POST(request:Request){if(!isSeaOriginAllowed(request))return json({error:'origin'},403);const gate=await guardSeaRequest(request);if(gate)return gate;if(Number(request.headers.get('content-length')||0)>1200)return json({error:'size'},413);
  try{const text=await request.text();if(text.length>1200)return json({error:'size'},413);let body;try{body=JSON.parse(text)}catch{return json({error:'body'},400)}const {id,visitor,leave,state}=body??{};
  if(!uuid(id)||(visitor!==undefined&&!uuid(visitor)))return json({error:'id'},400);if(state!==undefined&&!validAvatar(state))return json({error:'state'},400);if(!env.DB)return json({error:'unavailable'},503);
  const auth=await authorizeSea(body,'presence');if(auth)return auth;const now=Date.now(),who=visitor||id;await env.DB.prepare(leave===true?'DELETE FROM boat_passengers WHERE session=? AND visitor=?':'UPDATE boat_passengers SET seen=? WHERE session=? AND visitor=? AND seen>?' ).bind(...(leave===true?[id,who]:[now,id,who,now-15000])).run();let stored=state;

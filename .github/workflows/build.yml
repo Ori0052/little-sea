@@ -37,6 +37,7 @@ jobs:
         run: |
           node tests/sea-session.test.mjs
           node tests/sea-presence.test.mjs
+          node tests/sea-ingress.test.mjs
       - name: Build web
         run: npm run build
       - name: Build Apps in Toss

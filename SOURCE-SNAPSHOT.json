@@ -1,6 +1,6 @@
 {
   "site": "https://little-sea.rhfenrdltkfk.chatgpt.site",
-  "source_commit": "e77ae3a0a914779fbb08f13fe9caf181eda8302c",
-  "version": 66,
-  "description": "Adaptive presence polling, hidden-page suspension and less frequent DB maintenance"
+  "source_commit": "992999f7cd04ddaae4648467d4e87efee2381b96",
+  "version": 67,
+  "description": "Public snapshot closure and shared pre-auth admission limits"
 }

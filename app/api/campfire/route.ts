@@ -1,3 +1,4 @@
+import {guardSeaRequest} from '../../../lib/sea-request-guard';
 import {authorizeSea} from '../../../lib/sea-session';
 import {isSeaOriginAllowed} from '../../../lib/sea-origin';
 import {foodBurnDelay} from '../../../components/cooking-progress';
@@ -9,7 +10,7 @@ import {toWorld} from '../../../components/sea-space';
 import {potatoRoastMs,fishRoastMs} from '../../../components/campfire-state';
 export const dynamic='force-dynamic';
 export async function POST(request:Request){
- if(!isSeaOriginAllowed(request))return json({error:'origin'},403);
+ if(!isSeaOriginAllowed(request))return json({error:'origin'},403);const gate=await guardSeaRequest(request);if(gate)return gate;
  if(Number(request.headers.get('content-length')||0)>512)return json({error:'size'},413);
  try{const text=await request.text();if(text.length>512)return json({error:'size'},413);let body;try{body=JSON.parse(text)}catch{return json({error:'body'},400)}
  const {id,visitor,lit,action}=body??{};if(!uuid(id)||!uuid(visitor)||(action===undefined?typeof lit!=='boolean':!['watch','wood','aurora','roast','collect','roast-fish','collect-fish'].includes(action)))return json({error:'body'},400);if(!env.DB)return json({error:'unavailable'},503);const auth=await authorizeSea(body,'action');if(auth)return auth;if(await env.DB.prepare('SELECT seat FROM boat_passengers WHERE visitor=? AND session=? AND seen>?').bind(visitor,id,Date.now()-15000).first())return json({error:'aboard'},409);
