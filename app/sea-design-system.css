@@ -47,6 +47,11 @@
 .sea :is(.collection-tabs,.moods,.view-switch) {gap:4px;border-color:var(--sea-line);background:var(--sea-glass);color:var(--sea-soft-ink)}
 .sea :is(.collection-tabs>button,.moods>button,.view-switch>button) {min-height:44px;border-radius:16px;color:var(--sea-soft-ink)}
 .sea :is(.collection-tabs>button[aria-selected=true],.moods>button[aria-pressed=true],.view-switch>button[aria-pressed=true]) {background:var(--sea-action);color:var(--sea-action-ink);box-shadow:none}
+/* Landscape switch: equal segments with one clear selected surface. */
+.sea .view-switch {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;width:224px;padding:4px;box-sizing:border-box;border:0;border-radius:20px;background:var(--sea-soft);color:var(--sea-soft-ink);box-shadow:none;backdrop-filter:none}
+.sea .view-switch>button {display:flex;align-items:center;justify-content:center;width:100%;min-width:0;min-height:44px;padding:0 10px;border:0;border-radius:16px;font-size:12px;font-weight:500;line-height:1.2;letter-spacing:0;white-space:nowrap;background:transparent;color:var(--sea-soft-ink);transition:background-color .15s,color .15s}
+.sea .view-switch>button[aria-pressed=true] {background:var(--sea-action);color:var(--sea-action-ink);box-shadow:none}
+@media(hover:hover){.sea .view-switch>button:not([aria-pressed=true]):hover{background:var(--sea-soft-hover)}}
 /* Dialogs share surfaces, title color and close-button geometry. */
 .sea :is(.sea-onboarding,.sea-hub-dialog,.closet,.exploration-panel,.sea-idle-dialog,.island-cook-menu,.mobile-settings) {background:var(--sea-surface);border-color:var(--sea-line);color:var(--sea-text)}
 .sea :is(.sea-onboarding h2,.sea-hub-dialog h2,.mobile-settings-heading,.closet-title,.exploration-heading h2) {color:var(--sea-text)}
