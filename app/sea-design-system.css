@@ -1,0 +1,140 @@
+/* Final palette: clear deep blue. Imported after the game and native layout CSS. */
+:root {
+ --sea-action:#425fc4; --sea-action-hover:#354fae; --sea-action-pressed:#2d4399; --sea-action-ink:#fff;
+ --sea-soft:#edf0ff; --sea-soft-hover:#dfe5ff; --sea-soft-pressed:#d0d9ff; --sea-soft-ink:#344884;
+ --sea-surface:#fafbff; --sea-glass:#fafbffeb; --sea-line:#d5ddf2; --sea-text:#344765; --sea-muted:#5c6b85;
+ --sea-disabled:#e4e9f2; --sea-disabled-ink:#74809a; --sea-focus:#425fc4;
+ --sea-control:44px; --sea-radius:16px; --sea-gap:8px; --sea-icon:22px;
+}
+.sea.night,.sea.submerged,.toss-exit-dialog.night {
+ --sea-action:#8da4ff; --sea-action-hover:#a4b6ff; --sea-action-pressed:#7892f0; --sea-action-ink:#14234b;
+ --sea-soft:#283958; --sea-soft-hover:#33466c; --sea-soft-pressed:#3d5280; --sea-soft-ink:#dce5ff;
+ --sea-surface:#192a43; --sea-glass:#192a43ed; --sea-line:#46597b; --sea-text:#edf1ff; --sea-muted:#b6c3dc;
+ --sea-disabled:#2b3851; --sea-disabled-ink:#96a3be; --sea-focus:#a9baff;
+}
+/* Semantic classes also power the review page and native-only dialogs. */
+.sea-button,.sea :is(.sea-start-primary,.exploration-primary,.exploration-secondary,.sea-start-back,.hat-toggle,.island-cook-menu>button,.deepsea-grid button,.deep-map-list button,.island-rune-buttons button,.reward-amulet button,.sea-idle-dialog button,.sea-idle-warning button,.tent-room-actions button,.party-boat-board,.tent-entry,.island-landmark,.journey-hud>button,.island-fishing-actions>button) {
+ box-sizing:border-box;min-height:var(--sea-control);border:1px solid var(--sea-line);border-radius:var(--sea-radius);padding:10px 16px;
+ background:var(--sea-soft);color:var(--sea-soft-ink);font-size:12px;line-height:1.4;box-shadow:none;
+ transition:background-color .15s,color .15s,border-color .15s;
+}
+.sea-button--primary,.sea :is(.sea-start-primary,.exploration-primary,.reward-amulet button,.sea-idle-dialog button,.party-boat-board) {
+ background:var(--sea-action);border-color:var(--sea-action);color:var(--sea-action-ink);font-weight:500;
+}
+.sea-button--secondary {background:var(--sea-soft);color:var(--sea-soft-ink);border-color:var(--sea-line)}
+.sea-button--ghost,.sea .sea-start-back {background:transparent;color:var(--sea-soft-ink);border-color:transparent}
+.sea :is(.sea-start-actions,.tent-room-actions,.explorer-actions,.island-rune-buttons) {gap:var(--sea-gap)}
+/* Keep multi-line destination cards taller than single-line action controls. */
+.sea :is(.sea-menu-options>button,.explorer-actions>button) {min-width:0;min-height:64px;padding:12px;border:1px solid var(--sea-line);border-radius:var(--sea-radius);background:var(--sea-soft);color:var(--sea-soft-ink);box-shadow:none}
+.sea :is(.sea-menu-options>button small,.explorer-actions>button small) {color:var(--sea-muted)}
+.sea .name-editor>div>button {min-height:44px;border-radius:12px;background:var(--sea-soft);color:var(--sea-soft-ink)}
+/* Desktop travel controls keep their established equal widths and share one height. */
+.sea .player-tools :is(.closet-toggle,.voyage button) {height:var(--sea-control);min-height:var(--sea-control);max-height:var(--sea-control);border-radius:var(--sea-radius);border-color:var(--sea-line);color:var(--sea-soft-ink);background:var(--sea-soft)!important;box-shadow:none}
+.sea :is(.deepsea-grid button[aria-pressed=true],.explorer-actions>button[aria-pressed=true]) {background:var(--sea-action);border-color:var(--sea-action);color:var(--sea-action-ink)}
+.sea .amulet-collection button[aria-pressed=true] {border-color:var(--sea-action);box-shadow:0 0 0 1px var(--sea-action)}
+/* Navigation uses identical icon and caption rows in onboarding, beach and island modes. */
+.sea :is(.mobile-dock,.sea-start-dock) {grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch;gap:2px;border:1px solid var(--sea-line);background:var(--sea-glass);color:var(--sea-soft-ink);box-shadow:0 5px 20px #243e7214}
+.sea .mobile-dock {height:64px;max-height:64px;padding:4px 5px}
+.sea .sea-start-dock {padding:4px;min-height:64px}
+.sea :is(.mobile-dock,.sea-start-dock)>button {display:grid;grid-template-rows:26px 12px;align-content:center;justify-items:center;align-items:center;gap:4px;min-width:0;min-height:54px;padding:2px 0;border-radius:16px;font-size:10px;line-height:12px;background:transparent;color:inherit;box-shadow:none}
+.sea :is(.mobile-dock .dock-icon,.sea-start-dock>button>svg) {width:26px;height:26px;display:grid;place-items:center;flex:none}
+.sea :is(.mobile-dock .dock-icon svg,.sea-start-dock>button>svg) {width:var(--sea-icon);height:var(--sea-icon)}
+.sea :is(.mobile-dock button>span:last-child,.sea-start-dock button>span) {height:12px;line-height:12px;font-size:10px;white-space:nowrap;text-align:center}
+.sea :is(.mobile-dock button[aria-pressed=true] .dock-icon,.mobile-dock button[aria-expanded=true] .dock-icon) {background:var(--sea-soft-pressed);color:var(--sea-soft-ink)}
+.sea .sea-start-dock>button[aria-selected=true] {background:var(--sea-soft-pressed);color:var(--sea-soft-ink)}
+.sea :is(.dock-count,.dock-boat-count) {background:var(--sea-soft);color:var(--sea-soft-ink);border-color:var(--sea-line)}
+/* Tabs and weather controls have the same 44px hit area and selected state. */
+.sea :is(.collection-tabs,.moods,.view-switch) {gap:4px;border-color:var(--sea-line);background:var(--sea-glass);color:var(--sea-soft-ink)}
+.sea :is(.collection-tabs>button,.moods>button,.view-switch>button) {min-height:44px;border-radius:16px;color:var(--sea-soft-ink)}
+.sea :is(.collection-tabs>button[aria-selected=true],.moods>button[aria-pressed=true],.view-switch>button[aria-pressed=true]) {background:var(--sea-action);color:var(--sea-action-ink);box-shadow:none}
+/* Dialogs share surfaces, title color and close-button geometry. */
+.sea :is(.sea-onboarding,.sea-hub-dialog,.closet,.exploration-panel,.sea-idle-dialog,.island-cook-menu,.mobile-settings) {background:var(--sea-surface);border-color:var(--sea-line);color:var(--sea-text)}
+.sea :is(.sea-onboarding h2,.sea-hub-dialog h2,.mobile-settings-heading,.closet-title,.exploration-heading h2) {color:var(--sea-text)}
+.sea :is(.sea-start-copy,.sea-start-controls p,.sea-start-feature p,.sea-start-island,.sea-start-once,.hub-note,.album-storage) {color:var(--sea-muted)}
+.sea :is(.sea-start-feature,.sea-start-controls>div) {border-color:var(--sea-line)}
+.sea .sea-start-feature {background:var(--sea-soft)}
+.sea .sea-start-progress>.current {background:var(--sea-action)}
+.sea :is(.sea-hub-dialog>header>button,.closet-title>button,.album-heading>button,.exploration-heading>button,.mobile-settings-heading>button,.island-cook-menu>div>button,.tent-retreat header>button) {display:inline-grid;place-items:center;flex:none;width:44px;height:44px;min-height:44px;padding:0;border:1px solid var(--sea-line);border-radius:50%;background:var(--sea-soft);color:var(--sea-soft-ink);line-height:1}
+.sea .sea-onboarding-top>button {min-height:44px;color:var(--sea-soft-ink)}
+/* Fishing remains a single control. Waiting uses a quiet surface, bite uses the primary color. */
+.sea .fishing-active>button {height:48px;min-height:48px;border-radius:var(--sea-radius);background:var(--sea-action);border-color:var(--sea-action);color:var(--sea-action-ink)}
+.sea .fishing-active>button[data-fishing-state=waiting] {background:var(--sea-soft);color:var(--sea-soft-ink);border-color:var(--sea-line)}
+.sea .fishing-active>button.fishing-hold:after {background:var(--sea-action)}
+.sea :is(button,a,input):focus-visible,.sea-button:focus-visible {outline:3px solid var(--sea-focus);outline-offset:3px}
+@media(hover:hover) {
+ .sea-button--primary:not(:disabled):hover,.sea :is(.sea-start-primary,.exploration-primary,.reward-amulet button,.sea-idle-dialog button,.party-boat-board):not(:disabled):hover {background:var(--sea-action-hover);border-color:var(--sea-action-hover);color:var(--sea-action-ink)}
+ .sea-button--secondary:not(:disabled):hover,.sea :is(.exploration-secondary,.deepsea-grid button,.island-cook-menu>button,.explorer-actions>button,.sea-menu-options>button):not(:disabled):hover {background:var(--sea-soft-hover);color:var(--sea-soft-ink)}
+}
+.sea-button--primary:active,.sea-button--primary.is-preview-pressed,.sea :is(.sea-start-primary,.exploration-primary,.reward-amulet button,.sea-idle-dialog button,.party-boat-board):not(:disabled):active {background:var(--sea-action-pressed);border-color:var(--sea-action-pressed);color:var(--sea-action-ink)}
+.sea-button--secondary:active,.sea :is(.mobile-dock,.sea-start-dock)>button:not(:disabled):active {background:var(--sea-soft-pressed);color:var(--sea-soft-ink)}
+.sea-button:disabled,.sea :is(.sea-start-primary,.exploration-primary,.exploration-secondary,.explorer-actions>button,.deepsea-grid button,.island-cook-menu>button,.party-boat-board,.reward-amulet button,.island-fishing-actions>button):disabled {background:var(--sea-disabled);border-color:var(--sea-disabled);color:var(--sea-disabled-ink);opacity:1;cursor:not-allowed;box-shadow:none}
+.sea .mobile-dock button:disabled {color:var(--sea-disabled-ink);opacity:.65;cursor:not-allowed}
+@media(prefers-reduced-motion:reduce) {.sea-button,.sea button {transition:none}}
+/* Review-only layout. Uses the production tokens and control styles above. */
+.sea.sea-ui-kit {height:auto;min-height:100svh;overflow:visible;background:var(--sea-surface);color:var(--sea-text);padding:32px max(20px,calc((100vw - 1080px)/2));font-family:'Noto Sans KR',sans-serif}
+.sea-ui-kit>header {padding:0;gap:16px;flex-wrap:wrap;color:inherit}
+.sea-ui-kit h1 {font-size:32px;margin:24px 0 12px;color:var(--sea-text)}
+.sea-ui-kit p {font-size:13px;line-height:1.9;color:var(--sea-muted)}
+.sea-ui-kit .kit-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:24px 0}
+.sea-ui-kit .kit-card {min-width:0;padding:24px;border:1px solid var(--sea-line);border-radius:24px}
+.sea-ui-kit h2 {font-family:'Maru Buri',serif;font-size:22px;margin:0 0 20px}
+.sea-ui-kit .kit-row {display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0}
+.sea-ui-kit .kit-swatch {display:flex;align-items:center;justify-content:space-between;border-radius:16px;padding:18px;margin:10px 0;font-size:13px}
+.sea-ui-kit .mobile-dock {position:relative;inset:auto;width:100%;max-width:520px;margin:12px 0;transform:none}
+.sea-ui-kit .sea-start-dock {margin:12px 0}
+@media(max-width:640px){.sea-ui-kit .kit-grid{grid-template-columns:1fr}.sea-ui-kit .kit-card{padding:18px}.sea-ui-kit h1{font-size:28px}}
+
+/* Match the more specific legacy open-island/native dock selectors. */
+.sea .mobile-dock,.sea .island-activity-dock,.sea.island-mode.island-menu-open .mobile-dock:not(.island-activity-dock) {background:var(--sea-glass);border-color:var(--sea-line);color:var(--sea-soft-ink)}
+.sea .mobile-dock>button,.sea .island-activity-dock>button,.sea.island-mode.island-menu-open .mobile-dock:not(.island-activity-dock)>button {grid-template-rows:26px 12px;gap:4px;min-height:54px;border-radius:16px}
+.sea.night .mobile-dock {background:var(--sea-glass);border-color:var(--sea-line);color:var(--sea-soft-ink)}
+.sea footer.settings-open {background:var(--sea-glass);border-color:var(--sea-line);color:var(--sea-text)}
+.toss-exit-dialog {background:var(--sea-surface);border-color:var(--sea-line);color:var(--sea-text)}
+.toss-exit-dialog button.sea-button {min-height:var(--sea-control);border-radius:var(--sea-radius)}
+.toss-exit-dialog button.sea-button--primary,.toss-start-message button.sea-button--primary {background:var(--sea-action);color:var(--sea-action-ink);border-color:var(--sea-action)}
+.toss-exit-dialog button.sea-button--secondary {background:var(--sea-soft);color:var(--sea-soft-ink);border-color:var(--sea-line)}
+.sea :is(.island-fishing-actions:not(.fishing-active),.island-menu-handle) {background:var(--sea-glass);color:var(--sea-soft-ink);border-color:var(--sea-line)}
+.sea .fire-activity-menu button,.sea .island-fire-actions button {min-height:44px;border:1px solid var(--sea-line);border-radius:var(--sea-radius);padding:10px 14px;background:var(--sea-soft);color:var(--sea-soft-ink);box-shadow:none}
+.sea .fire-activity-menu button[aria-pressed=true],.sea .tent-room-actions button:first-child {background:var(--sea-action);color:var(--sea-action-ink);border-color:var(--sea-action)}
+.sea .mobile-dock button[aria-pressed=true],.sea .mobile-dock button[aria-expanded=true] {background:var(--sea-soft-pressed);color:var(--sea-soft-ink)}
+.sea .mobile-dock button[aria-pressed=true] .dock-icon,.sea .mobile-dock button[aria-expanded=true] .dock-icon {background:transparent;color:var(--sea-soft-ink)}
+.sea .sea-start-controls span {color:var(--sea-text)}
+.sea-ui-kit .mobile-dock {display:grid}
+.sea .sea-start-dock>button[aria-pressed=true] {background:var(--sea-soft-pressed);color:var(--sea-soft-ink)}
+.sea.island-mode.island-menu-open .mobile-dock:not(.island-activity-dock)>button:is([aria-pressed=true],[aria-expanded=true]) {background:var(--sea-soft-pressed);color:var(--sea-soft-ink)}
+@media(max-height:540px) and (orientation:landscape) {
+ .sea:not(.sea-ui-kit) {min-height:0}
+ .sea:not(.sea-ui-kit) .intro {display:none}
+ .sea:not(.sea-ui-kit) .mobile-dock {display:grid;position:fixed;left:calc(14px + var(--sea-safe-left,env(safe-area-inset-left,0px)));right:calc(14px + var(--sea-safe-right,env(safe-area-inset-right,0px)));bottom:calc(12px + var(--sea-safe-bottom,env(safe-area-inset-bottom,0px)));max-width:520px;width:auto;margin:0 auto}
+ .sea .player-tools {display:none}
+ .sea footer:not(.settings-open) {display:none}
+}
+.sea :is(.mobile-dock,.sea-start-dock) {border-radius:32px}
+.sea-button--primary,.sea :is(.sea-start-primary,.exploration-primary,.reward-amulet button,.sea-idle-dialog button,.party-boat-board) {font-size:13px}
+
+.sea .sea-onboarding-top {color:var(--sea-text)}
+@media(hover:hover) {
+ .sea :is(.deepsea-grid button[aria-pressed=true],.explorer-actions>button[aria-pressed=true]):not(:disabled):hover {background:var(--sea-action-hover);color:var(--sea-action-ink)}
+}
+
+.toss-exit-dialog h2 {font-family:'Maru Buri',serif}
+
+/* Keep settings labels readable against the shared dark surface. */
+.sea footer.settings-open :is(.controls,.audio,.audio button,.hide) {color:var(--sea-text)}
+.sea footer.settings-open .audio-caption {color:var(--sea-muted)}
+.sea footer.settings-open .hide {border-color:var(--sea-line)}
+.sea .company-setting {min-height:44px;padding:8px 14px;border:1px solid var(--sea-line);border-radius:var(--sea-radius);background:var(--sea-soft);color:var(--sea-soft-ink)}
+@media(max-height:540px) and (orientation:landscape) {
+ .sea:not(.sea-ui-kit) .mobile-dock {z-index:15;pointer-events:auto}
+ .sea footer.settings-open {display:block;position:fixed!important;left:calc(14px + var(--sea-safe-left,0px));right:calc(14px + var(--sea-safe-right,0px));bottom:calc(88px + var(--sea-safe-bottom,0px));width:auto;max-width:520px;max-height:calc(100svh - 120px - var(--sea-safe-top,0px) - var(--sea-safe-bottom,0px));margin:0 auto;padding:14px;border:1px solid var(--sea-line);border-radius:24px;overflow:auto;z-index:20;box-sizing:border-box;background:var(--sea-glass);backdrop-filter:blur(20px)}
+ .sea footer.settings-open .mobile-settings-heading {display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+ .sea footer.settings-open .controls {display:flex;flex-wrap:wrap;justify-content:center;gap:12px;padding:0;background:none;border:0;box-shadow:none}
+ .sea footer.settings-open .moods {display:flex;flex:1 1 100%;min-width:0;margin:0}
+ .sea footer.settings-open .moods>button {flex:1;min-width:0;padding:0 10px}
+ .sea footer.settings-open .hide {min-height:44px;padding:8px 12px;white-space:nowrap;border:1px solid var(--sea-line);border-radius:var(--sea-radius);background:var(--sea-soft);color:var(--sea-soft-ink)}
+ .sea footer.settings-open .bottom {display:none}
+ .sea .settings-backdrop {display:block;position:fixed;inset:0;width:100%;height:100%;z-index:14;background:#14244933}
+ .sea.island-mode.island-menu-open footer.settings-open {bottom:calc(192px + var(--sea-safe-bottom,0px));max-height:calc(100svh - 225px - var(--sea-safe-top,0px) - var(--sea-safe-bottom,0px))}
+}
+
+.sea :is(.fire-activity-menu button,.island-fire-actions button,.deep-map-list button):disabled {background:var(--sea-disabled);border-color:var(--sea-disabled);color:var(--sea-disabled-ink);opacity:1;cursor:not-allowed;box-shadow:none}
