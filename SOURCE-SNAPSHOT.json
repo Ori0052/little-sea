@@ -1,6 +1,5 @@
 {
   "site": "https://little-sea.rhfenrdltkfk.chatgpt.site",
-  "source_commit": "714dbf05a4e5ec5d3acb8f2f3f528def4cc9cd20",
-  "version": 70,
-  "description": "Equal-width scenery switch without the outer white border or shadow"
+  "version": 71,
+  "sourceCommit": "164eeae628e30639ad87c349cdd137066b4c3835"
 }

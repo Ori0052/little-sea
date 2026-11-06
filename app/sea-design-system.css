@@ -143,3 +143,8 @@
 }
 
 .sea :is(.fire-activity-menu button,.island-fire-actions button,.deep-map-list button):disabled {background:var(--sea-disabled);border-color:var(--sea-disabled);color:var(--sea-disabled-ink);opacity:1;cursor:not-allowed;box-shadow:none}
+/* Passive journey/activity feedback never imitates a control or catches a tap. */
+.journey-progress {margin:0;text-align:center;font-size:12px;line-height:1.5;font-variant-numeric:tabular-nums;color:var(--sea-text);text-shadow:0 1px 7px var(--sea-surface);pointer-events:none}
+.boat-state-label {position:absolute;transform:translate(-50%,42px);font-size:12px;color:var(--sea-text);text-shadow:0 1px 7px var(--sea-surface);white-space:nowrap;pointer-events:none}
+.activity-status {margin:8px 0;font-size:12px;line-height:1.7;color:var(--sea-muted)}
+.journey-announcement {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
