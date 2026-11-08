@@ -4,7 +4,7 @@ import {isAmuletId} from '../components/amulet-catalog';
 import type {SeaPlatform} from '../lib/sea-platform';
 declare const __SEA_TOSS_APP_NAME__:string;
 declare const __SEA_API_ORIGIN__:string;
-export const savedKeys=['little-sea-visitor','little-sea-session-proof-v1','little-sea-island-discoveries-v1','little-sea-onboarding-v1','little-sea-guidance-v1','little-sea-name','little-sea-look','little-sea-tube-enabled','little-sea-solo','little-sea-treasures-v1','little-sea-deepsea-v1','little-sea-exploration-v2'];
+export const savedKeys=['little-sea-visitor','little-sea-session-proof-v1','little-sea-island-discoveries-v1','little-sea-onboarding-v1','little-sea-guidance-v1','little-sea-name','little-sea-look','little-sea-tube-enabled','little-sea-solo','little-sea-preferences-v1','little-sea-treasures-v1','little-sea-deepsea-v1','little-sea-exploration-v2'];
 export function hasTossBridge(){return Boolean((window as unknown as {ReactNativeWebView?:unknown}).ReactNativeWebView)}
 export function installPlatform(){
  const platform:SeaPlatform={rewardAd:createRewardAd(import.meta.env.VITE_TOSS_REWARDED_AD_GROUP_ID||''),host:'toss',apiOrigin:import.meta.env.DEV?'':__SEA_API_ORIGIN__,

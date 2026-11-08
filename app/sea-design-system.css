@@ -150,3 +150,12 @@
 .journey-announcement {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 /* Keep the next boarding action above the approaching avatar, not across it. */
 .sea .party-boat-board {transform:translate(-50%,-52px)}
+.sea-rest-notice {position:fixed;top:auto;bottom:calc(96px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:2200;width:min(400px,calc(100% - 32px));padding:8px 12px;border:1px solid var(--sea-line);border-radius:20px;background:var(--sea-surface);color:var(--sea-text);text-align:left;font-size:12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.sea-rest-notice p {margin:0;line-height:1.6;font-size:11px}.sea-rest-notice small {color:var(--sea-muted)}
+.sea .sea-idle-warning {background:var(--sea-surface);color:var(--sea-text);font-size:12px}
+.quiet-controls {position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom));z-index:2300;display:flex;gap:8px}
+.quiet-controls svg {width:22px;height:22px}.sea .quiet-controls button {background:var(--sea-surface);color:var(--sea-text)}
+.sea-audio-notice {position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:2300;width:min(360px,calc(100% - 32px));padding:12px 16px;border-radius:16px;background:var(--sea-surface);color:var(--sea-text);font-size:12px;text-align:center}
+.sea .sea-help-button {min-height:44px;padding:8px 12px;border-radius:16px;background:var(--sea-surface);color:var(--sea-text)}
+.sea .sea-start-actions {flex-wrap:wrap}.sea .sea-start-actions button {flex:1 1 145px}
+.sea-rest-notice button {flex-shrink:0;padding:8px 12px}.sea .sea-start-once {word-break:keep-all}
