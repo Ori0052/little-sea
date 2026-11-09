@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {build} from 'esbuild';
+import {createRequire} from 'node:module';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+const binary=await readFile(new URL('../public/models/sea-boat.glb',import.meta.url));const asset=await new GLTFLoader().parseAsync(binary.buffer.slice(binary.byteOffset,binary.byteOffset+binary.byteLength),'');
+const r=await build({entryPoints:['components/boat-3d-rig.ts'],bundle:true,write:false,platform:'node',format:'cjs'}),m={exports:{}};new Function('require','module','exports',r.outputFiles[0].text)(createRequire(import.meta.url),m,m.exports);const{bindBoatRig,labSnapshot}=m.exports;
+test('Blender GLB contains complete six-seat rig and switchable island within asset budget',()=>{assert.ok(binary.length<1024*1024);assert.ok(asset.scene.getObjectByName('Island'));for(let i=0;i<6;i++){assert.ok(asset.scene.getObjectByName('Passenger_'+i));assert.ok(asset.scene.getObjectByName('Oar_'+i))}assert.ok(asset.parser.json.asset.generator.includes('Blender'))});
+test('one passenger has one oar through six passengers, with the same live seat coordinates',()=>{const rig=bindBoatRig(asset.scene);for(let count=1;count<=6;count++){rig.apply(labSnapshot(count,true),500);for(let i=0;i<6;i++){const rider=asset.scene.getObjectByName('Passenger_'+i),oar=asset.scene.getObjectByName('Oar_'+i);assert.equal(rider.visible,i<count);assert.equal(oar.visible,i<count);assert.equal(rider.position.x,i%2===0?-.55:.55);assert.equal(rider.position.z,1.1-Math.floor(i/2)*1.1)}}});
+test('sailing moves oars while stop and reduced motion return to rest; standalone keeps one oar',()=>{const rig=bindBoatRig(asset.scene),oar=asset.scene.getObjectByName('Oar_0');rig.apply(labSnapshot(6,true),500);assert.notEqual(oar.rotation.y,0);rig.apply(labSnapshot(6,false),500);assert.ok(Math.abs(oar.rotation.y)<1e-12);rig.apply(labSnapshot(6,true),500,true,false);assert.ok(Math.abs(oar.rotation.y)<1e-12);rig.apply(labSnapshot(6,true),500,false);assert.equal(asset.scene.getObjectByName('Passenger_0').visible,false);assert.equal(oar.visible,true);assert.equal(asset.scene.getObjectByName('Oar_1').visible,false)});
