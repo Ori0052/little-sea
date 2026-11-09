@@ -6,7 +6,7 @@ export function bindBoatRig(model:Object3D){
  const hull=need('BoatRoot'),riders=Array.from({length:boatCapacity},(_,i)=>need(`Passenger_${i}`)),oars=Array.from({length:boatCapacity},(_,i)=>need(`Oar_${i}`)),hats=Array.from({length:boatCapacity},(_,i)=>need(`Hat_${i}`));
  const arms=riders.map((_,i)=>[-1,1].map(side=>({side,grip:oarGripPoint(i%2===0?-1:1,side),root:need(`Arm_${i}_${side}`),upper:need(`Upper_${i}_${side}`),fore:need(`Fore_${i}_${side}`),elbow:need(`Elbow_${i}_${side}`),hand:need(`Hand_${i}_${side}`)})));
  const up=new Vector3(0,1,0),target=new Vector3(),direction=new Vector3(),bend=new Vector3(),elbow=new Vector3(),segment=new Vector3();
- return{hull,apply(snapshot:BoatSnapshot,time:number,showRiders=true,animate=true,showHats=false){
+ return{hull,riders,apply(snapshot:BoatSnapshot,time:number,showRiders=true,animate=true,showHats=false){
  const pose=boatPosition(snapshot,time);hull.position.set(pose.x,animate?Math.sin(time*.0012)*.025:0,pose.z);hull.rotation.y=pose.heading;
  for(let i=0;i<boatCapacity;i++){
   const occupied=showRiders&&snapshot.passengers.some(p=>p.seat===i),seat=boatSeatPosition({...pose,x:0,z:0,heading:0},i),r=riders[i],o=oars[i],side=i%2===0?-1:1;

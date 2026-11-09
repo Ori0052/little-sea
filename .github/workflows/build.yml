@@ -41,6 +41,7 @@ jobs:
           node tests/sea-action-ux.test.mjs
           node tests/sea-rest-ux.test.mjs
           node tests/boat-3d.test.mjs
+          node tests/boat-quality.test.mjs
       - name: Build web
         run: npm run build
       - name: Build Apps in Toss

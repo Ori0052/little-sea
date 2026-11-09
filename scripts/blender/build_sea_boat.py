@@ -1,6 +1,7 @@
 """Run: blender --background --python scripts/blender/build_sea_boat.py -- public/models/sea-boat.glb"""
 import bpy, math, os, sys
 from mathutils import Vector
+high='--detail' in sys.argv and sys.argv[sys.argv.index('--detail')+1]=='high'
 bpy.context.preferences.filepaths.save_version=0
 bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
 def mat(name,color):
@@ -19,7 +20,7 @@ def cube(name,loc,scale,material,parent=None,bevel=.06):
  if bevel:mod=o.modifiers.new('soft edges','BEVEL');mod.width=bevel;mod.segments=2;o.modifiers.new('normals','WEIGHTED_NORMAL')
  return o
 def sphere(name,loc,scale,material,parent=None):
- bpy.ops.mesh.primitive_uv_sphere_add(segments=32 if name=='Head' else 16 if name in ['Body','Hat brim','Hat top'] else (6 if name=='Smile' else 10),ring_count=16 if name=='Head' else 10 if name in ['Body','Hat brim','Hat top'] else (4 if name=='Smile' else 6));o=bpy.context.object;o.name=name;o.parent=parent;o.location=loc;o.scale=scale;o.data.materials.append(material)
+ bpy.ops.mesh.primitive_uv_sphere_add(segments=(48 if high else 24) if name=='Head' else (24 if high else 16) if name in ['Body','Hat brim','Hat top'] else (16 if high else 10),ring_count=(28 if high else 12) if name=='Head' else (16 if high else 10) if name in ['Body','Hat brim','Hat top'] else (10 if high else 6));o=bpy.context.object;o.name=name;o.parent=parent;o.location=loc;o.scale=scale;o.data.materials.append(material)
  for p in o.data.polygons:p.use_smooth=True
  return o
 def beam(name,a,b,radius,material,parent=None):
@@ -28,7 +29,7 @@ def beam(name,a,b,radius,material,parent=None):
 def chestnut(parent,index):
  hair_root=empty('Hair_'+str(index),parent=parent)
  # Closed-front cap with a short scalloped fringe, exposed ears and a high nape.
- verts=[];faces=[];segments=64;rings=12
+ verts=[];faces=[];segments=96 if high else 48;rings=20 if high else 10
  for j in range(rings+1):
   for k in range(segments):
    phi=2*math.pi*k/segments;front=max(0,-math.sin(phi));back=max(0,math.sin(phi))
@@ -81,7 +82,7 @@ for i in range(6):
  sphere('Eye left',(-.09,-.254,.67),(.027,.026,.035),dark,passenger);sphere('Eye right',(.09,-.254,.67),(.027,.026,.035),dark,passenger)
  for x in [-.17,.17]:sphere('Blush',(x,-.218,.59),(.055,.018,.032),blush,passenger)
  # One smooth smile rather than a chain of visible beads.
- verts_smile=[];faces_smile=[];segments_smile=9;sides_smile=6
+ verts_smile=[];faces_smile=[];segments_smile=15 if high else 9;sides_smile=8 if high else 6
  for j in range(segments_smile):
   x=(j/(segments_smile-1)-.5)*.060;z=.588+.020*(x/.030)**2
   for k in range(sides_smile):
@@ -142,6 +143,16 @@ for ob in list(bpy.data.objects):
  else:shared_meshes[signature]=mesh
 bpy.data.orphans_purge(do_local_ids=True,do_linked_ids=False,do_recursive=True)
 path=os.path.abspath(sys.argv[sys.argv.index('--')+1]);os.makedirs(os.path.dirname(path),exist_ok=True)
-bpy.ops.wm.save_as_mainfile(filepath=os.path.join(os.path.dirname(__file__),'sea-boat.blend'),compress=True)
-bpy.ops.export_scene.gltf(filepath=path,export_format='GLB',export_yup=True,export_apply=True)
+bpy.ops.wm.save_as_mainfile(filepath=os.path.join(os.path.dirname(__file__),'sea-boat-high.blend' if high else 'sea-boat.blend'),compress=True)
+if high:
+ bpy.ops.object.select_all(action='DESELECT');root.select_set(True)
+ for ob in list(bpy.data.objects):
+  ancestor=ob
+  while ancestor:
+   if ancestor.name.startswith('Passenger_'):
+    ob.select_set(True);break
+   ancestor=ancestor.parent
+  if ob.name.startswith('Oar_') and ob.type=='EMPTY':ob.select_set(True)
+root['quality']='detail' if high else 'light'
+bpy.ops.export_scene.gltf(filepath=path,export_format='GLB',export_yup=True,export_apply=True,use_selection=high,export_extras=True)
 print('Exported',path)
