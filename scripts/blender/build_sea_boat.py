@@ -5,9 +5,10 @@ bpy.context.preferences.filepaths.save_version=0
 bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
 def mat(name,color):
  m=bpy.data.materials.new(name);m.diffuse_color=(*color,1);m.use_nodes=True
- bs=m.node_tree.nodes.get('Principled BSDF');bs.inputs['Base Color'].default_value=(*(c**2.2 for c in color),1);bs.inputs['Roughness'].default_value=.42
+ bs=m.node_tree.nodes.get('Principled BSDF');bs.inputs['Base Color'].default_value=(*(c**2.2 for c in color),1);bs.inputs['Roughness'].default_value=.78
  return m
-cream=mat('warm ivory',(.83,.76,.57));wood=mat('honey wood',(.48,.28,.12));rim=mat('sea blue',(.11,.29,.38));skin=mat('warm skin',(.93,.70,.52));hat=mat('straw hat',(.86,.74,.44));white=mat('hat ribbon',(.91,.9,.83));dark=mat('hair',(.17,.12,.16))
+cream=mat('warm ivory',(.83,.76,.57));wood=mat('honey wood',(.48,.28,.12));rim=mat('sea blue',(.11,.29,.38));skin=mat('warm skin',(.98,.80,.65));hat=mat('straw hat',(.86,.74,.44));white=mat('hat ribbon',(.91,.9,.83));dark=mat('hair',(.17,.12,.16))
+hair=mat('chestnut hair',(.45,.28,.20))
 blush=mat('soft peach cheeks',(.98,.58,.60))
 shirts=[mat('shirt '+str(i),c) for i,c in enumerate([(.58,.49,.76),(.45,.68,.65),(.83,.54,.53),(.44,.61,.79),(.78,.67,.43),(.71,.55,.69)])]
 def empty(name,loc=(0,0,0),parent=None):
@@ -17,11 +18,42 @@ def cube(name,loc,scale,material,parent=None,bevel=.06):
  if bevel:mod=o.modifiers.new('soft edges','BEVEL');mod.width=bevel;mod.segments=2;o.modifiers.new('normals','WEIGHTED_NORMAL')
  return o
 def sphere(name,loc,scale,material,parent=None):
- bpy.ops.mesh.primitive_uv_sphere_add(segments=16 if name in ['Head','Body','Hat brim','Hat top'] else (6 if name=='Smile' else 10),ring_count=10 if name in ['Head','Body','Hat brim','Hat top'] else (4 if name=='Smile' else 6));o=bpy.context.object;o.name=name;o.parent=parent;o.location=loc;o.scale=scale;o.data.materials.append(material)
+ bpy.ops.mesh.primitive_uv_sphere_add(segments=32 if name=='Head' else 16 if name in ['Body','Hat brim','Hat top'] else (6 if name=='Smile' else 10),ring_count=16 if name=='Head' else 10 if name in ['Body','Hat brim','Hat top'] else (4 if name=='Smile' else 6));o=bpy.context.object;o.name=name;o.parent=parent;o.location=loc;o.scale=scale;o.data.materials.append(material)
  for p in o.data.polygons:p.use_smooth=True
  return o
 def beam(name,a,b,radius,material,parent=None):
  a,b=Vector(a),Vector(b);bpy.ops.mesh.primitive_cylinder_add(vertices=10,radius=radius,depth=(b-a).length);o=bpy.context.object;o.name=name;o.parent=parent;o.location=(a+b)/2;o.rotation_euler=(b-a).to_track_quat('Z','Y').to_euler();o.data.materials.append(material);return o
+
+def chestnut(parent,index):
+ hair_root=empty('Hair_'+str(index),parent=parent)
+ # Closed-front cap with a short scalloped fringe, exposed ears and a high nape.
+ verts=[];faces=[];segments=64;rings=12
+ for j in range(rings+1):
+  for k in range(segments):
+   phi=2*math.pi*k/segments;front=max(0,-math.sin(phi));back=max(0,math.sin(phi))
+   edge=1.52-.52*front+.40*back+.22*front*(.5+.5*math.cos(6*(phi+math.pi/2)))
+   theta=.012+(edge-.012)*j/rings
+   verts.append((.301*math.sin(theta)*math.cos(phi),-.015+.273*math.sin(theta)*math.sin(phi),.65+.301*math.cos(theta)))
+ for j in range(rings):
+  for k in range(segments):
+   a=j*segments+k;b=j*segments+(k+1)%segments;faces.append((a,a+segments,b+segments,b))
+ faces.append(tuple(range(segments)))
+ mesh=bpy.data.meshes.new('short hair cap mesh');mesh.from_pydata(verts,[],faces);mesh.update();ob=bpy.data.objects.new('Chestnut cap',mesh);bpy.context.collection.objects.link(ob);ob.parent=hair_root;ob.data.materials.append(hair)
+ for poly in mesh.polygons:poly.use_smooth=True
+ # One tiny rounded flick, sculpted as a short smooth tapered tube.
+ points=[(0,.015,.934),(.012,.016,.973),(.040,.018,.993),(.068,.018,.982)]
+ vertices=[];quads=[];sides=6
+ for j,point in enumerate(points):
+  r=[.028,.026,.019,.005][j]
+  for k in range(sides):
+   a=2*math.pi*k/sides;vertices.append((point[0],point[1]+math.cos(a)*r,point[2]+math.sin(a)*r))
+ for j in range(len(points)-1):
+  for k in range(sides):quads.append((j*sides+k,j*sides+(k+1)%sides,(j+1)*sides+(k+1)%sides,(j+1)*sides+k))
+ quads.extend([tuple(range(sides-1,-1,-1)),tuple((len(points)-1)*sides+k for k in range(sides))])
+ m=bpy.data.meshes.new('hair flick mesh');m.from_pydata(vertices,[],quads);m.update();o=bpy.data.objects.new('Little hair flick',m);bpy.context.collection.objects.link(o);o.parent=hair_root;o.data.materials.append(hair)
+ for poly in m.polygons:poly.use_smooth=True
+ return hair_root
+
 root=empty('BoatRoot')
 # Blender X=right, Y=forward, Z=up. glTF export converts to Y-up.
 N=48
@@ -47,12 +79,20 @@ for i in range(6):
  sphere('Head',(0,-.015,.65),(.285,.255,.275),skin,passenger)
  sphere('Eye left',(-.09,-.254,.67),(.027,.026,.035),dark,passenger);sphere('Eye right',(.09,-.254,.67),(.027,.026,.035),dark,passenger)
  for x in [-.17,.17]:sphere('Blush',(x,-.218,.59),(.055,.018,.032),blush,passenger)
- # A tiny rounded smile sits on the front of the face.
- for j in range(5):
-  x=(j-2)*.014;z=.588+.014*(abs(j-2)/2)**2
-  sphere('Smile',(x,-.263,z),(.010,.010,.010),dark,passenger)
- sphere('Hair',(0,.09,.78),(.264,.185,.18),dark,passenger)
- sphere('Hat brim',(0,0,.91),(.35,.32,.052),hat,passenger);sphere('Hat top',(0,0,.982),(.235,.22,.12),hat,passenger);sphere('Ribbon',(0,0,.936),(.241,.226,.038),white,passenger)
+ # One smooth smile rather than a chain of visible beads.
+ verts_smile=[];faces_smile=[];segments_smile=9;sides_smile=6
+ for j in range(segments_smile):
+  x=(j/(segments_smile-1)-.5)*.060;z=.588+.020*(x/.030)**2
+  for k in range(sides_smile):
+   a=2*math.pi*k/sides_smile;verts_smile.append((x,-.264+math.cos(a)*.008,z+math.sin(a)*.008))
+ for j in range(segments_smile-1):
+  for k in range(sides_smile):faces_smile.append((j*sides_smile+k,j*sides_smile+(k+1)%sides_smile,(j+1)*sides_smile+(k+1)%sides_smile,(j+1)*sides_smile+k))
+ m=bpy.data.meshes.new('smile mesh');m.from_pydata(verts_smile,[],faces_smile);m.update();o=bpy.data.objects.new('Smile',m);bpy.context.collection.objects.link(o);o.parent=passenger;o.data.materials.append(dark)
+ for poly in m.polygons:poly.use_smooth=True
+ for side_ear in [-1,1]:sphere('Ear',(side_ear*.276,-.015,.625),(.060,.065,.080),skin,passenger)
+ chestnut(passenger,i)
+ hat_root=empty('Hat_'+str(i),parent=passenger)
+ sphere('Hat brim',(0,0,.95),(.35,.32,.052),hat,hat_root);sphere('Hat top',(0,0,1.025),(.235,.22,.12),hat,hat_root);sphere('Ribbon',(0,0,.976),(.241,.226,.038),white,hat_root)
  for leg in [-1,1]:
   sphere('Thigh',(leg*.105,-.10,.065),(.095,.20,.095),shirts[i],passenger)
   sphere('Lower leg',(leg*.105,-.25,-.04),(.072,.075,.125),skin,passenger)
@@ -86,6 +126,15 @@ for objects in groups.values():
  bpy.ops.object.select_all(action='DESELECT')
  for ob in objects:ob.select_set(True)
  bpy.context.view_layer.objects.active=objects[0];bpy.ops.object.join()
+# Reuse identical geometry across passengers instead of storing it six times.
+shared_meshes={}
+for ob in list(bpy.data.objects):
+ if ob.type!='MESH':continue
+ mesh=ob.data
+ signature=(tuple((round(v.co.x,6),round(v.co.y,6),round(v.co.z,6)) for v in mesh.vertices),tuple((tuple(p.vertices),p.material_index,p.use_smooth) for p in mesh.polygons),tuple(m.name for m in mesh.materials))
+ if signature in shared_meshes:ob.data=shared_meshes[signature]
+ else:shared_meshes[signature]=mesh
+bpy.data.orphans_purge(do_local_ids=True,do_linked_ids=False,do_recursive=True)
 path=os.path.abspath(sys.argv[sys.argv.index('--')+1]);os.makedirs(os.path.dirname(path),exist_ok=True)
 bpy.ops.wm.save_as_mainfile(filepath=os.path.join(os.path.dirname(__file__),'sea-boat.blend'),compress=True)
 bpy.ops.export_scene.gltf(filepath=path,export_format='GLB',export_yup=True,export_apply=True)
