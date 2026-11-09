@@ -5,12 +5,13 @@ bpy.context.preferences.filepaths.save_version=0
 bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
 def mat(name,color):
  m=bpy.data.materials.new(name);m.diffuse_color=(*color,1);m.use_nodes=True
- bs=m.node_tree.nodes.get('Principled BSDF');bs.inputs['Base Color'].default_value=(*(c**2.2 for c in color),1);bs.inputs['Roughness'].default_value=.78
+ bs=m.node_tree.nodes.get('Principled BSDF');bs.inputs['Base Color'].default_value=(*((c/12.92 if c<=.04045 else ((c+.055)/1.055)**2.4) for c in color),1);bs.inputs['Roughness'].default_value=.78
  return m
-cream=mat('warm ivory',(.83,.76,.57));wood=mat('honey wood',(.48,.28,.12));rim=mat('sea blue',(.11,.29,.38));skin=mat('warm skin',(.98,.80,.65));hat=mat('straw hat',(.86,.74,.44));white=mat('hat ribbon',(.91,.9,.83));dark=mat('hair',(.17,.12,.16))
-hair=mat('chestnut hair',(.45,.28,.20))
-blush=mat('soft peach cheeks',(.98,.58,.60))
-shirts=[mat('shirt '+str(i),c) for i,c in enumerate([(.58,.49,.76),(.45,.68,.65),(.83,.54,.53),(.44,.61,.79),(.78,.67,.43),(.71,.55,.69)])]
+cream=mat('warm ivory',(.83,.76,.57));wood=mat('honey wood',(.48,.28,.12));rim=mat('sea blue',(.11,.29,.38));skin=mat('warm skin',(1.0,.855,.745));hat=mat('straw hat',(.86,.74,.44));white=mat('hat ribbon',(.91,.9,.83));dark=mat('hair',(.17,.12,.16))
+hair=mat('chestnut hair',(.59,.395,.31))
+clothing_ivory=mat('clothing warm ivory',(.97,.935,.875))
+blush=mat('soft peach cheeks',(1.0,.70,.72))
+shirts=[mat('shirt '+str(i),c) for i,c in enumerate([(.79,.71,.89),(.68,.83,.78),(.94,.74,.76),(.69,.80,.92),(.94,.85,.65),(.85,.75,.89)])]
 def empty(name,loc=(0,0,0),parent=None):
  o=bpy.data.objects.new(name,None);bpy.context.collection.objects.link(o);o.location=loc;o.parent=parent;return o
 def cube(name,loc,scale,material,parent=None,bevel=.06):
@@ -94,9 +95,9 @@ for i in range(6):
  hat_root=empty('Hat_'+str(i),parent=passenger)
  sphere('Hat brim',(0,0,.95),(.35,.32,.052),hat,hat_root);sphere('Hat top',(0,0,1.025),(.235,.22,.12),hat,hat_root);sphere('Ribbon',(0,0,.976),(.241,.226,.038),white,hat_root)
  for leg in [-1,1]:
-  sphere('Thigh',(leg*.105,-.10,.065),(.095,.20,.095),shirts[i],passenger)
+  sphere('Thigh',(leg*.105,-.10,.065),(.095,.20,.095),clothing_ivory,passenger)
   sphere('Lower leg',(leg*.105,-.25,-.04),(.072,.075,.125),skin,passenger)
-  sphere('Little foot',(leg*.105,-.29,-.135),(.083,.115,.06),skin,passenger)
+  sphere('Little foot',(leg*.105,-.29,-.135),(.083,.115,.06),clothing_ivory,passenger)
  for arm in [-1,1]:
   p=empty('Arm_'+str(i)+'_'+str(arm),(arm*.205,0,.32),passenger)
   sphere('Round sleeve',(arm*.02,-.07,-.045),(.085,.13,.10),shirts[i],p)
