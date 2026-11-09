@@ -1,5 +1,7 @@
 {
-  "site": "https://little-sea.rhfenrdltkfk.chatgpt.site",
-  "version": 79,
-  "sourceCommit": "7ac86486c6b8b83bdf6d3d4ee62f29206217572c"
+  "siteProjectId": "appgprj_6ae35048afc481919581e19dd5fb6086",
+  "siteVersion": 80,
+  "sourceCommit": "5becf0506ed5329f6d80bb81873f0596f72bf22c",
+  "siteUrl": "https://little-sea.rhfenrdltkfk.chatgpt.site",
+  "note": "Live web integration of adaptive boat and passenger rendering; real multi-device and Toss device tests pending."
 }
