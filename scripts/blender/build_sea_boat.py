@@ -8,6 +8,7 @@ def mat(name,color):
  bs=m.node_tree.nodes.get('Principled BSDF');bs.inputs['Base Color'].default_value=(*(c**2.2 for c in color),1);bs.inputs['Roughness'].default_value=.42
  return m
 cream=mat('warm ivory',(.83,.76,.57));wood=mat('honey wood',(.48,.28,.12));rim=mat('sea blue',(.11,.29,.38));skin=mat('warm skin',(.93,.70,.52));hat=mat('straw hat',(.86,.74,.44));white=mat('hat ribbon',(.91,.9,.83));dark=mat('hair',(.17,.12,.16))
+blush=mat('soft peach cheeks',(.98,.58,.60))
 shirts=[mat('shirt '+str(i),c) for i,c in enumerate([(.58,.49,.76),(.45,.68,.65),(.83,.54,.53),(.44,.61,.79),(.78,.67,.43),(.71,.55,.69)])]
 def empty(name,loc=(0,0,0),parent=None):
  o=bpy.data.objects.new(name,None);bpy.context.collection.objects.link(o);o.location=loc;o.parent=parent;return o
@@ -16,7 +17,7 @@ def cube(name,loc,scale,material,parent=None,bevel=.06):
  if bevel:mod=o.modifiers.new('soft edges','BEVEL');mod.width=bevel;mod.segments=2;o.modifiers.new('normals','WEIGHTED_NORMAL')
  return o
 def sphere(name,loc,scale,material,parent=None):
- bpy.ops.mesh.primitive_uv_sphere_add(segments=12,ring_count=8);o=bpy.context.object;o.name=name;o.parent=parent;o.location=loc;o.scale=scale;o.data.materials.append(material)
+ bpy.ops.mesh.primitive_uv_sphere_add(segments=16 if name in ['Head','Body','Hat brim','Hat top'] else (6 if name=='Smile' else 10),ring_count=10 if name in ['Head','Body','Hat brim','Hat top'] else (4 if name=='Smile' else 6));o=bpy.context.object;o.name=name;o.parent=parent;o.location=loc;o.scale=scale;o.data.materials.append(material)
  for p in o.data.polygons:p.use_smooth=True
  return o
 def beam(name,a,b,radius,material,parent=None):
@@ -41,14 +42,26 @@ for y in [-2.0,2.0]:cube('End deck',(0,y,.7),(.65,.40,.14),wood,root,.04)
 for i in range(6):
  side=-1 if i%2==0 else 1;y=1.1-(i//2)*1.1
  passenger=empty('Passenger_'+str(i),(side*.55,y,.64),root)
- sphere('Body',(0,0,.24),(.20,.16,.29),shirts[i],passenger);sphere('Head',(0,0,.66),(.20,.19,.23),skin,passenger)
- sphere('Eye left',(-.075,-.17,.68),(.025,.025,.033),dark,passenger);sphere('Eye right',(.075,-.17,.68),(.025,.025,.033),dark,passenger)
- sphere('Hair',(0,.045,.76),(.205,.16,.16),dark,passenger)
- sphere('Hat brim',(0,0,.88),(.31,.29,.045),hat,passenger);sphere('Hat top',(0,0,.94),(.20,.19,.10),hat,passenger);sphere('Ribbon',(0,0,.90),(.207,.196,.035),white,passenger)
+ # Soft chibi proportions: large round head, plump torso, short rounded limbs.
+ sphere('Body',(0,0,.20),(.235,.20,.235),shirts[i],passenger)
+ sphere('Head',(0,-.015,.65),(.285,.255,.275),skin,passenger)
+ sphere('Eye left',(-.09,-.254,.67),(.027,.026,.035),dark,passenger);sphere('Eye right',(.09,-.254,.67),(.027,.026,.035),dark,passenger)
+ for x in [-.17,.17]:sphere('Blush',(x,-.218,.59),(.055,.018,.032),blush,passenger)
+ # A tiny rounded smile sits on the front of the face.
+ for j in range(5):
+  x=(j-2)*.014;z=.588+.014*(abs(j-2)/2)**2
+  sphere('Smile',(x,-.263,z),(.010,.010,.010),dark,passenger)
+ sphere('Hair',(0,.09,.78),(.264,.185,.18),dark,passenger)
+ sphere('Hat brim',(0,0,.91),(.35,.32,.052),hat,passenger);sphere('Hat top',(0,0,.982),(.235,.22,.12),hat,passenger);sphere('Ribbon',(0,0,.936),(.241,.226,.038),white,passenger)
  for leg in [-1,1]:
-  beam('Thigh',(leg*.10,0,.08),(leg*.10,-.27,.06),.075,shirts[i],passenger);beam('Lower leg',(leg*.10,-.27,.06),(leg*.10,-.27,-.20),.06,skin,passenger)
+  sphere('Thigh',(leg*.105,-.10,.065),(.095,.20,.095),shirts[i],passenger)
+  sphere('Lower leg',(leg*.105,-.25,-.04),(.072,.075,.125),skin,passenger)
+  sphere('Little foot',(leg*.105,-.29,-.135),(.083,.115,.06),skin,passenger)
  for arm in [-1,1]:
-  p=empty('Arm_'+str(i)+'_'+str(arm),(arm*.18,0,.37),passenger);beam('Sleeve',(0,0,0),(arm*.055,-.20,-.15),.065,shirts[i],p);beam('Forearm',(arm*.055,-.20,-.15),(-side*.16-arm*.18,-.24,-.11),.045,skin,p)
+  p=empty('Arm_'+str(i)+'_'+str(arm),(arm*.205,0,.32),passenger)
+  sphere('Round sleeve',(arm*.02,-.07,-.045),(.085,.13,.10),shirts[i],p)
+  beam('Forearm',(arm*.02,-.14,-.10),(-side*.16-arm*.205,-.24,-.07),.06,skin,p)
+  sphere('Little hand',(-side*.16-arm*.205,-.24,-.07),(.075,.07,.07),skin,p)
  pivot=empty('Oar_'+str(i),(side*.91,y,.82),root)
  beam('Oar shaft',(-side*.52,-.24,-.12),(side*1.04,-.24,-.30),.035,wood,pivot)
  blade=cube('Oar blade',(side*1.22,-.24,-.32),(.42,.22,.065),wood,pivot,.08)
