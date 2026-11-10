@@ -1,7 +1,7 @@
 {
   "siteProjectId": "appgprj_6ae35048afc481919581e19dd5fb6086",
-  "siteVersion": 82,
-  "sourceCommit": "965ed5a51306669185a60c7ff19a2ab843508b0a",
+  "siteVersion": 83,
+  "sourceCommit": "7834a42a4408209863a116ae38b55391a8aa36eb",
   "siteUrl": "https://little-sea.rhfenrdltkfk.chatgpt.site",
-  "note": "Restore original SVG boat and characters plus original boarding camera; retain destination ring and movement fixes. 3D lab/preview remain experimental."
+  "note": "Fixed framing only while aboard: rear sailing view, quarter docking view and restored pre-boarding free angles. Original SVG graphics retained."
 }
