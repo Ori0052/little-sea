@@ -1,7 +1,7 @@
 {
   "siteProjectId": "appgprj_6ae35048afc481919581e19dd5fb6086",
-  "siteVersion": 83,
-  "sourceCommit": "7834a42a4408209863a116ae38b55391a8aa36eb",
+  "siteVersion": 84,
+  "sourceCommit": "9cc015088c287ecfbdd27d45ccf3d2bffcebb262",
   "siteUrl": "https://little-sea.rhfenrdltkfk.chatgpt.site",
-  "note": "Fixed framing only while aboard: rear sailing view, quarter docking view and restored pre-boarding free angles. Original SVG graphics retained."
+  "note": "21 uploaded sounds, audio credits and activity cues; fire-2 unavailable above 32MiB. Remaining source links/licenses documented as pending."
 }

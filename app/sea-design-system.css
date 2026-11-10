@@ -163,3 +163,4 @@
 /* A sailing destination stays visible for captain and passengers until docking. */
 .ground-ping.sailing-ping{z-index:560;min-width:42px;min-height:18px;filter:drop-shadow(0 1px 3px #163c7d88)}
 .ground-ping.sailing-ping>i{border:2px solid #fff8d8;background:#425fc438;box-shadow:0 0 0 2px #425fc470,0 0 12px #fff7c678}
+.sea-thunder-setting{display:flex;gap:8px;align-items:center;font-size:11px;color:var(--sea-text);margin:10px 0}.sea-thunder-setting input{width:18px;height:18px;accent-color:var(--sea-action)}.sea-audio-credits{display:grid;gap:16px}.sea-audio-credits section{border-bottom:1px solid var(--sea-line);padding-bottom:12px}.sea-audio-credits h3{font-size:14px;line-height:1.6;word-break:keep-all}.sea-audio-credits p,.sea-audio-credits a,.sea-audio-credits small{font-size:11px;line-height:1.8}.sea-audio-credits a{text-decoration:underline;text-underline-offset:3px}.sea-audio-credits small{display:block;color:var(--sea-text-muted)}
