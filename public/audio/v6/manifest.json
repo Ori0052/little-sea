@@ -471,5 +471,17 @@
         "coding_history": ""
       }
     }
+  ],
+  "generated": [
+    {
+      "id": "aurora",
+      "file": "aurora.mp3",
+      "title": "오로라 반짝임",
+      "seconds": 2.2,
+      "outputBytes": 27315,
+      "outputSha256": "f6dddf7edd832d6d530e448843f36a7562a06ee5aaeafede1fdf082a43ba7975",
+      "source": "scripts/audio/create-aurora-chime.py",
+      "credit": "서비스용 직접 합성 효과음 — 외부 샘플 없음"
+    }
   ]
 }

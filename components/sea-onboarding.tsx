@@ -9,7 +9,7 @@ const features=[
  {icon:'travel' as const,label:'상황별 행동',title:'지금 있는 곳에 맞는 행동',description:'해변에서는 쉬고, 바다에서는 잠수해요. 물속에서는 같은 버튼으로 수면에 올라와요.'},
  {icon:'beach' as const,label:'해변으로',title:'언제든 해변으로 돌아오기',description:'탐험을 마쳤거나 길을 잃었다면 눌러주세요. 편안한 해변으로 돌아와요.'},
  {icon:'sound' as const,label:'소리',title:'파도 소리 켜고 끄기',description:'버튼의 글씨는 현재 소리 상태예요. 눌러서 파도 소리를 켜거나 끌 수 있어요.'},
- {icon:'settings' as const,label:'설정',title:'오늘의 바다 고르기',description:'낮·노을·밤·비를 고르고, 소리 크기와 함께 쉬는 방식을 조절해요.'}
+ {icon:'settings' as const,label:'설정',title:'오늘의 바다 고르기',description:'낮·노을·밤·비·천둥을 고르고, 소리 크기와 함께 쉬는 방식을 조절해요.'}
 ];
 function finished(raw:string|null){try{const d=JSON.parse(raw||'null');return d&&(d.status==='completed'||d.status==='skipped')}catch{return false}}
 export function SeaOnboarding({onActiveChange,onStartSound}:{onActiveChange:(active:boolean)=>void;onStartSound?:()=>void}){const[visible,setVisible]=useState(false),[step,setStep]=useState(0),[selected,setSelected]=useState(0),dialog=useRef<HTMLDialogElement>(null),heading=useRef<HTMLHeadingElement>(null),sink=useRef(onActiveChange);sink.current=onActiveChange;
