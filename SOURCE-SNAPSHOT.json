@@ -1,7 +1,7 @@
 {
   "siteProjectId": "appgprj_6ae35048afc481919581e19dd5fb6086",
-  "siteVersion": 85,
-  "sourceCommit": "309b46bdd59f8c320acd4816b61da114243c1aa8",
+  "siteVersion": 86,
+  "sourceCommit": "59773cb2d656ac100f97865bca0040a0f6aefaef",
   "siteUrl": "https://little-sea.rhfenrdltkfk.chatgpt.site",
-  "note": "21 uploaded sound assets, credits, consent gates and keyboard-contained credits dialog. Fire-2 unavailable above 32MiB; unknown source licenses documented."
+  "note": "Distance-based crossfade between sea and audible campfire; failed/unlit fire does not attenuate sea. Existing sound assets and credits retained."
 }
