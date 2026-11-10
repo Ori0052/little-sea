@@ -1,8 +1,7 @@
 {
   "siteProjectId": "appgprj_6ae35048afc481919581e19dd5fb6086",
-  "siteVersion": 81,
-  "sourceCommit": "3ba203636661d503456bf240a5d40ab57af096c4",
+  "siteVersion": 82,
+  "sourceCommit": "965ed5a51306669185a60c7ff19a2ab843508b0a",
   "siteUrl": "https://little-sea.rhfenrdltkfk.chatgpt.site",
-  "previewUrl": "https://little-sea.rhfenrdltkfk.chatgpt.site/boat-preview",
-  "note": "Art preview requires user review before live-world art replacement. Live movement and destination ring fixes included."
+  "note": "Restore original SVG boat and characters plus original boarding camera; retain destination ring and movement fixes. 3D lab/preview remain experimental."
 }
