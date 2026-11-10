@@ -1,7 +1,8 @@
 {
   "siteProjectId": "appgprj_6ae35048afc481919581e19dd5fb6086",
-  "siteVersion": 80,
-  "sourceCommit": "5becf0506ed5329f6d80bb81873f0596f72bf22c",
+  "siteVersion": 81,
+  "sourceCommit": "3ba203636661d503456bf240a5d40ab57af096c4",
   "siteUrl": "https://little-sea.rhfenrdltkfk.chatgpt.site",
-  "note": "Live web integration of adaptive boat and passenger rendering; real multi-device and Toss device tests pending."
+  "previewUrl": "https://little-sea.rhfenrdltkfk.chatgpt.site/boat-preview",
+  "note": "Art preview requires user review before live-world art replacement. Live movement and destination ring fixes included."
 }

@@ -9,7 +9,7 @@ import atlas from '../public/treasure-art/manifest.json';
 import {bindBoatRig} from './boat-3d-rig';
 import {boatProjectionGLSL} from './boat-screen-projection';
 import {shouldUseDetailedPassenger,shouldWarmDetail} from './boat-quality';
-export type LiveBoatProps={boat:BoatSnapshot;pose:ReturnType<typeof boatPosition>;view:'dream'|'shore';camera:RefObject<SeaCamera>;localDistance:number;selfId:string;selfLook:AvatarLook;selfCrown:CrownId|null;peers:SeaPeer[];onReady:(ready:boolean)=>void};
+export type LiveBoatProps={samplePose?:()=>ReturnType<typeof boatPosition>|null;boat:BoatSnapshot;pose:ReturnType<typeof boatPosition>;view:'dream'|'shore';camera:RefObject<SeaCamera>;localDistance:number;selfId:string;selfLook:AvatarLook;selfCrown:CrownId|null;peers:SeaPeer[];onReady:(ready:boolean)=>void};
 export function LivePartyBoat(props:LiveBoatProps){
  const host=useRef<HTMLDivElement>(null),current=useRef(props);current.current=props;
  useEffect(()=>{let disposed=false,frame=0,renderer:THREE.WebGLRenderer|undefined,scene:THREE.Scene|undefined,observer:ResizeObserver|undefined,texture:THREE.Texture|undefined,contextLost=false,ready=false,shaderFailed=false;
@@ -35,8 +35,8 @@ export function LivePartyBoat(props:LiveBoatProps){
   const crowns=Array.from({length:6},()=>{const mat=new T.MeshBasicMaterial({map:texture,transparent:true,alphaTest:.04,depthWrite:false,side:T.DoubleSide});patch(mat);const mesh=new T.Mesh(new T.PlaneGeometry(.001,.001),mat);geometries.add(mesh.geometry);scene!.add(mesh);mesh.frustumCulled=false;mesh.visible=false;return mesh});
   const point=new T.Vector3();let last=0,sample=0,frames=0;const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   observer=new ResizeObserver(()=>{if(renderer)renderer.setSize(node.clientWidth,node.clientHeight,false)});observer.observe(node);
-  const draw=(ms:number)=>{if(disposed||!renderer)return;frame=requestAnimationFrame(draw);if(document.hidden||contextLost){sample=ms;frames=0;return}if(ms-last<33)return;last=ms;
-   try{const p=current.current,c=p.camera.current,aspect=node.clientWidth/Math.max(1,node.clientHeight),aboard=p.boat.selfSeat!==null,night=node.closest('main')?.classList.contains('night');
+  const draw=(ms:number)=>{if(disposed||!renderer)return;frame=requestAnimationFrame(draw);if(document.hidden||contextLost){sample=ms;frames=0;return}if(ms-last<(limited?32:15))return;last=ms;
+   try{const source=current.current,p={...source,pose:source.samplePose?.()??source.pose},c=p.camera.current,aspect=node.clientWidth/Math.max(1,node.clientHeight),aboard=p.boat.selfSeat!==null,night=node.closest('main')?.classList.contains('night');
     cameraUniform.value.set(c.x,c.z,c.yaw,c.pitch);lensUniform.value.set(c.eye,c.ground??0,c.spread??1,aspect);mapUniform.value=p.view==='shore'?1:0;
     if(p.view==='dream'){camera.up.set(0,1,0);camera.position.set(c.x,(c.ground??0)+4*c.eye,c.z);camera.lookAt(c.x+Math.sin(c.yaw)*10,0,c.z+Math.cos(c.yaw)*10)}else{camera.up.set(1,0,0);camera.position.set(p.pose.x,30,p.pose.z);camera.lookAt(p.pose.x,0,p.pose.z)}camera.updateMatrixWorld();
     const apply=(rig:ReturnType<typeof bindBoatRig>)=>{rig.apply(p.boat,p.pose.time,true,!reduced,true);rig.hull.position.x=p.pose.x;rig.hull.position.z=p.pose.z;rig.hull.rotation.y=p.pose.heading};apply(base);if(!p.boat.passengers.length)asset.scene.getObjectByName("Oar_0")!.visible=true;if(high)apply(high);
