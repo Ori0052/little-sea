@@ -47,6 +47,7 @@ jobs:
           node tests/boat-camera.test.mjs
           node tests/sea-audio.test.mjs
           node tests/sea-weather.test.mjs
+          node tests/sea-sleep.test.mjs
       - name: Build web
         run: npm run build
       - name: Build Apps in Toss

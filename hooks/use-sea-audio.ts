@@ -5,9 +5,9 @@ import {useEffect,useRef,useState,type RefObject} from 'react';
 import type {AvatarState} from '../components/avatar-state';
 import {seaLand} from '../components/island-space';
 import {soundUrl,unlockSeaSound,setSeaSoundEnabled,playSeaSequence} from '../lib/sea-sound';
-export function useSeaAudio(mood:string,volume:number,actor?:RefObject<AvatarState|null>){
- const[sound,setSound]=useState(false),[audioError,setAudioError]=useState('');const waves=useRef<HTMLAudioElement|null>(null),rain=useRef<HTMLAudioElement|null>(null),pool=useRef(new Set<HTMLAudioElement>()),pending=useRef(new Set<HTMLAudioElement>()),preferred=useRef(false),playing=useRef(false),busy=useRef(false),epoch=useRef(0),duck=useRef(0),fireMix=useRef(0),introPlayed=useRef(false),track=useRef(''),failedTracks=useRef(new Map<string,number>()),current=useRef({mood,volume});current.current={mood,volume};
- const selected=()=>current.current.mood==='night'?'night':actor?.current&&seaLand(actor.current.x,actor.current.z,actor.current.view)?'beach':'waves';
+export function useSeaAudio(mood:string,volume:number,actor?:RefObject<AvatarState|null>,ambience:'sea'|'fire'='sea'){
+ const[sound,setSound]=useState(false),[audioError,setAudioError]=useState('');const waves=useRef<HTMLAudioElement|null>(null),rain=useRef<HTMLAudioElement|null>(null),pool=useRef(new Set<HTMLAudioElement>()),pending=useRef(new Set<HTMLAudioElement>()),preferred=useRef(false),playing=useRef(false),busy=useRef(false),epoch=useRef(0),duck=useRef(0),fireMix=useRef(0),introPlayed=useRef(false),track=useRef(''),failedTracks=useRef(new Map<string,number>()),current=useRef({mood,volume,ambience});current.current={mood,volume,ambience};
+ const selected=()=>current.current.ambience==='fire'?'fire':current.current.mood==='night'?'night':actor?.current&&seaLand(actor.current.x,actor.current.z,actor.current.view)?'beach':'waves';
  function make(url:string){const a=new Audio(url);a.loop=true;a.preload='none';a.volume=0;pool.current.add(a);return a}
  function rainTrack(){if(!rain.current)rain.current=make(soundUrl('rain'));return rain.current}
  function stop(){epoch.current++;busy.current=false;playing.current=false;for(const a of pool.current)a.pause();setSeaSoundEnabled(false,0);setSound(false)}
