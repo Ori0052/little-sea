@@ -13,3 +13,5 @@ export type SavedLetter={date:string;index:number};
 export function koreanDay(now=new Date()){return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(now)}
 export function letterIndex(day:string){return Array.from(day).reduce((n,c)=>n+c.charCodeAt(0),0)%seaLetters.length}
 export function readLetters(raw:string|null):SavedLetter[]{try{const a:unknown=JSON.parse(raw||'[]');if(!Array.isArray(a))return[];const dates=new Set<string>();return a.filter((v):v is SavedLetter=>!!v&&typeof v==='object'&&'date'in v&&typeof v.date==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(v.date)&&'index'in v&&Number.isInteger(v.index)&&Number(v.index)>=0&&Number(v.index)<seaLetters.length).filter(v=>{if(dates.has(v.date))return false;dates.add(v.date);return true}).slice(0,30)}catch{return[]}}
+
+export function nextKoreanMidnight(now=Date.now()){const day=86400000,offset=9*3600000;return(Math.floor((now+offset)/day)+1)*day-offset}
