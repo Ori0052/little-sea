@@ -205,3 +205,9 @@
 @keyframes storm-double-glow{0%,100%{opacity:0}8%{opacity:.48}26%{opacity:0}48%{opacity:.27}72%{opacity:0}}
 @keyframes storm-double-bolt{0%,100%{opacity:0}7%{opacity:.95}24%{opacity:0}47%{opacity:.68}68%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.sea.thunder .my-person[data-raft=true] .person-art>svg,.sea.thunder .my-person[data-raft=true] .avatar-footprint,.sea-storm-atmosphere:before{animation:none;will-change:auto}.sea-lightning{display:none}}
+
+/* Branching strikes sit behind a veil of cloud, with local illumination. */
+.sea-lightning svg{inset:auto;width:clamp(600px,115vw,1500px);height:76%;max-width:none;filter:drop-shadow(0 0 5px #73c6ff80);transform-origin:50% 0}.lightning-halo{filter:blur(4px)}
+.sea-lightning-glow{background:radial-gradient(ellipse at var(--strike-x,60%) 15%,#98d9ff90,transparent 62%)}
+.sea-lightning-cloud-light{position:absolute;inset:0 0 40%;background:radial-gradient(ellipse at var(--strike-x,60%) 12%,#b7e7ff88,transparent 45%),radial-gradient(ellipse at 38% 36%,#3c82b34d,transparent 52%);mix-blend-mode:screen;animation:storm-double-glow 1.8s ease-out both;filter:blur(12px)}
+.sea.thunder .rain-mist{background:linear-gradient(#10203620,#2b53630a 55%,#6b96b514)}.sea.thunder .rain-drop{opacity:.5}.sea.thunder .rain-ripples b{border-color:#8bbbd04d}
