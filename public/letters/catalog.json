@@ -1,0 +1,242 @@
+[
+  {
+    "id": 0,
+    "species": "보름달해파리",
+    "file": "/letters/01-moon-jelly.webp",
+    "title": "물결에 기대어",
+    "text": "오늘은 마음에 힘을 조금 빼보아요. 파도처럼 다가오는 생각도, 멀어지는 생각도 잠시 그대로 두어요.",
+    "originalSha256": "c412b1d136094e8199213bac29e3387094537b284a97f4a282bbd47095fdd1d4"
+  },
+  {
+    "id": 1,
+    "species": "블루탱",
+    "file": "/letters/02-blue-tang.webp",
+    "title": "나만의 푸른빛",
+    "text": "다른 빛을 따라가지 않아도 좋아요. 오늘 당신이 지나온 길에는 당신만의 푸른빛이 남아 있어요.",
+    "originalSha256": "660a7b9d3947696a5e37ac2f048ecdeda4fe98a2a81716147f78f32ad7640597"
+  },
+  {
+    "id": 2,
+    "species": "만타가오리",
+    "file": "/letters/03-manta-ray.webp",
+    "title": "날개를 쉬는 시간",
+    "text": "늘 앞으로 나아가지 않아도 괜찮아요. 오늘 밤에는 넓은 바다에 몸을 맡기듯, 어깨를 가볍게 내려놓아요.",
+    "originalSha256": "cfee49b7e971362211e78ad8689665bbcd4762e28c46306ce048e30e8325fb57"
+  },
+  {
+    "id": 3,
+    "species": "푸른바다거북",
+    "file": "/letters/04-green-turtle.webp",
+    "title": "느린 걸음의 하루",
+    "text": "빨리 도착하지 못한 날에도 지나온 길은 사라지지 않아요. 오늘의 걸음만큼만, 자신을 다정하게 바라봐요.",
+    "originalSha256": "ce8c9ed34d9a4d36eb260cbb26370110476e27382f2aa6e02ce8f1e534657922"
+  },
+  {
+    "id": 4,
+    "species": "흰동가리",
+    "file": "/letters/05-clownfish.webp",
+    "title": "작은 안식처",
+    "text": "마음이 기댈 곳은 아주 작아도 충분해요. 익숙한 소리 하나, 따뜻한 자리 하나를 오늘 곁에 두어요.",
+    "originalSha256": "6899a07f572ef5e992f380491052a543ef53954808339317f54821c0337a3210"
+  },
+  {
+    "id": 5,
+    "species": "해마",
+    "file": "/letters/06-seahorse.webp",
+    "title": "살짝 붙잡아도 좋아요",
+    "text": "혼자 단단해지려고 애쓰지 않아도 괜찮아요. 오늘은 좋아하는 무언가에 마음을 살짝 기대어보아요.",
+    "originalSha256": "40901c636508b51d70eb221c86d8e95bc3ddfe3afcbb5a0ef3ad16aaf21c07fa"
+  },
+  {
+    "id": 6,
+    "species": "벨루가",
+    "file": "/letters/07-beluga.webp",
+    "title": "부드러운 인사",
+    "text": "오늘의 나에게 부드럽게 인사해요. 잘한 일을 찾기 전에, 여기까지 온 자신을 먼저 반겨주어요.",
+    "originalSha256": "f9a25ef4b8f79454be1a726b5e8e8a33b0b3e56afd951988b1108b32f084b4ec"
+  },
+  {
+    "id": 7,
+    "species": "혹등고래",
+    "file": "/letters/08-humpback.webp",
+    "title": "넓게 품어주는 밤",
+    "text": "오늘 다 설명하지 못한 마음이 있어도 좋아요. 이 바다는 서둘러 답을 묻지 않고 조용히 곁에 있을게요.",
+    "originalSha256": "c60baa1727bd02c09e4311437375620f762723a9f9aeafa287370adfc55cef52"
+  },
+  {
+    "id": 8,
+    "species": "큰돌고래",
+    "file": "/letters/09-bottlenose-dolphin.webp",
+    "title": "가벼운 순간 하나",
+    "text": "아주 잠깐 웃었던 순간 하나를 떠올려보아요. 작은 기쁨도 하루를 건너온 당신의 소중한 조각이에요.",
+    "originalSha256": "dfc59bad9b0ee357e3f10b9da98362eaf6982d1d0cb75ed6e17b0c78c37fe408"
+  },
+  {
+    "id": 9,
+    "species": "가시나비고기",
+    "file": "/letters/10-threadfin-butterflyfish.webp",
+    "title": "작은 빛을 따라",
+    "text": "오늘의 작은 좋음을 하나만 골라보아요. 큰 이유가 없어도, 마음에 남았다면 그것으로 충분해요.",
+    "originalSha256": "e3ac7ab5f5f7e38a4e01aa7a6e30ce94168929af3744493b99ab5729ebe80f41"
+  },
+  {
+    "id": 10,
+    "species": "만다린피시",
+    "file": "/letters/11-mandarinfish.webp",
+    "title": "여러 빛의 마음",
+    "text": "한 가지 기분으로 하루를 설명하지 않아도 돼요. 당신 안의 여러 빛을 오늘은 모두 그대로 놓아두어요.",
+    "originalSha256": "654ea11cfea560c45ef55715655acf4da05dcc344173ab75584e8a57c650c794"
+  },
+  {
+    "id": 11,
+    "species": "리본장어",
+    "file": "/letters/12-ribbon-eel.webp",
+    "title": "생각의 매듭",
+    "text": "지금 풀리지 않는 생각은 잠시 느슨하게 두어요. 모든 매듭을 오늘 밤 안에 풀어야 하는 건 아니니까요.",
+    "originalSha256": "2e3b6a628527d360fc1034019363e36af5ab49acc2db49dcbe96450212668ee8"
+  },
+  {
+    "id": 12,
+    "species": "큰지느러미산호오징어",
+    "file": "/letters/13-reef-squid.webp",
+    "title": "잔잔한 날갯짓",
+    "text": "힘껏 움직이지 않아도 바다는 조금씩 흘러요. 오늘 당신에게도 작은 움직임만으로 충분한 시간이 있기를.",
+    "originalSha256": "2b3b069f390c7abd87e1d0ca66eb1c411822607f55f3f1bfa6cfefb5acc528a7"
+  },
+  {
+    "id": 13,
+    "species": "덤보문어",
+    "file": "/letters/14-dumbo-octopus.webp",
+    "title": "작고 다정한 용기",
+    "text": "잘 버틴 날만 소중한 건 아니에요. 쉬고 싶다고 알아차린 마음에도 작은 용기가 담겨 있어요.",
+    "originalSha256": "caf5eb883ce99fec4ebafc480abef64e56870ae1a9a568e62fe47ff47fe6e616"
+  },
+  {
+    "id": 14,
+    "species": "갑오징어",
+    "file": "/letters/15-cuttlefish.webp",
+    "title": "모양이 바뀌는 마음",
+    "text": "어제와 다른 마음이어도 괜찮아요. 오늘의 나를 어제의 모습에 꼭 맞추지 않아도 좋아요.",
+    "originalSha256": "606e31039986e4f4fbb6e88d23c8036548732bfb261c6270b1a3b4a1f4bbcbb0"
+  },
+  {
+    "id": 15,
+    "species": "고래상어",
+    "file": "/letters/16-whale-shark.webp",
+    "title": "서두르지 않는 바다",
+    "text": "바다는 당신이 얼마나 해냈는지 묻지 않아요. 오늘은 한 일을 세기보다, 편안한 자리를 찾아보아요.",
+    "originalSha256": "40901355e383fc35bfeee8c8bac7d0cd482577be0db93eca761c95938d03ecb8"
+  },
+  {
+    "id": 16,
+    "species": "얼룩상어",
+    "file": "/letters/17-zebra-shark.webp",
+    "title": "하루의 무늬",
+    "text": "조금 어긋난 순간도 하루의 무늬가 되었어요. 오늘을 반듯하게 고치려 애쓰지 말고 잠시 쉬어가요.",
+    "originalSha256": "07d1f19b890088f0f1af0f1573e0290f6667ce1b0615570ba6f0b9222368879c"
+  },
+  {
+    "id": 17,
+    "species": "리피해룡",
+    "file": "/letters/18-leafy-seadragon.webp",
+    "title": "있는 그대로",
+    "text": "더 멋진 모습이 되어야 쉴 수 있는 건 아니에요. 지금 이 모습 그대로 편안한 자리에 머물러도 좋아요.",
+    "originalSha256": "6692e3e7bbc01bfbc874853808ac914349284d75005e7c042087ead25359258e"
+  },
+  {
+    "id": 18,
+    "species": "잎양갯민숭달팽이",
+    "file": "/letters/19-leaf-sheep.webp",
+    "title": "아주 작은 쉼",
+    "text": "긴 시간이 없어도 작은 쉼은 가능해요. 손에 쥔 것을 잠시 놓고, 지금 들리는 소리를 천천히 들어보아요.",
+    "originalSha256": "f3d1110e838f1b2bd6c03396576a785b06aa0b8256bf8143fc674de656c6625f"
+  },
+  {
+    "id": 19,
+    "species": "푸른갯민숭달팽이",
+    "file": "/letters/20-blue-dragon.webp",
+    "title": "작은 존재의 반짝임",
+    "text": "눈에 잘 띄지 않는 순간에도 당신의 하루는 이어졌어요. 보이지 않았던 작은 애씀을 오늘은 알아주어요.",
+    "originalSha256": "439d994c087d99cceca9e415cbfadcdee81ec8e52bad47827fb50bd36158c2f7"
+  },
+  {
+    "id": 20,
+    "species": "푸른불가사리",
+    "file": "/letters/21-blue-sea-star.webp",
+    "title": "다시 만나는 해변",
+    "text": "잠시 쉬었다 돌아와도 당신의 자리는 있어요. 이 바다는 빠르게 오는 사람만 기다리는 곳이 아니에요.",
+    "originalSha256": "77d6d8f227bdfb3d73a432e2461fd844763d0f9f8266731193e7509436ae532a"
+  },
+  {
+    "id": 21,
+    "species": "깃털갯고사리",
+    "file": "/letters/22-feather-star.webp",
+    "title": "한 칸의 여백",
+    "text": "오늘의 마음에 작은 여백을 남겨두어요. 아무것도 채우지 않은 자리에서도 조용한 편안함이 찾아올 수 있어요.",
+    "originalSha256": "f35a5675d9f5a770efd60fe673fd4ddcbc72ae51b08ee48f9867b553661905e4"
+  },
+  {
+    "id": 22,
+    "species": "버블팁말미잘",
+    "file": "/letters/23-bubble-tip-anemone.webp",
+    "title": "따뜻한 거리",
+    "text": "모든 소식과 마음을 가까이 두지 않아도 좋아요. 오늘 밤 나에게 편안한 거리를 조용히 골라보아요.",
+    "originalSha256": "d72bebcee9a0926cf1ac36a4aef0753e422c87239d908f8544559578ebd2baf2"
+  },
+  {
+    "id": 23,
+    "species": "붉은부채산호",
+    "file": "/letters/24-red-sea-fan.webp",
+    "title": "천천히 자라는 것",
+    "text": "바로 눈에 보이지 않아도 괜찮아요. 천천히 자라는 마음을 재촉하지 말고, 오늘은 곁에서 쉬어주어요.",
+    "originalSha256": "5d434123e4a6bfab257535079619fec49715d5042e3758f359e2fbfd4b1891c2"
+  },
+  {
+    "id": 24,
+    "species": "대왕조개",
+    "file": "/letters/25-giant-clam.webp",
+    "title": "간직하고 싶은 순간",
+    "text": "오늘 마음에 들었던 순간 하나를 조개처럼 간직해요. 남에게 설명하지 않아도 나에게 좋았다면 충분해요.",
+    "originalSha256": "cf33adfe1f1b76ab2a12d99a0709e869ebe6d1c8704f20f4d3355ed806ed82c7"
+  },
+  {
+    "id": 25,
+    "species": "비단가리비",
+    "file": "/letters/26-scallop.webp",
+    "title": "조용히 접는 하루",
+    "text": "아직 끝나지 않은 일이 있어도 하루를 잠시 접어두어요. 나머지는 내일의 나와 다시 만나도 좋아요.",
+    "originalSha256": "8cfda495fda103d9adaa097c307c398aeb547cd80710b090570cdcae18c2f82b"
+  },
+  {
+    "id": 26,
+    "species": "앵무조개",
+    "file": "/letters/27-nautilus.webp",
+    "title": "다시 돌아오는 길",
+    "text": "마음이 멀리 다녀온 날에도 돌아올 곳을 남겨두어요. 좋아하는 소리와 익숙한 풍경이 여기 기다리고 있어요.",
+    "originalSha256": "502b8a4f11a9db52c1f52a9c43e53dadb608e6618c75fa7e6108e734ba69a68f"
+  },
+  {
+    "id": 27,
+    "species": "푸른바닷가재",
+    "file": "/letters/28-blue-lobster.webp",
+    "title": "잠시 내려놓는 힘",
+    "text": "계속 단단하게 버티지 않아도 좋아요. 지금은 힘을 덜 주어도 되는 자리라는 걸 자신에게 알려주어요.",
+    "originalSha256": "e3bcd66439bd88231f37020fda6e35a5f1988d9b0bc85265952afb20b545594d"
+  },
+  {
+    "id": 28,
+    "species": "스칼렛청소새우",
+    "file": "/letters/29-scarlet-cleaner-shrimp.webp",
+    "title": "마음을 돌보는 일",
+    "text": "남을 챙기느라 놓친 내 마음은 없었나요. 오늘은 아주 작은 친절 하나를 자신에게도 건네보아요.",
+    "originalSha256": "ab6d9ade0d5780decffbd69e56d250a9f06887b351cf9a23317eb2adde9e185b"
+  },
+  {
+    "id": 29,
+    "species": "바다나비",
+    "file": "/letters/30-sea-angel.webp",
+    "title": "당신의 속도로",
+    "text": "이 바다를 찾는 속도도 떠나는 시간도 당신이 정해요. 오늘의 쉼이 당신에게 다정한 기억으로 남기를.",
+    "originalSha256": "2892491a675d6b9a93264e27d329c30acd3f6372a9c80a25ff8099ef854ec78c"
+  }
+]

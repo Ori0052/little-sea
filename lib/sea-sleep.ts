@@ -1,3 +1,4 @@
+import letterDesigns from '../public/letters/catalog.json';
 export type SleepSound='waves'|'rain'|'fire';
 export function sleepEnvelope(deadline:number|null,now:number){if(deadline===null)return{remaining:null,gain:1,finished:false};const remaining=Math.max(0,deadline-now);return{remaining,gain:Math.min(1,remaining/30000),finished:remaining===0}}
 export const seaLetters=[
@@ -9,9 +10,12 @@ export const seaLetters=[
  {title:'달이 기운 자리',text:'달은 매일 같은 모양이 아니어도 여전히 달이에요. 당신도 매일 같지 않아도 괜찮아요.'},
  {title:'내일의 해변',text:'내일의 일은 내일의 해변에서 만나기로 해요. 지금은 파도가 오고 가는 소리만 곁에 두어요.'},
 ];
-export type SavedLetter={date:string;index:number};
+export type SavedLetter={date:string;index:number;designId?:number;title?:string;text?:string};
+export const seaLetterDesigns=letterDesigns;
+export function resolveLetter(letter:SavedLetter){const design=letterDesigns[letter.designId??letter.index%letterDesigns.length];const legacy=seaLetters[letter.index%seaLetters.length];return {...design,title:letter.title??(letter.designId===undefined?legacy.title:design.title),text:letter.text??(letter.designId===undefined?legacy.text:design.text)}}
 export function koreanDay(now=new Date()){return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(now)}
 export function letterIndex(day:string){return Array.from(day).reduce((n,c)=>n+c.charCodeAt(0),0)%seaLetters.length}
-export function readLetters(raw:string|null):SavedLetter[]{try{const a:unknown=JSON.parse(raw||'[]');if(!Array.isArray(a))return[];const dates=new Set<string>();return a.filter((v):v is SavedLetter=>!!v&&typeof v==='object'&&'date'in v&&typeof v.date==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(v.date)&&'index'in v&&Number.isInteger(v.index)&&Number(v.index)>=0&&Number(v.index)<seaLetters.length).filter(v=>{if(dates.has(v.date))return false;dates.add(v.date);return true}).slice(0,30)}catch{return[]}}
+export function readLetters(raw:string|null):SavedLetter[]{try{const a:unknown=JSON.parse(raw||'[]');if(!Array.isArray(a))return[];const dates=new Set<string>();return a.filter((v):v is SavedLetter=>!!v&&typeof v==='object'&&'date'in v&&typeof v.date==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(v.date)&&'index'in v&&Number.isInteger(v.index)&&Number(v.index)>=0&&Number(v.index)<('designId'in v?letterDesigns.length:seaLetters.length)&&(!('designId'in v)||(Number.isInteger(v.designId)&&Number(v.designId)>=0&&Number(v.designId)<letterDesigns.length))&&(!('title'in v)||(typeof v.title==='string'&&v.title.length<=60))&&(!('text'in v)||(typeof v.text==='string'&&v.text.length<=500))).filter(v=>{if(dates.has(v.date))return false;dates.add(v.date);return true}).slice(0,30)}catch{return[]}}
 
 export function nextKoreanMidnight(now=Date.now()){const day=86400000,offset=9*3600000;return(Math.floor((now+offset)/day)+1)*day-offset}
+export function discoverDailyLetter(existing:SavedLetter[],day:string){if(!/^\d{4}-\d{2}-\d{2}$/.test(day)||existing.some(v=>v.date===day))return null;const used=new Set(existing.map(v=>v.designId??v.index%letterDesigns.length));let designId=letterDesigns.findIndex(d=>!used.has(d.id));if(designId<0)designId=((existing[0]?.designId??existing[0]?.index??-1)+1)%letterDesigns.length;const design=letterDesigns[designId];const letter:SavedLetter={date:day,index:designId,designId,title:design.title,text:design.text};return{letter,letters:[letter,...existing].slice(0,30)}}
