@@ -1,0 +1,14 @@
+'use client';
+import {useEffect,useRef,useState} from 'react';
+import {seaApiUrl} from '../lib/sea-platform';
+import {clockMood,solarPalette,currentObservation,observationMood,weatherRegions,type WeatherRegion,type WeatherSnapshot} from '../lib/sea-live-weather';
+export type WeatherMode='manual'|'clock'|'weather';
+const key='little-sea-auto-weather-v1';
+export function useSeaLiveWeather(paused:boolean){
+ const[mode,setMode]=useState<WeatherMode>('manual'),[region,setRegion]=useState<WeatherRegion>('seoul'),[loaded,setLoaded]=useState(false),[now,setNow]=useState(0),[snapshot,setSnapshot]=useState<WeatherSnapshot|null>(null),[status,setStatus]=useState<'idle'|'loading'|'ready'|'unavailable'>('idle'),nextFetch=useRef(0);
+ useEffect(()=>{try{const d=JSON.parse(localStorage.getItem(key)||'null');if(d&&['manual','clock','weather'].includes(d.mode))setMode(d.mode);else if(!localStorage.getItem('little-sea-preferences-v1'))setMode('clock');if(weatherRegions.some(r=>r.id===d?.region))setRegion(d.region)}catch{}setNow(Date.now());setLoaded(true)},[]);
+ useEffect(()=>{if(loaded)try{localStorage.setItem(key,JSON.stringify({mode,region}))}catch{}},[loaded,mode,region]);
+ useEffect(()=>{if(!loaded)return;const tick=()=>{if(!document.hidden&&!paused)setNow(Date.now())};const timer=setInterval(tick,60000);document.addEventListener('visibilitychange',tick);tick();return()=>{clearInterval(timer);document.removeEventListener('visibilitychange',tick)}},[loaded,paused]);
+ useEffect(()=>{if(!loaded||mode!=='weather'||paused)return;let disposed=false,busy=false,controller:AbortController|null=null;const load=async()=>{if(document.hidden||busy||Date.now()<nextFetch.current)return;busy=true;controller=new AbortController();setStatus('loading');try{const res=await fetch(seaApiUrl('/api/weather'),{signal:controller.signal});if(!res.ok)throw Error();const d=await res.json() as WeatherSnapshot;if(!d||!Number.isFinite(d.fetchedAt)||!Array.isArray(d.observations))throw Error();if(!disposed){setSnapshot(d);setStatus('ready');setNow(Date.now());nextFetch.current=Date.now()+10*60000}}catch{if(!disposed){setStatus('unavailable');nextFetch.current=Date.now()+5*60000}}finally{busy=false}};const timer=setInterval(()=>void load(),60000);const visible=()=>{if(document.hidden)controller?.abort();else void load()};document.addEventListener('visibilitychange',visible);void load();return()=>{disposed=true;controller?.abort();clearInterval(timer);document.removeEventListener('visibilitychange',visible)}},[loaded,mode,paused]);
+ const observation=currentObservation(snapshot,region,now||Date.now());return{mode,setMode,region,setRegion,status,observation,timeMood:clockMood(now||Date.now(),region),mood:observationMood(mode==='weather'?observation:null,now||Date.now(),region),now,loaded,palette:solarPalette(now||Date.now(),region)};
+}
