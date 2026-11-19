@@ -1,4 +1,5 @@
 'use client';
+import {seaIceGLSL} from '../lib/sea-ice-shader';
 import {newIslands} from './archipelago';
 import {useGraphicsRecovery} from '../hooks/use-graphics-recovery';
 import {drawSeaTerrain} from './sea-graphics-layer';
@@ -13,12 +14,13 @@ precision highp float;
 uniform vec2 resolution;
 uniform vec2 offset;
 uniform float time;
-uniform float mood;uniform float tempest;
+uniform float mood;uniform float tempest;uniform float frozen;
 float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
 float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*noise(p);p=p*2.04+vec2(11.7,7.3);a*=.5;}return v;}
 float cells(vec2 p){vec2 b=floor(p),f=fract(p);float a=8.,c=8.;for(int y=-1;y<=1;y++){for(int x=-1;x<=1;x++){vec2 o=vec2(float(x),float(y));vec2 seed=vec2(hash(b+o),hash(b+o+19.4));vec2 q=o+.5+.36*sin(seed*6.283+time*.23)-f;float d=dot(q,q);if(d<a){c=a;a=d;}else if(d<c){c=d;}}}return sqrt(c)-sqrt(a);}
 ${islandGLSL}
+${seaIceGLSL}
 void main(){
  vec2 uv=gl_FragCoord.xy/resolution;uv.y=1.-uv.y;
  float aspect=resolution.x/resolution.y;uv.y=(uv.y-.5)/aspect+.5;uv+=offset;vec2 p=vec2(uv.x*aspect,uv.y);
@@ -26,7 +28,7 @@ void main(){
  float coast=(uv.x-shore)*aspect;
  float n=fbm(p*5.+vec2(time*.025,0));
  float storm=step(2.5,mood);float sweep=sin(time*(.40+storm*.55)+uv.y*1.5)*(.025+storm*.035+tempest*.025);
- float wet=coast-sweep;
+ sweep*=1.-frozen*.92;float wet=coast-sweep;
  vec3 sand=mix(vec3(.85,.84,.77),vec3(.96,.94,.86),fbm(p*65.));
  sand*=1.-.14*exp(-pow((wet+.025)/.055,2.));
  vec3 water=mix(vec3(.39,.77,.79),vec3(.045,.43,.54),smoothstep(0.,aspect*.85,coast));
@@ -56,6 +58,7 @@ void main(){
  float beachfoam=exp(-pow((wet-.005)/.014,2.))*(.4+.6*noise(p*130.));
  froth=max(froth,beachfoam);
  water=mix(water,vec3(.96,.99,.94),clamp(froth,0.,.97));
+ if(frozen>.5){water=frozenSea(vec2(worldX,(uv.x-baseShore)*12.),0.);sand=mix(sand,vec3(.88,.94,.96),.7);}
  vec3 color=mix(sand,water,smoothstep(-.006,.008,wet));
  float island=islandField(vec2(worldX,(uv.x-baseShore)*12.),vec2(0.,${islandCenter.z.toFixed(1)}),vec2(${islandRadius.x.toFixed(1)},${islandRadius.z.toFixed(1)}));island=min(island,islandField(vec2(worldX,(uv.x-baseShore)*12.),vec2(${campingCenter.x.toFixed(1)},${campingCenter.z.toFixed(1)}),vec2(${campingRadius.x.toFixed(1)},${campingRadius.z.toFixed(1)})));island=min(island,islandField(vec2(worldX,(uv.x-baseShore)*12.),vec2(${tinyCenter.x.toFixed(1)},${tinyCenter.z.toFixed(1)}),vec2(${tinyRadius.x.toFixed(1)},${tinyRadius.z.toFixed(1)})));${newIslands.map(i=>`island=min(island,islandField(vec2(worldX,(uv.x-baseShore)*12.),vec2(${i.x.toFixed(1)},${i.z.toFixed(1)}),vec2(${i.rx.toFixed(1)},${i.rz.toFixed(1)})));`).join('')}float reef=exp(-pow((island-.14)/.20,2.));color=mix(color,vec3(.38,.85,.78),reef*.40);float islandFoam=exp(-pow((island-.03-sin(time*.8)*.015)/.035,2.));color=mix(color,vec3(.98,1.,.94),islandFoam*.8);
  float twilight=clamp(1.-abs(mood-1.),0.,1.);color=mix(color,mix(color*vec3(1.03,.77,.76),vec3(.98,.73,.56),rays*.36),twilight);
@@ -64,21 +67,21 @@ void main(){
  color+=(hash(gl_FragCoord.xy)-.5)*.015;
  gl_FragColor=vec4(color,1.);
 }`;
-export function OceanShore({mood,camera,storm=false,solarPalette}:{solarPalette?:number;storm?:boolean;mood:Mood;camera:RefObject<SeaCamera>}){
- const paletteRef=useRef(solarPalette);paletteRef.current=solarPalette;const stormRef=useRef(storm);stormRef.current=storm;const ref=useRef<HTMLCanvasElement>(null),moodRef=useRef(mood);const [failed,setFailed]=useState(false);const attempt=useGraphicsRecovery(ref,failed);moodRef.current=mood;
+export function OceanShore({mood,camera,storm=false,solarPalette,frozen=false}:{frozen?:boolean;solarPalette?:number;storm?:boolean;mood:Mood;camera:RefObject<SeaCamera>}){
+ const frozenRef=useRef(frozen);frozenRef.current=frozen;const paletteRef=useRef(solarPalette);paletteRef.current=solarPalette;const stormRef=useRef(storm);stormRef.current=storm;const ref=useRef<HTMLCanvasElement>(null),moodRef=useRef(mood);const [failed,setFailed]=useState(false);const attempt=useGraphicsRecovery(ref,failed);moodRef.current=mood;
  useEffect(()=>{const canvas=ref.current!;const gl=canvas.getContext('webgl',{alpha:false,antialias:false,powerPreference:'low-power'});if(!gl){recordGraphicsFailure('shore',{stage:'context_unavailable',detail:'getContext(webgl) returned null'});setFailed(true);return}
  if(gl.isContextLost()){setFailed(true);return}let stopped=false,frame=0,last=0;const motion=matchMedia('(prefers-reduced-motion: reduce)');
  const shader=(type:number,source:string)=>{const s=gl.createShader(type)!;gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error((type===gl.VERTEX_SHADER?'vertex_compile: ':'fragment_compile: ')+(gl.getShaderInfoLog(s)||'Shader compilation failed'));return s};
  let program:WebGLProgram,vs:WebGLShader,fs:WebGLShader;
  try{vs=shader(gl.VERTEX_SHADER,vertex);fs=shader(gl.FRAGMENT_SHADER,fragment);program=gl.createProgram()!;gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('program_link: '+(gl.getProgramInfoLog(program)||'Program link failed'))}catch(e){recordGraphicsFailure('shore',{stage:'shader_setup',detail:e instanceof Error?e.message:String(e)});setFailed(true);return}
  setFailed(false);gl.useProgram(program);const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);const attr=gl.getAttribLocation(program,'position');gl.enableVertexAttribArray(attr);gl.vertexAttribPointer(attr,2,gl.FLOAT,false,0,0);
- const offset=gl.getUniformLocation(program,'offset');const res=gl.getUniformLocation(program,'resolution'),time=gl.getUniformLocation(program,'time'),mode=gl.getUniformLocation(program,'mood'),tempest=gl.getUniformLocation(program,'tempest');
+ const offset=gl.getUniformLocation(program,'offset');const res=gl.getUniformLocation(program,'resolution'),time=gl.getUniformLocation(program,'time'),mode=gl.getUniformLocation(program,'mood'),tempest=gl.getUniformLocation(program,'tempest'),ice=gl.getUniformLocation(program,'frozen');
  const resize=()=>{const d=Math.min(devicePixelRatio,1.25,Math.sqrt(900000/(canvas.clientWidth*canvas.clientHeight)));canvas.width=Math.round(canvas.clientWidth*d);canvas.height=Math.round(canvas.clientHeight*d);gl.viewport(0,0,canvas.width,canvas.height)};resize();window.addEventListener('resize',resize);
- const draw=(ms:number)=>{if(stopped)return;if(ms-last>40){last=ms;gl.useProgram(program);gl.disable(gl.DEPTH_TEST);gl.depthMask(false);for(let n=0;n<3;n++)gl.disableVertexAttribArray(n);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.enableVertexAttribArray(attr);gl.vertexAttribPointer(attr,2,gl.FLOAT,false,0,0);gl.uniform2f(res,canvas.width,canvas.height);gl.uniform2f(offset,camera.current.x,camera.current.z);gl.uniform1f(time,motion.matches?18:ms/1000);gl.uniform1f(mode,paletteRef.current??{day:0,sunset:1,night:2,rain:3}[moodRef.current]);gl.uniform1f(tempest,stormRef.current?1:0);gl.drawArrays(gl.TRIANGLES,0,6);drawSeaTerrain({gl,canvas,view:'shore'})}frame=requestAnimationFrame(draw)};frame=requestAnimationFrame(draw);
+ const draw=(ms:number)=>{if(stopped)return;if(ms-last>40){last=ms;gl.useProgram(program);gl.disable(gl.DEPTH_TEST);gl.depthMask(false);for(let n=0;n<3;n++)gl.disableVertexAttribArray(n);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.enableVertexAttribArray(attr);gl.vertexAttribPointer(attr,2,gl.FLOAT,false,0,0);gl.uniform2f(res,canvas.width,canvas.height);gl.uniform2f(offset,camera.current.x,camera.current.z);gl.uniform1f(time,motion.matches?18:ms/1000);gl.uniform1f(mode,paletteRef.current??{day:0,sunset:1,night:2,rain:3}[moodRef.current]);gl.uniform1f(tempest,stormRef.current?1:0);gl.uniform1f(ice,frozenRef.current?1:0);gl.drawArrays(gl.TRIANGLES,0,6);drawSeaTerrain({gl,canvas,view:'shore'})}frame=requestAnimationFrame(draw)};frame=requestAnimationFrame(draw);
  const lost=(e:Event)=>{e.preventDefault();recordGraphicsFailure('shore',{stage:'context_lost',detail:'WebGL context lost'});stopped=true;setFailed(true)};canvas.addEventListener('webglcontextlost',lost);
  return()=>{stopped=true;cancelAnimationFrame(frame);window.removeEventListener('resize',resize);canvas.removeEventListener('webglcontextlost',lost);if(buffer&&gl.isBuffer(buffer))gl.deleteBuffer(buffer);if(gl.isProgram(program))gl.deleteProgram(program);if(gl.isShader(vs))gl.deleteShader(vs);if(gl.isShader(fs))gl.deleteShader(fs)};
  },[attempt,camera]);
- return <div data-storm={storm} className={`shore-scene ${failed?'shore-fallback':''}`}><canvas ref={ref} role="img" aria-label="위에서 바라본 청록빛 해변. 하얀 포말이 모래 위로 밀려오고 물속 빛이 반짝입니다."/>{failed&&<div className="fallback-foam"/>}</div>
+ return <div data-storm={storm} data-frozen={frozen} className={`shore-scene ${failed?'shore-fallback':''}`}><canvas ref={ref} role="img" aria-label="위에서 바라본 청록빛 해변. 하얀 포말이 모래 위로 밀려오고 물속 빛이 반짝입니다."/>{failed&&<div className="fallback-foam"/>}</div>
 }
 export function SeaFriends({count}:{count:number|null}){
  const visible=Math.min(count??0,12);
