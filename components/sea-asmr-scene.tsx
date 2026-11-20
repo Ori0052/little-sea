@@ -1,0 +1,2 @@
+'use client';
+export function SeaAsmrScene({night=false}:{night?:boolean}){return <div className={`asmr-scene ${night?'is-night':''}`} role="img" aria-label="반투명 파도와 따뜻한 종이배, 달빛 아래 앉아 있는 작은 사람" data-scene="sea-glass"><img src="/asmr/ocean-rest.webp" alt="" aria-hidden="true" width="1280" height="853" className="asmr-scene-rest" draggable={false}/><img src="/asmr/ocean-sleep.webp" alt="" aria-hidden="true" width="1280" height="853" className="asmr-scene-night" draggable={false}/></div>}

@@ -4,7 +4,7 @@ import {isAmuletId} from '../components/amulet-catalog';
 import type {SeaPlatform} from '../lib/sea-platform';
 declare const __SEA_TOSS_APP_NAME__:string;
 declare const __SEA_API_ORIGIN__:string;
-export const savedKeys=['little-sea-visitor','little-sea-session-proof-v1','little-sea-island-discoveries-v1','little-sea-onboarding-v1','little-sea-guidance-v1','little-sea-name','little-sea-look','little-sea-tube-enabled','little-sea-solo','little-sea-preferences-v1','little-sea-treasures-v1','little-sea-deepsea-v1','little-sea-exploration-v2'];
+export const savedKeys=['little-sea-visitor','little-sea-session-proof-v1','little-sea-island-discoveries-v1','little-sea-onboarding-v1','little-sea-onboarding-v3','little-sea-letters-v1','little-sea-auto-weather-v1','little-sea-guidance-v1','little-sea-name','little-sea-look','little-sea-tube-enabled','little-sea-solo','little-sea-preferences-v1','little-sea-treasures-v1','little-sea-deepsea-v1','little-sea-exploration-v2'];
 export function hasTossBridge(){return Boolean((window as unknown as {ReactNativeWebView?:unknown}).ReactNativeWebView)}
 export function installPlatform(){
  const platform:SeaPlatform={rewardAd:createRewardAd(import.meta.env.VITE_TOSS_REWARDED_AD_GROUP_ID||''),host:'toss',apiOrigin:import.meta.env.DEV?'':__SEA_API_ORIGIN__,
@@ -24,6 +24,7 @@ export function subscribeHost(onBack:()=>void){if(!hasTossBridge())return()=>{};
 export function dismissSeaLayer(){
  const dialogs=Array.from(document.querySelectorAll<HTMLDialogElement>('dialog[open]'));const top=dialogs[dialogs.length-1];
  if(top){if(top.dispatchEvent(new Event('cancel',{cancelable:true})))top.close();return true}
+ const asmrBack=document.querySelector<HTMLButtonElement>('[data-sleep-undim]')||document.querySelector<HTMLButtonElement>('[data-sleep-exit]')||document.querySelector<HTMLButtonElement>('[data-asmr-home]');if(asmrBack){asmrBack.click();return true}
  const closer=document.querySelector<HTMLButtonElement>('.closet [aria-label="옷장 닫기"],.island-cook-menu button[aria-label],footer.settings-open [aria-label="바다 설정 닫기"]');
  if(closer){closer.click();return true}
  const main=document.querySelector('main.sea');

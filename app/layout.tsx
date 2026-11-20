@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import './sea-design-system.css';
+import './sea-asmr.css';
 const siteUrl='https://little-sea.rhfenrdltkfk.chatgpt.site';
 const title='나의 작은 바다';
 const description='멀리 가지 않아도 괜찮아. 파도 소리를 들으며 쉬고, 작은 섬을 탐험하는 나만의 바다.';

@@ -1,0 +1,20 @@
+[
+  {
+    "name": "rest",
+    "file": "/asmr/ocean-rest.webp",
+    "sourceSha256": "5c8b06cb24b10da505e4de6005b086a0ae79b0588225be4b248627c7fe22c774",
+    "sha256": "f08446f98423d9a657509c51f6381126b8031997b9ff8c60d030852c3be7ca0e",
+    "bytes": 39166,
+    "origin": "Original generated illustration based on user-approved rest/sleep mockup",
+    "rendering": "Pre-rendered sea-glass illustration; no embedded interface"
+  },
+  {
+    "name": "sleep",
+    "file": "/asmr/ocean-sleep.webp",
+    "sourceSha256": "5c06d77b8d6dc66a3aac0f2933d892f0f6ece5ca686837ba7843c2159ae1753e",
+    "sha256": "f5b3f466771e8b3547dc654c1792358121d23be6edaf4651524e06daaef6b661",
+    "bytes": 35794,
+    "origin": "Original generated illustration based on user-approved rest/sleep mockup",
+    "rendering": "Pre-rendered sea-glass illustration; no embedded interface"
+  }
+]
