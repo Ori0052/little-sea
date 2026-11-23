@@ -1,9 +1,10 @@
 'use client';
-import {ArrowLeft,Waves,Compass,Archive,UserRound,Menu,type LucideIcon} from 'lucide-react';
+import {ArrowLeft,Gamepad2,Moon,type LucideIcon} from 'lucide-react';
 export type SeaTab={id:string;label:string;icon:LucideIcon};
-let rootFocusTab='sea';
+let rootFocusTab='game';
 export function seaNavigationFocusTab(){return rootFocusTab}
-export const seaMainTabs:readonly SeaTab[]=[{id:'sea',label:'바다',icon:Waves},{id:'explore',label:'탐험',icon:Compass},{id:'collection',label:'수집함',icon:Archive},{id:'wardrobe',label:'내 정보',icon:UserRound},{id:'all',label:'전체',icon:Menu}];
+export const seaModeTabs:readonly SeaTab[]=[{id:'game',label:'게임 플레이하기',icon:Gamepad2},{id:'asmr',label:'오늘은 쉬기',icon:Moon}];
+export function SeaModeBar({mode,onGame,onRest}:{mode:'game'|'asmr';onGame:()=>void;onRest:()=>void}){return <SeaTabBar className="sea-main-tabs sea-mode-bar ui" label="이용 모드 선택" items={seaModeTabs} active={mode} onSelect={id=>id==='game'?onGame():onRest()}/>}
 /** Navigation destinations only. Play/pause, sound and travel stay outside this bar. */
 export function SeaTabBar({items,active,onSelect,onBack,label='바다 하단 메뉴',className=''}:{items:readonly SeaTab[];active:string;onSelect:(id:string)=>void;onBack?:()=>void;label?:string;className?:string}){
  return <nav className={`sea-tab-bar ${onBack?'has-back':''} ${className}`} aria-label={label} data-sea-tab-bar={onBack?'detail':'main'} onPointerDown={e=>e.stopPropagation()}>

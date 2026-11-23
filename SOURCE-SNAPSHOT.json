@@ -1,5 +1,5 @@
 {
-  "sourceCommit": "05f825bf3b668c67f812fcd203aa750e5ce6df17",
+  "sourceCommit": "059c9e34c0302f08eee7f13cd595f8dd53b617bc",
   "site": "https://little-sea.rhfenrdltkfk.chatgpt.site",
-  "note": "Shared main/section tab bars with back, simpler game and ASMR navigation, grouped settings and retained player location."
+  "note": "Game-first entry with one-time onboarding; two plain play/rest choices in the shared bottom bar; compact rest controls and a single sleep flow."
 }

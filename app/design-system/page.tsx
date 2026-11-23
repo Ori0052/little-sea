@@ -1,7 +1,7 @@
 'use client';
 import {useEffect,useRef,useState} from 'react';
 import {SeaBrand} from '../../components/sea-brand';
-import {SeaTabBar,seaMainTabs} from '../../components/sea-tab-bar';
+import {SeaTabBar,SeaModeBar,seaModeTabs} from '../../components/sea-tab-bar';
 import {SeaMenu} from '../../components/sea-hub';
 
 const themes=[
@@ -41,12 +41,12 @@ export default function DesignSystem(){
     <button className="sea-button sea-button--primary" onClick={()=>setMenu(true)}>실제 바다 메뉴 열기</button>
    </section>
    <section className="kit-card"><h2>온보딩 조작부</h2>
-    <SeaTabBar label="버튼 사용법 미리보기" items={seaMainTabs} active={seaMainTabs[active]?.id||'sea'} onSelect={id=>setActive(seaMainTabs.findIndex(t=>t.id===id))}/>
+    <SeaTabBar label="버튼 사용법 미리보기" items={seaModeTabs} active={seaModeTabs[active]?.id||'game'} onSelect={id=>setActive(seaModeTabs.findIndex(t=>t.id===id))}/>
     <div className="sea-start-actions"><button className="sea-start-back">이전</button><button className="sea-start-primary">바다 시작하기</button></div>
    </section>
    <section className="kit-card"><h2>게임 하단바</h2>
-    <SeaTabBar items={seaMainTabs} active={seaMainTabs[active]?.id||'sea'} onSelect={id=>setActive(seaMainTabs.findIndex(t=>t.id===id))}/>
-    <p>실제 게임과 같은 하단바 컴포넌트입니다. 기본 탭의 선택 상태와 아이콘·글자 간격을 확인할 수 있습니다.</p>
+    <SeaModeBar mode={active===1?'asmr':'game'} onGame={()=>setActive(0)} onRest={()=>setActive(1)}/>
+    <p>실제 게임과 같은 하단바 컴포넌트입니다. 게임·휴식 모드의 선택 상태와 아이콘·글자 간격을 확인할 수 있습니다.</p>
    </section>
   </div>
   <p>이 페이지는 공통 게임 UI의 검토 화면입니다. ASMR의 화면 배치와 기존 개별 컴포넌트 스타일은 별도 검토가 필요합니다.</p>

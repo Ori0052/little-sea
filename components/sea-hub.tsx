@@ -3,7 +3,7 @@ import {WinterEquipment} from './winter-equipment';
 import {WinterGear} from './winter-art';
 import type {JourneyKind} from './journey-state';
 import {useState} from 'react';
-import {Map,Mountain,Package,Archive,Gem,Sparkles,Compass,UserRound,Settings,HelpCircle,Moon} from 'lucide-react';
+import {Map,Mountain,Package,Archive,Gem,Sparkles,Compass,UserRound,Settings,HelpCircle,Moon,Umbrella} from 'lucide-react';
 import {SeaNavDialog} from './sea-nav-dialog';
 import {SeaTabBar} from './sea-tab-bar';
 import {CrownPreview} from './treasure-art';
@@ -20,12 +20,12 @@ import {islandLanding,campingLanding,tinyLanding} from './island-space';
 import {islandSummit} from './island-terrain';
 import {fromWorld} from './sea-space';
 type Deep=ReturnType<typeof useDeepSea>;type Exploration=ReturnType<typeof useExploration>;
-export function SeaMenu({frozen=false,onChoose,onClose,onAsmr,onSettings,onHelp}:{frozen?:boolean;onChoose:(section:'wardrobe'|'explore'|'collection')=>void;onClose:()=>void;onAsmr?:()=>void;onSettings?:()=>void;onHelp?:()=>void}){
+export function SeaMenu({frozen=false,onChoose,onClose,onAsmr,onSettings,onHelp,onBeach}:{frozen?:boolean;onChoose:(section:'wardrobe'|'explore'|'collection')=>void;onClose:()=>void;onAsmr?:()=>void;onSettings?:()=>void;onHelp?:()=>void;onBeach?:()=>void}){
  const shortcuts=[{id:'explore',label:'탐험',icon:Compass},{id:'collection',label:'수집함',icon:Archive},{id:'wardrobe',label:'내 정보',icon:UserRound}];
  return <SeaNavDialog title="전체" onClose={onClose} navigation={<SeaTabBar label="전체 메뉴 이동" active="all" items={shortcuts} onBack={onClose} onSelect={id=>onChoose(id as 'wardrobe'|'explore'|'collection')}/>}>
-  {onAsmr&&<section className="sea-menu-rest"><p>오늘은 소리만 곁에 두어도 좋아요.</p><button onClick={onAsmr}><Moon size={18} aria-hidden="true"/> 소리 들으며 쉬기</button></section>}
+  {onAsmr&&<section className="sea-menu-rest"><p>오늘은 소리만 곁에 두어도 좋아요.</p><button onClick={onAsmr}><Moon size={18} aria-hidden="true"/> 오늘은 쉬기</button></section>}
   <div className="sea-menu-options"><button onClick={()=>onChoose('wardrobe')}><UserRound aria-hidden="true"/><span>내 정보<small>이름 · 옷 · 편지함</small></span></button><button onClick={()=>onChoose('explore')}><Compass aria-hidden="true"/><span>탐험<small>{frozen?'섬 · 지도 · 겨울 장비':'섬 · 지도 · 이동 장비'}</small></span></button><button onClick={()=>onChoose('collection')}><Archive aria-hidden="true"/><span>수집함<small>수집품 · 보물 · 부적</small></span></button></div>
-  <div className="sea-menu-options">{onSettings&&<button onClick={onSettings}><Settings aria-hidden="true"/><span>바다 설정<small>날씨 · 소리 · 화면</small></span></button>}{onHelp&&<button onClick={onHelp}><HelpCircle aria-hidden="true"/><span>이용 안내<small>바다에서 쉬고 탐험하는 방법</small></span></button>}</div>
+  <div className="sea-menu-options">{onBeach&&<button onClick={onBeach}><Umbrella aria-hidden="true"/><span>해변으로 돌아가기</span></button>}{onSettings&&<button onClick={onSettings}><Settings aria-hidden="true"/><span>바다 설정<small>날씨 · 소리 · 화면</small></span></button>}{onHelp&&<button onClick={onHelp}><HelpCircle aria-hidden="true"/><span>이용 안내<small>바다에서 쉬고 탐험하는 방법</small></span></button>}</div>
  </SeaNavDialog>;
 }
 export function SeaCollection({frozen=false,fishCount,deep,counts,saveError,exploration,tab:initial='items',onClose,onSearch}:{frozen?:boolean;fishCount:number;deep:Deep;counts:number[];saveError:boolean;exploration:Exploration;tab?:'items'|'treasures'|'amulets';onClose:()=>void;onSearch:(id:CrownId)=>void}){const[tab,setTab]=useState(initial);const tabs=[{id:'items',label:'수집품',icon:Archive},{id:'treasures',label:'보물',icon:Gem},{id:'amulets',label:'부적',icon:Sparkles}];return <SeaNavDialog title="나의 바다 수집함" onClose={onClose} navigation={<SeaTabBar label="수집함 종류" items={tabs} active={tab} onBack={onClose} onSelect={id=>setTab(id as typeof tab)}/>}><section aria-label={tabs.find(t=>t.id===tab)?.label}>

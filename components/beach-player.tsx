@@ -33,7 +33,7 @@ import {SeaIsland} from './sea-island';
 import {islandLanding,onIsland,seaLand,fireCenter,fireSeatPositions} from './island-space';
 import {DockIcon} from './mobile-dock';
 import {UserRound,Shirt,Mail} from 'lucide-react';
-import {SeaTabBar,seaMainTabs} from './sea-tab-bar';
+import {SeaTabBar,SeaModeBar} from './sea-tab-bar';
 import {SeaNavDialog} from './sea-nav-dialog';
 import {cleanSeaName,randomSeaName} from './sea-names';
 import {meetingPoint} from './meeting-point';
@@ -176,8 +176,8 @@ export function BeachPlayer({onAsmr,frozen=false,boat,boatBusy,boatError,onBoat,
 
  <SeaTreasures disabled={paused||tentOpen||letterToRead!==null||seaMenuOpen||explorerOpen||collectionOpen||closet||settingsOpen||seat!==null||fireRest} onLetterFound={()=>{const letter=letterState.discover();if(letter){clearGoal();held.current.clear();setCruise(false);setLetterToRead(letter)}}} onInventory={(counts,saveError)=>setSurfaceBag({counts,saveError})} point={point} view={view} camera={camera} world={world} submerged={diving} onNavigate={p=>navigateTo(p,false,'종이배의 선물')} open={false} onClose={()=>{}}/>
  {!closet&&!seaMenuOpen&&!explorerOpen&&!collectionOpen&&!settingsOpen&&!letterToRead&&!tentOpen&&<>
- <div className="sea-game-actions ui"><button disabled={aboard&&(boatBusy||(!!boatPose?.moving&&!boat?.selfCaptain))} onClick={()=>void contextAction()}><DockIcon name={contextIcon}/><span>{contextLabel}</span></button>{awayFromBeach&&<button onClick={()=>void goBeach()}><DockIcon name="beach"/><span>해변으로</span></button>}<button className="game-sound-toggle" data-sound-toggle aria-label={sound?'파도 소리 끄기':'파도 소리 켜기'} aria-pressed={sound} onClick={onToggleSound}><DockIcon name={sound?'sound':'muted'}/></button></div>
- <SeaTabBar className="sea-main-tabs ui" items={seaMainTabs} active="sea" onSelect={chooseMenu}/>
+ <div className="sea-game-actions ui"><button data-game-menu aria-label="바다 메뉴 열기" onClick={openSeaMenu}><DockIcon name="menu"/><span>메뉴</span></button><button disabled={aboard&&(boatBusy||(!!boatPose?.moving&&!boat?.selfCaptain))} onClick={()=>void contextAction()}><DockIcon name={contextIcon}/><span>{contextLabel}</span></button><button className="game-sound-toggle" data-sound-toggle aria-label={sound?'파도 소리 끄기':'파도 소리 켜기'} aria-pressed={sound} onClick={onToggleSound}><DockIcon name={sound?'sound':'muted'}/></button></div>
+ <SeaModeBar mode="game" onGame={()=>{}} onRest={onAsmr}/>
  </>}
  {aboard&&boat?.selfCaptain&&<BoatFirstHint/>}
  {boatError&&<p className="boat-error ui" role="status">{boatError}</p>}
@@ -187,7 +187,7 @@ export function BeachPlayer({onAsmr,frozen=false,boat,boatBusy,boatError,onBoat,
  {eating&&<PotatoEating food={eatingFood}/>}
  {seatError&&<p className="camp-message" role="alert">{seatError}</p>}{seat!==null&&<div className="seat-caption ui" role="status">그늘막에 앉아서 바다를 바라보는 중</div>}
  <SeaFeedback hideJourney={aboard} disabled={paused||tentOpen||aboard||seaMenuOpen||explorerOpen||collectionOpen||closet||settingsOpen} journey={journey} arrival={arrivalHud} point={point} view={view} mode={casting?'fishing':winterTravel?'snow':onAnyIsland?'island':diving?'dive':floating?'swim':'beach'}/>
- {seaMenuOpen&&<SeaMenu frozen={frozen} onClose={()=>setSeaMenuOpen(false)} onChoose={chooseMenu} onAsmr={onAsmr} onSettings={()=>{setSeaMenuOpen(false);onSettings()}} onHelp={()=>{setSeaMenuOpen(false);window.dispatchEvent(new Event('sea-help-open'))}}/>}
+ {seaMenuOpen&&<SeaMenu frozen={frozen} onClose={()=>setSeaMenuOpen(false)} onChoose={chooseMenu} onAsmr={onAsmr} onBeach={()=>{setSeaMenuOpen(false);void goBeach()}} onSettings={()=>{setSeaMenuOpen(false);onSettings()}} onHelp={()=>{setSeaMenuOpen(false);window.dispatchEvent(new Event('sea-help-open'))}}/>}
  {collectionOpen&&<SeaCollection frozen={frozen} fishCount={angling.fishCount} deep={deepsea} counts={surfaceBag.counts} saveError={surfaceBag.saveError} exploration={exploration} tab={collectionTab} onClose={()=>setCollectionOpen(false)} onSearch={searchTreasure}/>}
  {explorerOpen&&<SeaExplorer frozen={frozen} onWinterGift={()=>{setExplorerOpen(false);navigateTo(fromWorld(winterGiftPosition.x,winterGiftPosition.z,view),false,'겨울 선물상자')}} boatPoint={boatPose?fromWorld(boatPose.x,boatPose.z,view):undefined} aboard={aboard} point={point} view={view} deep={deepsea} exploration={exploration} canDive={!frozen&&floating&&!rafting&&seat===null} diving={diving} onDive={()=>{setExplorerOpen(false);void toggleDive()}} onSwim={()=>void freeSwim()} onToggleRaft={()=>{exploration.toggleRaft();setDiving(false)}} onReset={()=>{followDestination.current=false;camera.current.yaw=0;camera.current.pitch=0;setExplorerOpen(false)}} onClose={()=>setExplorerOpen(false)} onTravel={(p,name,kind='destination')=>{setExplorerOpen(false);void startMapJourney(p,false,name,kind)}} onSearch={searchTreasure}/>}
  {closet&&<SeaNavDialog title="내 정보" onClose={closeWardrobe} navigation={<SeaTabBar label="내 정보 메뉴" items={[{id:'profile',label:'프로필',icon:UserRound},{id:'outfit',label:'옷·장비',icon:Shirt},{id:'letters',label:'편지함',icon:Mail}]} active={closetTab} onSelect={setClosetTab} onBack={closeWardrobe}/>}>
