@@ -1,0 +1,15 @@
+{
+  "id": "winter-carol",
+  "title": "고요한 밤 · 작은 바다 피아노",
+  "file": "/audio/seasonal/silent-night-v1.mp3",
+  "composer": "Franz Xaver Gruber (1787–1863)",
+  "melodySource": "https://www.mutopiaproject.org/ftp/GruberFX/stille_nacht/stille_nacht-let.pdf",
+  "melodyLicense": "Public Domain",
+  "recording": "서비스용 직접 편곡·피아노 톤 합성; 외부 녹음·샘플 없음",
+  "generator": "scripts/audio/create-winter-carol.py",
+  "seconds": 76.2,
+  "outputBytes": 1220483,
+  "outputSha256": "89f2b5773971d0756f3b04c50ebcb914f2a84ccaef40af617ab07a242a505ca4",
+  "peak": 0.29,
+  "rms": 0.067544
+}

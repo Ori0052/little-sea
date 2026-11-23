@@ -13,3 +13,6 @@
 썰매 후보의 크레딧 초안: “Sledging (SoundAction 359)” — alexarje, Freesound, CC BY 4.0. https://freesound.org/people/alexarje/sounds/863338/ · https://creativecommons.org/licenses/by/4.0/ · 편집 내역은 실제 적용 후 기재.
 
 적용 예정 상황: 눈 덮인 땅에서 걸을 때 발소리, 얼음 바다에서 스키로 이동할 때 마찰음, 나무·루돌프 썰매로 이동할 때 썰매 마찰음. 정지·쉬기·음소거·수면 상태에서는 이동음이 계속 남지 않도록 기존 오디오 제어에 연결한다.
+
+
+업데이트: 썰매 후보는 사용자의 재선정 요청으로 [SLED-CANDIDATES.md](SLED-CANDIDATES.md)의 새 3개를 비교한다. 위 Sledging은 이전 후보이며 아직 채택하지 않았다. 눈 발걸음·스키 후보는 유지한다.
