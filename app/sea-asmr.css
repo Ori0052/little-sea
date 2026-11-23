@@ -1,20 +1,151 @@
-/* Separate ASMR experience. Game styles and scene stay under .sea. */
-.sea-asmr{--asmr-ink:#273353;--asmr-muted:#616681;--asmr-line:#c9c4d9;--asmr-card:#fffaf6bc;--asmr-accent:#7963a2;--asmr-button-ink:#fff;position:relative;min-height:100svh;box-sizing:border-box;background:radial-gradient(ellipse at 82% 40%,#e7e0f3 0,transparent 65%),linear-gradient(150deg,#fbf3e9,#f1e9ed);color:var(--asmr-ink);font-family:'Noto Sans KR',sans-serif;font-weight:400;color-scheme:light;isolation:isolate}
-.sea-asmr *{box-sizing:border-box}.sea-asmr button,.asmr-dialog button{min-height:44px;cursor:pointer;font:inherit}.sea-asmr :is(button,a,input):focus-visible,.asmr-dialog :is(button,a,input):focus-visible{outline:2px solid var(--asmr-accent,#7963a2);outline-offset:4px}.asmr-shell{width:min(100%,590px);margin:auto;padding:24px 24px max(24px,env(safe-area-inset-bottom));display:flex;flex-direction:column}.asmr-header{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;z-index:1;min-height:44px}.sea-asmr .sea-brand-lockup{display:inline-flex;align-items:center;gap:10px;color:inherit;font:600 20px/1.4 'Maru Buri',serif;white-space:nowrap}.sea-asmr .sea-brand-lockup img{width:32px;height:32px}.asmr-home{padding:0;text-align:left;display:flex;align-items:center}.asmr-icon-button{width:44px;border-radius:50%;display:grid;place-items:center}.asmr-icon-button:hover{background:#9580bd14}.asmr-tagline{font-size:14px;line-height:1.7;text-align:center;color:var(--asmr-muted);margin:12px 0 0}.asmr-heading{text-align:center;margin:30px 0 0}.asmr-heading h1{font:500 clamp(25px,5.7vw,34px)/1.65 'Maru Buri',serif;letter-spacing:-.045em;margin:0;color:var(--asmr-ink);word-break:keep-all}.asmr-heading p{font-size:14px;line-height:1.8;color:var(--asmr-muted);margin:10px 0 0}.asmr-kicker{display:block;font-size:12px;letter-spacing:.16em;margin:0 0 14px;color:var(--asmr-muted)}
-.asmr-scene{position:relative;width:calc(100% + 48px);margin:0 -24px;aspect-ratio:3/2;pointer-events:none;overflow:hidden;mask-image:radial-gradient(ellipse 82% 86% at 50% 47%,#000 62%,transparent 100%);animation:asmr-breathe 16s ease-in-out infinite}.asmr-scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;user-select:none;transition:opacity 1.6s ease-in-out}.asmr-scene-night{opacity:0}.asmr-scene.is-night .asmr-scene-rest{opacity:0}.asmr-scene.is-night .asmr-scene-night{opacity:1}
-.asmr-sound-card{display:flex;align-items:center;gap:16px;padding:18px;border:1px solid #ffffffc9;border-radius:24px;background:var(--asmr-card);box-shadow:0 8px 26px #6b527013;position:relative}.asmr-sound-symbol{display:grid;place-items:center;width:56px;height:56px;flex-shrink:0;color:#74679c;border-radius:18px;background:linear-gradient(140deg,#e5d8f5,#bfe0e1)}.asmr-sound-detail{flex:1;min-width:0}.asmr-sound-detail strong{display:block;font:600 20px/1.5 'Maru Buri',serif;margin-bottom:10px}.asmr-sound-detail label{display:flex;align-items:center;gap:10px;color:var(--asmr-muted)}.asmr-sound-detail input{width:100%;min-width:0;accent-color:var(--asmr-accent);height:24px}.asmr-play{display:grid;place-items:center;flex-shrink:0;width:54px;height:54px;border-radius:50%;background:#e2d8ef;color:#635181}.asmr-tools{display:flex;justify-content:center;gap:0;margin:18px 0}.asmr-tools button{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--asmr-ink);padding:8px}.asmr-tools button+button{border-left:1px solid var(--asmr-line)}.asmr-tools svg{width:23px;height:23px;stroke-width:1.6}.asmr-tools span{font-size:14px;line-height:1.5}.asmr-primary,.asmr-secondary{border-radius:28px;min-height:56px;padding:15px 22px;display:flex;align-items:center;justify-content:center;gap:10px;text-align:center}.asmr-primary{background:linear-gradient(120deg,#8a73ae,#716296);color:var(--asmr-button-ink);font:500 19px/1.4 'Maru Buri',serif;box-shadow:0 6px 16px #6652821a}.asmr-secondary{border:1px solid var(--asmr-line);background:#ffffff66;color:var(--asmr-ink)}.asmr-game-link{align-self:center;font-size:14px;line-height:1.6;color:var(--asmr-muted);margin-top:10px;text-decoration:underline;text-underline-offset:4px}.asmr-error{font-size:14px;line-height:1.7;color:#8b3c58;text-align:center}.asmr-footnote{font-size:13px;line-height:1.8;color:var(--asmr-muted,#65657f);text-align:center;margin:16px 0 0}.asmr-edition{font-size:12px;color:var(--asmr-muted);max-width:110px;text-align:right;line-height:1.7}.experience-paths{display:grid;gap:12px;margin-top:8px}.experience-paths button{display:flex;flex-direction:column;gap:7px;padding:18px}.experience-paths strong{font-size:18px;font-weight:500}.experience-paths span{font:400 14px/1.7 'Noto Sans KR',sans-serif}.sea-experience-choice .asmr-heading{margin-top:34px}
-.asmr-night{--asmr-ink:#eee9f4;--asmr-muted:#c1bed5;--asmr-line:#7e769e;--asmr-card:#343654ac;--asmr-accent:#b5a2d6;--asmr-button-ink:#172039;background:radial-gradient(ellipse at 55% 52%,#242e4d,transparent 75%),#131b30;color:var(--asmr-ink);color-scheme:dark}.asmr-night .asmr-sound-symbol{background:linear-gradient(140deg,#655d8e,#354a65);color:#dfdcf3}.asmr-night .asmr-play{background:#695c8c;color:#f1edf8}.asmr-night .asmr-primary{color:#fff}.asmr-night .asmr-secondary{background:#34355266}.asmr-night .asmr-sound-card{border-color:#6a6281}.asmr-night .asmr-icon-button:hover{background:#b5a2d622}
-.asmr-dialog{--asmr-ink:#273353;--asmr-muted:#616681;--asmr-accent:#7963a2;--asmr-line:#c9c4d9;width:min(480px,calc(100% - 32px));max-height:80svh;overflow:auto;padding:24px;border:1px solid #d5cde2;border-radius:26px;background:#fbf5f3;color:var(--asmr-ink);font:400 16px/1.8 'Noto Sans KR',sans-serif}.asmr-dialog::backdrop{background:#111b3b66;backdrop-filter:blur(6px)}.asmr-dialog-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}.asmr-dialog-heading h2{font:600 23px/1.6 'Maru Buri',serif;margin:0}.asmr-dialog-heading>button{display:grid;place-items:center;width:44px;border-radius:50%;background:#eae2f2}.asmr-options{display:grid;gap:12px}.asmr-options>button,.asmr-archive>button{padding:12px 16px;border:1px solid var(--asmr-line);border-radius:16px;background:#fff9;color:var(--asmr-ink)}.asmr-options>button[aria-pressed=true]{background:#7963a2;color:white}.asmr-options p,.asmr-archive p{font-size:14px;line-height:1.9;color:var(--asmr-muted)}.asmr-archive>button{display:flex;width:100%;gap:12px;align-items:center;text-align:left;margin-bottom:10px}.asmr-archive time{font-size:12px;color:var(--asmr-muted);white-space:nowrap}.asmr-archive span{font-size:16px}.asmr-dialog .asmr-secondary{width:100%}
-/* Reuse the tested timer and fade engine with the approved night scene. */
-.sea-sleep-panel.sea-asmr{position:fixed;inset:0;z-index:150;overflow:auto;min-height:100svh}.sea-sleep-panel.sea-asmr:before{display:none}.sea-sleep-panel .sea-sleep-content{max-width:590px;padding:24px 24px max(24px,env(safe-area-inset-bottom));margin:auto;text-align:center}.sea-sleep-panel .sea-sleep-content header{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 24px;min-height:44px}.sea-sleep-panel .sea-sleep-content header>button{font-size:13px;padding:6px 0;color:var(--asmr-muted);white-space:nowrap}.sea-sleep-panel .sleep-eyebrow{display:block;font-size:13px;color:var(--asmr-muted)}.sea-sleep-panel .sea-sleep-content h1{font:500 clamp(28px,6vw,36px)/1.6 'Maru Buri',serif;letter-spacing:-.04em;margin:16px 0 10px;color:var(--asmr-ink)}.sea-sleep-panel .sea-sleep-content>p{font-size:14px;line-height:1.9;color:var(--asmr-muted);margin:0}.sea-sleep-panel .asmr-scene{margin-top:0;margin-bottom:0}.sea-sleep-panel .sleep-sources{margin:0 0 12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.sea-sleep-panel .sleep-sources legend,.sea-sleep-panel .sleep-timers legend{font-size:14px;line-height:1.8;margin-bottom:8px;color:var(--asmr-muted)}.sea-sleep-panel .sleep-sources button{border-radius:18px;font-size:14px;min-height:44px;padding:8px 14px;border-color:var(--asmr-line);background:#242b46;color:#ddd9ee}.sea-sleep-panel .sleep-sources button[aria-pressed=true]{background:#7c6a9e;color:#fff;border-color:#b6a8ce}.sea-sleep-panel .sleep-volume{font-size:14px;color:var(--asmr-muted);display:flex;gap:18px;align-items:center;justify-content:center;margin:10px 0}.sea-sleep-panel .sleep-volume input{width:65%;max-width:260px;height:26px;accent-color:#b5a2d6}.sea-sleep-panel .sleep-timers{margin:18px 0 12px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.sea-sleep-panel .sleep-timers button{border-radius:24px;min-width:66px;min-height:44px;padding:8px 12px;font-size:14px;color:#e5dff0;border:1px solid #7c7698;background:transparent}.sea-sleep-panel .sleep-timers button[aria-pressed=true]{background:#7c6a9e;color:white}.sea-sleep-panel .sea-sleep-content .sleep-timer-status{font-size:13px;margin:12px 0;color:#c9c1d9}.sea-sleep-panel .sleep-primary{display:block;min-height:52px;width:100%;border:1px solid #a796c6;border-radius:28px;background:#776298;color:white;font-size:16px;margin:12px 0}.sea-sleep-panel .sleep-dim-button{display:block;min-height:52px;width:100%;border:1px solid #a796c6;border-radius:28px;background:transparent;color:#f0ebf7;font-size:16px;margin:12px 0}.sea-sleep-panel .sea-sleep-content>small{display:block;font-size:12px;line-height:1.8;color:#b1acc2;margin-top:16px}.sea-sleep-panel.is-dimmed .sea-sleep-content{display:none}.sea-sleep-panel .sleep-dark-screen{background:#03060e;color:#a2a9bf}.sea .sea-story-entry{display:flex;gap:8px;flex-wrap:wrap}
-@keyframes asmr-breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-@media(min-width:800px){.sea-asmr .asmr-shell{padding-top:32px}.asmr-heading{margin-top:32px}.sea-sleep-panel .sea-sleep-content{padding-top:32px}}
-@media(max-height:760px) and (max-width:640px){.asmr-shell{padding-top:16px}.asmr-heading{margin-top:18px}.asmr-heading p{margin-top:4px}.asmr-scene{aspect-ratio:1.7}.asmr-tools{margin:12px 0}.asmr-tagline{margin-top:5px}.sea-sleep-panel .sea-sleep-content header{margin-bottom:12px}}
-@media(prefers-reduced-motion:reduce){.asmr-scene{animation:none}.asmr-scene img{transition:none}}
-.asmr-sound-detail .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.sea-asmr .sea-brand-lockup>span{color:inherit}.asmr-scene{mask-image:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent)}
-/* Keep the sound, timer and dim control within easy reach on a phone. */
-.sea-sleep-panel .sea-sleep-content{padding-top:18px;padding-bottom:18px}.sea-sleep-panel .sea-sleep-content header{margin-bottom:12px}.sea-sleep-panel .sleep-eyebrow{display:none}.sea-sleep-panel .sea-sleep-content h1{font-size:28px;margin:10px 0 8px}.sea-sleep-panel .sea-sleep-content>p:not(.sleep-timer-status){max-width:330px;margin:auto;font-size:14px}.sea-sleep-panel .asmr-scene{aspect-ratio:1.9}.sea-sleep-panel .sleep-sources{gap:8px;margin:0 0 8px}.sea-sleep-panel .sleep-sources legend{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.sea-sleep-panel .sleep-sources button{display:flex;align-items:center;gap:8px;padding:6px 12px;flex:1}.sea-sleep-panel .sleep-sources button span{font-size:20px}.sea-sleep-panel .sleep-volume{margin:6px 0}.sea-sleep-panel .sleep-timers{margin:12px 0 8px}.sea-sleep-panel .sea-sleep-content .sleep-timer-status{margin:8px 0}.sea-sleep-panel .sleep-primary,.sea-sleep-panel .sleep-dim-button{margin:8px 0;min-height:48px}.sea-sleep-panel .sea-sleep-content>small{margin-top:10px}.sea-sleep-panel .sleep-timers button{flex:1;white-space:nowrap;min-width:0;padding:8px}.sea-sleep-panel .sleep-dark-screen button{min-height:48px}
-.sea-asmr .asmr-header,.sea-sleep-panel .sea-sleep-content header{color:var(--asmr-ink)}.sea-sleep-panel .asmr-scene{aspect-ratio:3/2}.sea-sleep-panel .sleep-sources button{padding:6px 8px;gap:6px;white-space:nowrap}.sea-sleep-panel .sleep-sources button span{flex-shrink:0}
-/* Native host safe areas apply to both experiences. */
-.asmr-shell{padding-top:calc(24px + var(--toss-safe-top,0px));padding-bottom:calc(24px + max(env(safe-area-inset-bottom,0px),var(--toss-safe-bottom,0px)))}.sea-sleep-panel .sea-sleep-content{padding-top:calc(18px + var(--toss-safe-top,0px));padding-bottom:calc(18px + max(env(safe-area-inset-bottom,0px),var(--toss-safe-bottom,0px)))}
-.asmr-loading{display:grid;place-items:center;font:500 18px/1.8 'Maru Buri',serif;padding:24px}
+/* ASMR layout uses a shared 8 / 12 / 16 / 24 / 32 / 48px spacing scale. */
+.sea-asmr {
+ --asmr-ink:#273353; --asmr-muted:#616681; --asmr-line:#c9c4d9;
+ --asmr-card:#fffaf6bc; --asmr-accent:#7963a2; --asmr-button-ink:#fff;
+ --asmr-gutter:24px; --asmr-section-gap:32px; --asmr-control-gap:12px;
+ position:relative; min-height:100svh; box-sizing:border-box;
+ background:radial-gradient(ellipse at 82% 40%,#e7e0f3 0,transparent 65%),linear-gradient(150deg,#fbf3e9,#f1e9ed);
+ color:var(--asmr-ink); color-scheme:light; isolation:isolate;
+ font-family:'Noto Sans KR',sans-serif; font-weight:400;
+}
+.sea-asmr * {box-sizing:border-box}
+.sea-asmr button,.asmr-dialog button {min-height:48px;cursor:pointer;font:inherit}
+.sea-asmr :is(button,a,input):focus-visible,.asmr-dialog :is(button,a,input):focus-visible {outline:2px solid var(--asmr-accent,#7963a2);outline-offset:4px}
+.asmr-shell {
+ width:min(100%,620px);margin:auto;display:flex;flex-direction:column;
+ padding:calc(32px + var(--toss-safe-top,0px)) var(--asmr-gutter) calc(48px + max(env(safe-area-inset-bottom,0px),var(--toss-safe-bottom,0px)));
+}
+.asmr-header {display:flex;align-items:center;justify-content:space-between;gap:20px;position:relative;z-index:1;min-height:48px;color:var(--asmr-ink)}
+.sea-asmr .sea-brand-lockup {display:inline-flex;align-items:center;gap:12px;color:inherit;font:600 20px/1.5 'Maru Buri',serif;white-space:nowrap}
+.sea-asmr .sea-brand-lockup>span {color:inherit}
+.sea-asmr .sea-brand-lockup img {width:32px;height:32px}
+.asmr-home {padding:0;text-align:left;display:flex;align-items:center}
+.asmr-icon-button {width:48px;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+.asmr-icon-button:hover {background:#9580bd14}
+.asmr-tagline {font-size:14px;line-height:1.8;text-align:center;color:var(--asmr-muted);margin:16px 0 0}
+.asmr-heading {text-align:center;margin:40px 0 0}
+.asmr-heading h1 {font:500 clamp(25px,5.7vw,34px)/1.65 'Maru Buri',serif;letter-spacing:-.035em;margin:0;color:var(--asmr-ink);word-break:keep-all}
+.asmr-heading p {font-size:14px;line-height:1.9;color:var(--asmr-muted);margin:16px 0 0}
+.asmr-kicker {display:block;font-size:12px;letter-spacing:.16em;margin:0 0 24px;color:var(--asmr-muted)}
+.asmr-scene {
+ position:relative;width:calc(100% + 2 * var(--asmr-gutter));margin:24px calc(-1 * var(--asmr-gutter));aspect-ratio:3/2;
+ pointer-events:none;overflow:hidden;mask-image:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent);
+ animation:asmr-breathe 16s ease-in-out infinite;
+}
+.asmr-scene img {position:absolute;inset:0;width:100%;height:100%;object-fit:contain;user-select:none;transition:opacity 1.6s ease-in-out}
+.asmr-scene-night {opacity:0}
+.asmr-scene.is-night .asmr-scene-rest {opacity:0}
+.asmr-scene.is-night .asmr-scene-night {opacity:1}
+.asmr-sound-card {display:flex;align-items:center;gap:16px;padding:24px;border:1px solid #ffffffc9;border-radius:24px;background:var(--asmr-card);box-shadow:0 8px 26px #6b527013;position:relative}
+.asmr-sound-symbol {display:grid;place-items:center;width:52px;height:52px;flex-shrink:0;color:#74679c;border-radius:18px;background:linear-gradient(140deg,#e5d8f5,#bfe0e1)}
+.asmr-sound-detail {flex:1;min-width:0}
+.asmr-sound-detail strong {display:block;font:600 20px/1.6 'Maru Buri',serif;margin-bottom:12px;word-break:keep-all}
+.asmr-sound-detail label {display:flex;align-items:center;gap:12px;min-height:28px;color:var(--asmr-muted)}
+.asmr-sound-detail label>svg {flex-shrink:0}
+.asmr-sound-detail input {width:100%;min-width:0;accent-color:var(--asmr-accent);height:28px}
+.asmr-sound-detail .sr-only {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.asmr-play {display:grid;place-items:center;flex-shrink:0;width:52px;height:52px;border-radius:50%;background:#e2d8ef;color:#635181}
+.asmr-tools {display:flex;gap:var(--asmr-control-gap);margin:var(--asmr-section-gap) 0}
+.asmr-tools button {flex:1;min-width:0;min-height:80px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--asmr-ink);padding:16px 8px;border:1px solid #ffffff80;border-radius:20px;background:#ffffff35}
+.asmr-tools button:hover {background:#ffffff70}
+.asmr-tools svg {width:23px;height:23px;stroke-width:1.6}
+.asmr-tools span {font-size:14px;line-height:1.6}
+.asmr-primary,.asmr-secondary {border-radius:28px;min-height:56px;padding:16px 24px;display:flex;align-items:center;justify-content:center;gap:12px;text-align:center}
+.asmr-primary {background:linear-gradient(120deg,#8a73ae,#716296);color:var(--asmr-button-ink);font:500 19px/1.5 'Maru Buri',serif;box-shadow:0 6px 16px #6652821a}
+.asmr-secondary {border:1px solid var(--asmr-line);background:#ffffff66;color:var(--asmr-ink)}
+.asmr-game-link {align-self:center;font-size:14px;line-height:1.8;color:var(--asmr-muted);margin-top:24px;padding:12px 16px;text-decoration:underline;text-underline-offset:4px}
+.asmr-error {font-size:14px;line-height:1.9;color:#8b3c58;text-align:center;margin:16px 0}
+.asmr-footnote {font-size:13px;line-height:1.9;color:var(--asmr-muted,#65657f);text-align:center;margin:24px 0 0}
+.asmr-edition {font-size:12px;color:var(--asmr-muted);max-width:110px;text-align:right;line-height:1.8}
+.experience-paths {display:grid;gap:16px;margin-top:8px}
+.experience-paths button {display:flex;flex-direction:column;gap:12px;padding:24px;min-height:96px}
+.experience-paths strong {font-size:18px;font-weight:500}
+.experience-paths span {font:400 14px/1.8 'Noto Sans KR',sans-serif}
+.sea-experience-choice .asmr-heading {margin-top:48px}
+.asmr-night {
+ --asmr-ink:#eee9f4;--asmr-muted:#c1bed5;--asmr-line:#7e769e;
+ --asmr-card:#343654ac;--asmr-accent:#b5a2d6;--asmr-button-ink:#172039;
+ background:radial-gradient(ellipse at 55% 52%,#242e4d,transparent 75%),#131b30;color:var(--asmr-ink);color-scheme:dark;
+}
+.asmr-night .asmr-sound-symbol {background:linear-gradient(140deg,#655d8e,#354a65);color:#dfdcf3}
+.asmr-night .asmr-play {background:#695c8c;color:#f1edf8}
+.asmr-night .asmr-primary {color:#fff}
+.asmr-night .asmr-secondary {background:#34355266}
+.asmr-night .asmr-sound-card {border-color:#6a6281}
+.asmr-night .asmr-tools button {background:#34365466;border-color:#7e769e66}
+.asmr-night .asmr-tools button:hover,.asmr-night .asmr-icon-button:hover {background:#b5a2d622}
+.asmr-dialog {
+ --asmr-ink:#273353;--asmr-muted:#616681;--asmr-accent:#7963a2;--asmr-line:#c9c4d9;
+ width:min(480px,calc(100% - 40px));max-height:80svh;overflow:auto;padding:28px;
+ border:1px solid #d5cde2;border-radius:26px;background:#fbf5f3;color:var(--asmr-ink);font:400 16px/1.8 'Noto Sans KR',sans-serif;
+}
+.asmr-dialog::backdrop {background:#111b3b66;backdrop-filter:blur(6px)}
+.asmr-dialog-heading {display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:24px}
+.asmr-dialog-heading h2 {font:600 23px/1.6 'Maru Buri',serif;margin:0}
+.asmr-dialog-heading>button {display:grid;place-items:center;width:48px;border-radius:50%;background:#eae2f2;flex-shrink:0}
+.asmr-options {display:grid;gap:16px}
+.asmr-options>button,.asmr-archive>button {min-height:56px;padding:16px 20px;border:1px solid var(--asmr-line);border-radius:16px;background:#fff9;color:var(--asmr-ink)}
+.asmr-options>button[aria-pressed=true] {background:#7963a2;color:white}
+.asmr-options p,.asmr-archive p {font-size:14px;line-height:1.9;color:var(--asmr-muted);margin:8px 0}
+.asmr-archive>button {display:flex;width:100%;gap:16px;align-items:center;text-align:left;margin-bottom:16px}
+.asmr-archive time {font-size:12px;color:var(--asmr-muted);white-space:nowrap}
+.asmr-archive span {font-size:16px}
+.asmr-dialog .asmr-secondary {width:100%;margin:20px 0}
+/* Sleep uses the same spacing rhythm; controls are grouped instead of compressed. */
+.sea-sleep-panel.sea-asmr {position:fixed;inset:0;z-index:150;overflow:auto;overscroll-behavior:contain;min-height:100svh;scroll-padding:24px}
+.sea-sleep-panel.sea-asmr:before {display:none}
+.sea-sleep-panel.sea-asmr .sea-sleep-content {
+ width:min(100%,620px);margin:auto;text-align:center;
+ padding:calc(32px + var(--toss-safe-top,0px)) var(--asmr-gutter) calc(48px + max(env(safe-area-inset-bottom,0px),var(--toss-safe-bottom,0px)));
+}
+.sea-sleep-panel .sea-sleep-content header {position:relative;display:flex;align-items:center;justify-content:space-between;gap:20px;margin:0;min-height:48px;color:var(--asmr-ink)}
+.sea-sleep-panel .sea-sleep-content header>button {font-size:14px;line-height:1.7;min-height:48px;padding:12px 0;color:var(--asmr-muted);white-space:nowrap}
+.sea-sleep-panel .sleep-intro {margin-top:40px}
+.sea-sleep-panel .sleep-eyebrow {display:none}
+.sea-sleep-panel .sleep-intro h1 {font:500 clamp(28px,6vw,36px)/1.6 'Maru Buri',serif;letter-spacing:-.035em;margin:0;color:var(--asmr-ink)}
+.sea-sleep-panel .sleep-intro p {font-size:14px;line-height:1.9;color:var(--asmr-muted);margin:16px 0 0}
+.sea-sleep-panel .asmr-scene {margin-top:24px;margin-bottom:24px;aspect-ratio:3/2}
+.sea-sleep-panel .sleep-audio-controls {padding:24px 20px;border:1px solid #7e769e66;border-radius:24px;background:#34365466}
+.sea-sleep-panel :is(.sleep-sources,.sleep-timers) {border:0;padding:0;min-inline-size:0}
+.sea-sleep-panel :is(.sleep-sources,.sleep-timers) legend {display:block;float:none;width:100%;font-size:14px;line-height:1.8;margin-bottom:16px;padding:0;color:var(--asmr-muted)}
+.sea-sleep-panel .sleep-sources {margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.sea-sleep-panel .sleep-sources button {display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:16px 8px;border:1px solid var(--asmr-line);border-radius:18px;font-size:14px;line-height:1.6;min-height:88px;white-space:nowrap;background:#242b46;color:#ddd9ee}
+.sea-sleep-panel .sleep-sources button span {font-size:24px;line-height:1;flex-shrink:0}
+.sea-sleep-panel .sleep-sources button[aria-pressed=true] {background:#7c6a9e;color:#fff;border-color:#b6a8ce}
+.sea-sleep-panel .sleep-volume {font-size:14px;line-height:1.8;color:var(--asmr-muted);display:flex;gap:20px;align-items:center;justify-content:space-between;margin:24px 0 0;min-height:44px}
+.sea-sleep-panel .sleep-volume input {width:65%;min-width:0;max-width:300px;height:32px;accent-color:#b5a2d6}
+.sea-sleep-panel .sleep-timer-controls {margin-top:var(--asmr-section-gap)}
+.sea-sleep-panel .sleep-timers {margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.sea-sleep-panel .sleep-timers button {border-radius:24px;min-width:0;min-height:48px;padding:12px 8px;font-size:14px;line-height:1.6;white-space:nowrap;color:#e5dff0;border:1px solid #7c7698;background:transparent}
+.sea-sleep-panel .sleep-timers button[aria-pressed=true] {background:#7c6a9e;color:white}
+.sea-sleep-panel .sea-sleep-content .sleep-timer-status {font-size:13px;line-height:1.9;margin:16px 0 0;color:#c9c1d9}
+.sea-sleep-panel .sleep-actions {display:grid;gap:16px;margin-top:var(--asmr-section-gap)}
+.sea-sleep-panel :is(.sleep-primary,.sleep-dim-button) {display:block;min-height:56px;width:100%;padding:16px 24px;border:1px solid #a796c6;border-radius:28px;font-size:16px;line-height:1.5;margin:0}
+.sea-sleep-panel .sleep-primary {background:#776298;color:white}
+.sea-sleep-panel .sleep-dim-button {background:transparent;color:#f0ebf7}
+.sea-sleep-panel .sea-sleep-content>small {display:block;font-size:12px;line-height:1.9;color:#b1acc2;margin-top:24px}
+.sea-sleep-panel.is-dimmed .sea-sleep-content {display:none}
+.sea-sleep-panel .sleep-dark-screen {background:#03060e;color:#a2a9bf}
+.sea-sleep-panel .sleep-dark-screen button {min-height:48px}
+.sea .sea-story-entry {display:flex;gap:8px;flex-wrap:wrap}
+.asmr-loading {display:grid;place-items:center;font:500 18px/1.8 'Maru Buri',serif;padding:24px}
+@keyframes asmr-breathe {0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@media(min-width:768px) {
+ .sea-asmr {--asmr-gutter:40px;--asmr-section-gap:40px}
+ .asmr-shell,.sea-sleep-panel.sea-asmr .sea-sleep-content {padding-top:calc(48px + var(--toss-safe-top,0px));padding-bottom:64px}
+ .asmr-heading,.sea-experience-choice .asmr-heading,.sea-sleep-panel .sleep-intro {margin-top:48px}
+ .asmr-scene {margin-top:32px;margin-bottom:32px}
+}
+@media(max-width:399px) {
+ .sea-asmr {--asmr-gutter:20px}
+ .asmr-header,.sea-sleep-panel .sea-sleep-content header {gap:12px}
+ .sea-asmr .sea-brand-lockup {font-size:18px;gap:10px}
+ .asmr-sound-card {padding:20px;gap:12px}
+ .asmr-sound-symbol,.asmr-play {width:48px;height:48px}
+ .asmr-sound-detail strong {font-size:18px}
+ .sea-sleep-panel .sleep-audio-controls {padding:24px 16px}
+ .sea-sleep-panel .sleep-timers {grid-template-columns:repeat(2,minmax(0,1fr))}
+ .sea-sleep-panel .sea-sleep-content header>button {font-size:13px}
+ .asmr-edition {max-width:80px}
+}
+@media(prefers-reduced-motion:reduce) {.asmr-scene{animation:none}.asmr-scene img{transition:none}}
