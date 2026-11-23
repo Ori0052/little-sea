@@ -48,6 +48,7 @@ jobs:
           node tests/sea-audio.test.mjs
           node tests/sea-weather.test.mjs
           node tests/sea-winter.test.mjs
+          node tests/christmas-tree.test.mjs
           node tests/winter-carol.test.mjs
           node tests/sea-live-weather.test.mjs
           node tests/sea-sleep.test.mjs

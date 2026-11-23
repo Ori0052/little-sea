@@ -34,3 +34,6 @@
 
 .sea .sea-carol-toggle[aria-pressed=true]{background:var(--sea-soft-pressed);color:var(--sea-soft-ink)}
 @media(max-width:640px){.sea .sea-carol-toggle{display:none}}
+
+/* Once the shared 3D terrain is ready, keep only the in-world solid trees. */
+.sea:has([data-terrain="islands"][data-graphics-mode="webgl-shared"]) .winter-decoration{display:none}
