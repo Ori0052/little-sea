@@ -10,7 +10,8 @@
  --sea-disabled:#e7e2ed; --sea-disabled-ink:#81758e; --sea-focus:var(--sea-brand-primary);
  --sea-control:44px; --sea-radius:16px; --sea-gap:8px; --sea-icon:22px;
 }
-.sea.night,.sea.submerged,.toss-exit-dialog.night {
+/* Every dark scene inherits the complete state palette, including hover/pressed. */
+.sea:is(.night,.submerged,.thunder,.auto-weather-night),.sea-story-onboarding,.toss-exit-dialog.night {
  --sea-action:var(--sea-brand-primary); --sea-action-hover:var(--sea-brand-hover); --sea-action-pressed:var(--sea-brand-pressed); --sea-action-ink:var(--sea-brand-ink);
  --sea-soft:#30293f; --sea-soft-hover:#3d3351; --sea-soft-pressed:#4a3c62; --sea-soft-ink:#e8dff4;
  --sea-surface:#192a43; --sea-glass:#192a43ed; --sea-line:#46597b; --sea-text:#edf1ff; --sea-muted:#b6c3dc;
@@ -30,7 +31,7 @@
 .sea :is(.sea-start-actions,.tent-room-actions,.explorer-actions,.island-rune-buttons) {gap:var(--sea-gap)}
 /* Keep multi-line destination cards taller than single-line action controls. */
 .sea :is(.sea-menu-options>button,.explorer-actions>button) {min-width:0;min-height:64px;padding:12px;border:1px solid var(--sea-line);border-radius:var(--sea-radius);background:var(--sea-soft);color:var(--sea-soft-ink);box-shadow:none}
-.sea :is(.sea-menu-options>button small,.explorer-actions>button small) {color:var(--sea-muted)}
+.sea :is(.sea-menu-options>button small,.explorer-actions>button small) {color:inherit}
 .sea .name-editor>div>button {min-height:44px;border-radius:12px;background:var(--sea-soft);color:var(--sea-soft-ink)}
 /* Desktop travel controls keep their established equal widths and share one height. */
 .sea .player-tools :is(.closet-toggle,.voyage button) {height:var(--sea-control);min-height:var(--sea-control);max-height:var(--sea-control);border-radius:var(--sea-radius);border-color:var(--sea-line);color:var(--sea-soft-ink);background:var(--sea-soft)!important;box-shadow:none}
@@ -75,13 +76,16 @@
  .sea-button--secondary:not(:disabled):hover,.sea :is(.exploration-secondary,.deepsea-grid button,.island-cook-menu>button,.explorer-actions>button,.sea-menu-options>button):not(:disabled):hover {background:var(--sea-soft-hover);color:var(--sea-soft-ink)}
 }
 .sea-button--primary:active,.sea-button--primary.is-preview-pressed,.sea :is(.sea-start-primary,.exploration-primary,.reward-amulet button,.sea-idle-dialog button,.party-boat-board):not(:disabled):active {background:var(--sea-action-pressed);border-color:var(--sea-action-pressed);color:var(--sea-action-ink)}
-.sea-button--secondary:active,.sea :is(.mobile-dock,.sea-start-dock)>button:not(:disabled):active {background:var(--sea-soft-pressed);color:var(--sea-soft-ink)}
-.sea-button:disabled,.sea :is(.sea-start-primary,.exploration-primary,.exploration-secondary,.explorer-actions>button,.deepsea-grid button,.island-cook-menu>button,.party-boat-board,.reward-amulet button,.island-fishing-actions>button):disabled {background:var(--sea-disabled);border-color:var(--sea-disabled);color:var(--sea-disabled-ink);opacity:1;cursor:not-allowed;box-shadow:none}
+.sea-button--secondary:not(:disabled):active,.sea-button--secondary.is-preview-pressed,.sea :is(.exploration-secondary,.sea-menu-options>button,.explorer-actions>button:not([aria-pressed=true])):not(:disabled):active,.sea :is(.mobile-dock,.sea-start-dock)>button:not(:disabled):active {background:var(--sea-soft-pressed);color:var(--sea-soft-ink)}
+.sea-button:disabled,.sea :is(.sea-start-primary,.exploration-primary,.exploration-secondary,.sea-menu-options>button,.explorer-actions>button,.deepsea-grid button,.island-cook-menu>button,.party-boat-board,.reward-amulet button,.island-fishing-actions>button):disabled {background:var(--sea-disabled);border-color:var(--sea-disabled);color:var(--sea-disabled-ink);opacity:1;cursor:not-allowed;box-shadow:none}
 .sea .mobile-dock button:disabled {color:var(--sea-disabled-ink);opacity:.65;cursor:not-allowed}
 @media(prefers-reduced-motion:reduce) {.sea-button,.sea button {transition:none}}
 /* Review-only layout. Uses the production tokens and control styles above. */
 .sea.sea-ui-kit {height:auto;min-height:100svh;overflow:visible;background:var(--sea-surface);color:var(--sea-text);padding:32px max(20px,calc((100vw - 1080px)/2));font-family:'Noto Sans KR',sans-serif}
 .sea-ui-kit>header {padding:0;gap:16px;flex-wrap:wrap;color:inherit}
+.sea-ui-kit .kit-theme {display:flex;align-items:center;flex-wrap:wrap;gap:12px;font-size:14px;color:var(--sea-text)}
+.sea-ui-kit .kit-theme select {min-height:44px;padding:8px 12px;border:1px solid var(--sea-line);border-radius:12px;background:var(--sea-soft);color:var(--sea-soft-ink);font:inherit}
+.sea-ui-kit .kit-theme select:focus-visible {outline:3px solid var(--sea-focus);outline-offset:3px}
 .sea-ui-kit h1 {font-size:32px;margin:24px 0 12px;color:var(--sea-text)}
 .sea-ui-kit p {font-size:13px;line-height:1.9;color:var(--sea-muted)}
 .sea-ui-kit .kit-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:24px 0}
@@ -197,7 +201,7 @@
 /* Approved square stationery: preview and download use the same complete image. */
 .paper-letter-dialog.is-unfolded{width:min(540px,calc(100% - 20px));padding:10px;background:#f8f2e7}.square-letter{position:relative;aspect-ratio:1;width:100%;transform-origin:top;animation:letter-unfold .65s ease-out both}.paper-letter-image{display:block;width:100%;height:100%;aspect-ratio:1;object-fit:contain}.letter-readable-copy{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.letter-image-loading{aspect-ratio:1;display:grid;align-content:center;gap:14px;padding:22%;background-size:100% 100%;text-align:center;font:15px/1.8 'Maru Buri',serif;color:#4b6170}.paper-letter-dialog .paper-letter-footer{padding:12px 14px;border:0}.letter-save-actions{display:flex;flex-direction:column;align-items:center;gap:12px}.letter-save-actions .paper-letter-open{margin-top:14px}.letter-save-actions a{font-size:12px;color:#5c7590}.paper-letter-dialog button:disabled{opacity:.55;cursor:wait}@media(prefers-reduced-motion:reduce){.square-letter{animation:none}}
 /* Thunder only: rough water and raft roll, with a stable camera. */
-.sea.thunder{--sea-action:var(--sea-brand-primary);--sea-action-ink:var(--sea-brand-ink);--sea-soft:#30293f;--sea-soft-ink:#e8dff4;--sea-surface:#17263c;--sea-glass:#17263ced;--sea-line:#526584;--sea-text:#edf2ff;--sea-muted:#bdcbe0;--sea-focus:var(--sea-brand-focus-dark)}
+.sea.thunder{--sea-surface:#17263c;--sea-glass:#17263ced;--sea-line:#526584;--sea-text:#edf2ff;--sea-muted:#bdcbe0}
 .sea.thunder header.ui,.sea.thunder .sea-brand-lockup,.sea.thunder .intro,.sea.thunder .intro :is(h1,p,small,.eyebrow){color:#e4edff;text-shadow:0 2px 16px #06102680}.sea.thunder .online-badge{color:#e4edff}.sea.thunder .view-switch{background:#15233cdd;border-color:#586f91}.sea.thunder .view-switch>button{color:#dbe6fb}.sea.thunder .view-switch>button[aria-pressed=true]{background:var(--sea-action);color:var(--sea-action-ink)}
 .sea-storm-atmosphere{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,#02071077,transparent 58%,#07152514)}.sea-storm-atmosphere:before{content:'';position:absolute;inset:0 0 48%;background:radial-gradient(ellipse at 18% 10%,#02071399,transparent 58%),radial-gradient(ellipse at 85% 0%,#020713aa,transparent 65%);animation:storm-cloud-drift 18s ease-in-out infinite alternate}.sea.thunder .dream-photo{filter:brightness(.39) saturate(.65)}.sea.thunder .shore-fallback{filter:brightness(.5) saturate(.7)}
 .sea.thunder .my-person[data-raft=true] .person-art>svg{transform-origin:50% 76%;animation:storm-raft-roll 2.8s ease-in-out infinite;will-change:transform}.sea.thunder .my-person[data-raft=true] .avatar-footprint{animation:storm-raft-wake 2.8s ease-in-out infinite}

@@ -1,36 +1,71 @@
-# Little Sea design system — clear deep blue
+# 나의 작은 바다 디자인 시스템
 
-Approved primary color: **#425FC4**. The production styles are centralized in `app/sea-design-system.css`, imported after the existing game CSS by both the web layout and native entry. `/design-system` is a review page using the same production tokens, semantic button classes, onboarding controls and actual `MobileDock` component.
+기준일: 2026-11-23. 현재 주요 버튼은 사용자가 선택한 공통 라벤더다. 이전의 딥블루 문서와 색상 미리보기는 더 이상 현행 기준이 아니다.
 
-## Foundations
+## 현재 관리 상태
 
-| Token | Light | Dark / underwater |
+공통 토큰과 실제 컴포넌트 검토 화면이 있지만 **전 화면의 디자인 시스템 전환이 완료된 상태는 아니다.** `app/globals.css`의 기존 화면별 스타일 위에 `app/sea-design-system.css`의 공통 규칙을 적용한다. ASMR은 `app/sea-asmr.css`에서 별도 배치·배경 토큰을 사용하며 주요 버튼 색상은 공통 브랜드 토큰을 참조한다.
+
+| 영역 | 상태 | 남은 작업 |
 | --- | --- | --- |
-| Primary | #425FC4 | #8DA4FF |
-| Primary hover | #354FAE | #A4B6FF |
-| Primary pressed | #2D4399 | #7892F0 |
-| Primary text | #FFFFFF | #14234B |
-| Secondary surface | #EDF0FF | #283958 |
-| Secondary text | #344884 | #DCE5FF |
-| Panel surface | #FAFBFF | #192A43 |
-| Text | #344765 | #EDF1FF |
-| Muted text | #5C6B85 | #B6C3DC |
-| Border | #D5DDF2 | #46597B |
+| 브랜드 주요 버튼 색상 | 공통 `--sea-brand-*`로 연결 | 새 버튼이 공통 규칙을 사용하는지 확인 |
+| 게임 다크 테마 | 밤·잠수·천둥·자동 야간에 전체 상태 팔레트 적용 | 새 환경 추가 시 전체 상태 검토 |
+| 메뉴·탐험 카드 | 공통 배경·문자색 적용, 설명 문구는 카드 글자색 상속 | 다른 기존 카드까지 점진적으로 컴포넌트화 |
+| 버튼 컴포넌트 | 의미별 CSS 클래스와 기존 선택자 매핑 병행 | 모든 버튼을 하나의 React 컴포넌트로 전환한 것은 아님 |
+| 간격·타이포그래피 | 공통 제어값과 개별 반응형 규칙 병행 | 모든 화면의 작은 글자·여백에 대한 전체 검토는 미완료 |
+| 검토 화면 | `/design-system`에서 실제 계산된 색상, 5개 환경, 실제 메뉴 확인 | ASMR 전체 화면 검토는 별도 브라우저 흐름으로 수행 |
+| 검증 | 이번 다크 상태 브라우저 회귀 검사 추가 | 해당 브라우저 검사는 현재 CI에서 자동 실행하지 않음; 배포 전 별도 실행 |
 
-Dark mode preserves a dark game surface and uses a lighter blue variant for readable controls. Primary text contrast: light 5.73:1, dark 6.48:1. Secondary text contrast: light 7.69:1, dark 9.19:1. Muted text on the light secondary surface is 4.75:1. These are color-pair calculations, not a claim of complete WCAG certification.
+## 단일 기준과 팔레트
 
-- Brand and display typography: locally bundled Maru Buri. UI labels keep the existing sans-serif stack.
-- Single-line controls: minimum 44px height, 16px radius, 8px group gap. Multi-line destination/menu cards remain taller.
-- Navigation: 64px capsule, five equal columns, 26px icon box with 22px artwork, 12px caption row, 4px icon/caption gap. Onboarding and actual dock share selected-tile styling.
-- Focus: 3px visible outline, 3px offset. Hover applies only to hover-capable devices. Disabled controls do not depend on opacity alone.
-- Semantic classes: `.sea-button--primary`, `--secondary`, `--ghost`; the legacy game selectors are mapped centrally to these same tokens to avoid changing action behavior.
+색상 정의의 기준은 `app/sea-design-system.css`다. 웹과 토스 진입점 모두 기존 CSS 뒤에 공통 스타일을 읽는다. `/design-system`의 색상 코드는 브라우저 계산값에서 읽으며 별도로 하드코딩하지 않는다.
 
-## Coverage
+| 역할 | 밝은 모드 | 다크 모드 |
+| --- | --- | --- |
+| 주요 버튼 | #8066AA | #8066AA |
+| 주요 버튼 hover | #705692 | #705692 |
+| 주요 버튼 pressed | #62477F | #62477F |
+| 주요 버튼 글자 | #FFFFFF | #FFFFFF |
+| 보조 버튼 | #F1EBF8 | #30293F |
+| 보조 버튼 hover | #E5DCF0 | #3D3351 |
+| 보조 버튼 pressed | #D9CCE9 | #4A3C62 |
+| 보조 버튼 글자·카드 설명 | #5E497E | #E8DFF4 |
+| 패널 배경 | #FAFBFF | #192A43 |
+| 본문 | #344765 | #EDF1FF |
+| 보조 본문 | #5C6B85 | #B6C3DC |
+| 테두리 | #DCD2E8 | #46597B |
+| 포커스 | #8066AA | #D0BCE9 |
 
-Onboarding, beach/island docks, collection tabs and crown actions, exploration/map/amulet actions, wardrobe controls, weather tabs, cooking/fishing actions, boarding, tent actions, modal close buttons, idle recovery and native exit/retry controls. Character appearance color swatches and scene graphics retain their semantic colors.
+천둥의 패널 배경은 #17263C, 테두리 #526584, 본문 #EDF2FF, 보조 본문 #BDCBE0으로 조정한다. 버튼 상태는 다른 다크 환경과 공유한다. 이야기 온보딩은 자체 어두운 배경을 유지한다.
 
-Fishing still shows one control. Island swipe-menu visibility, boat stop/leave behavior, session security, ownership and reward logic are unchanged. A short landscape viewport shows the dock and hides decorative introduction text so controls remain reachable.
+주요 버튼과 흰 글자는 기본색 대비 약 4.77:1이다. 메뉴·탐험 카드 설명 글자는 보조 본문색을 고정하지 않고 버튼 글자색을 상속한다. 밝은 pressed 배경에서도 약 5.04:1을 유지하기 위한 선택이다. 이 수치는 특정 불투명 색상쌍의 대비이며 앱 전체 접근성 인증을 의미하지 않는다.
 
-## Verification
+참고용 이전 팔레트: 다크 패널 #192A43, 보조 버튼 #283958, hover #33466C, pressed #3D5280, 본문 #EDF1FF, 보조 본문 #B6C3DC, 주요 버튼 #8DA4FF. 현행 주요·보조 버튼에는 위의 라벤더 팔레트를 사용한다.
 
-Browser checks at 320×740, 390×844, 844×390 and 1180×850: onboarding and dock alignment, selected collection tabs, light/dark tokens, disabled/pressed states and keyboard focus. Review captures are under `/workspace/outputs/little-sea-design-system/`. Web/Toss builds and existing platform/security checks run in GitHub Actions. A physical Toss-device acceptance test and console submission remain separate steps.
+## 컴포넌트 규칙
+
+- 브랜드·제목: 로컬 Maru Buri. UI는 기존 sans-serif를 사용한다.
+- 단일 버튼 최소 높이 44px, 모서리 16px, 기본 그룹 간격 8px. 여러 줄 메뉴 카드는 최소 64px.
+- 하단바: 5개 같은 너비, 26px 아이콘 영역 안의 22px 아이콘, 캡션 행과 4px 간격. 실제 `MobileDock`을 검토 화면에서도 사용한다.
+- 의미별 클래스: `.sea-button--primary`, `--secondary`, `--ghost`. 내비게이션, 선택 상태, 비활성, 포커스를 역할에 따라 적용한다.
+- 키보드 포커스: 3px 테두리와 3px 바깥 간격. hover는 hover 가능한 환경에 적용한다. 비활성은 투명도에만 의존하지 않는다.
+- 장면 그래픽과 캐릭터 색상표, 종이 편지지의 색은 공통 버튼 팔레트로 덮어쓰지 않는다.
+
+## 이번 결함과 수정
+
+천둥 테마가 기본 보조 버튼 색상만 다크로 바꾸고 hover 토큰은 밝은 모드에서 상속했다. 메뉴에 마우스를 올리면 #E5DCF0 배경에 #E8DFF4 글자가 놓여 대비가 약 1.03:1이었다. 자동 야간 테마도 공통 다크 선택자에서 빠져 있었다. 주요 버튼만 확인했던 이전 검증으로는 이 보조 메뉴 결함을 잡지 못했다.
+
+이제 모든 게임 다크 환경이 전체 토큰 세트를 공유한다. 천둥은 패널 차이만 덮어쓴다. 실제 메뉴 버튼에는 의미별 보조 버튼 클래스를 적용했고, 메뉴·탐험 카드 설명의 상속색 및 메뉴 pressed/disabled 상태도 정리했다. 기존 게임 행동과 서버 로직은 바꾸지 않는다.
+
+## 변경·검증 절차
+
+1. 색상은 공통 CSS에서 변경하고 관련 ASMR 참조를 확인한다. 검토 화면에 별도 색상 숫자를 복제하지 않는다.
+2. 밝은 모드·밤·천둥·잠수·자동 야간에서 기본·hover·pressed·키보드 포커스·비활성을 확인한다. 카드의 설명 글자도 함께 확인한다.
+3. 실제 화면을 390px 모바일과 데스크톱에서 확인한다. 주요 변경에는 해당 흐름의 브라우저 회귀 검사를 실행한다.
+4. 문서와 실제 검토 화면을 함께 갱신하고 TypeScript, 웹·토스 빌드 및 기존 CI 검사를 통과시킨다.
+
+브라우저 검사: `tests/browser/sea-design-system.cjs`. Playwright가 설치된 환경에서 `PLAYWRIGHT_MODULE`을 해당 모듈 경로로 지정하고, 실행 중인 로컬 서버에 `SEA_TEST_URL`을 지정한다. 실제 SeaMenu 컴포넌트를 검토 화면에 마운트해 6개 시각 환경의 메뉴 3개를 검사한다. 게임의 실제 밤 메뉴와 터치 천둥 메뉴, 리뷰의 5개 환경 및 터치 메뉴에서 내 정보 이동도 확인한다. 자동 야간·잠수 클래스는 시각 검증을 위해 직접 전환하며 실제 날씨 API 동작은 별도 검사 대상이다. 캡처·결과는 `/workspace/outputs/little-sea-design-system/`에 저장한다.
+
+물리 기기와 토스 콘솔 제출은 별도 확인 항목이다. 전체 기존 CSS 정리와 모든 화면의 간격·글자 크기 검토가 끝난 것처럼 보고하지 않는다.
+
+이번 브라우저 결과: 텍스트 색상쌍 135회 검사 통과, 최저 대비 4.77:1. 6개 시각 환경의 기본·hover·pressed·포커스·비활성과 검토 화면 5개 환경, 실제 게임 밤 메뉴, 모바일 천둥 메뉴에서 내 정보 이동, 가로 넘침 및 JavaScript 오류를 확인했다. 기존 ASMR의 진입·명시적 재생·편지함·타이머·어둡게·게임 복귀 회귀 검사도 통과했다. 스타일 전환 애니메이션의 중간 프레임과 전체 앱의 모든 텍스트를 검사한 수치는 아니다.
