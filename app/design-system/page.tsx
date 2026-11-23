@@ -1,7 +1,7 @@
 'use client';
 import {useEffect,useRef,useState} from 'react';
 import {SeaBrand} from '../../components/sea-brand';
-import {DockIcon,MobileDock} from '../../components/mobile-dock';
+import {SeaTabBar,seaMainTabs} from '../../components/sea-tab-bar';
 import {SeaMenu} from '../../components/sea-hub';
 
 const themes=[
@@ -17,8 +17,8 @@ function Swatch({label,token,ink,theme}:{label:string;token:string;ink:string;th
  return <div ref={ref} className="kit-swatch" style={{background:`var(${token})`,color:`var(${ink})`}}><span>{label}</span><code>{value}</code></div>;
 }
 export default function DesignSystem(){
- const[theme,setTheme]=useState('day'),[active,setActive]=useState(0),[sound,setSound]=useState(true),[menu,setMenu]=useState(false);
- const selected=themes.find(t=>t.id===theme)!,icons=['menu','rest','beach','sound','settings'] as const,labels=['메뉴','쉬기','해변으로','소리','설정'];
+ const[theme,setTheme]=useState('day'),[active,setActive]=useState(0),[menu,setMenu]=useState(false);
+ const selected=themes.find(t=>t.id===theme)!;
  return <main className={`sea sea-ui-kit ${selected.classes}`}>
   <header><div className="brand"><SeaBrand/></div><label className="kit-theme">확인할 환경<select value={theme} onChange={e=>setTheme(e.target.value)}>{themes.map(t=><option key={t.id} value={t.id}>{t.label}</option>)}</select></label></header>
   <h1>나의 작은 바다 디자인 시스템</h1>
@@ -41,12 +41,12 @@ export default function DesignSystem(){
     <button className="sea-button sea-button--primary" onClick={()=>setMenu(true)}>실제 바다 메뉴 열기</button>
    </section>
    <section className="kit-card"><h2>온보딩 조작부</h2>
-    <div className="sea-start-dock" role="group" aria-label="버튼 사용법 미리보기">{icons.map((name,i)=><button key={name} aria-pressed={active===i} onClick={()=>setActive(i)}><DockIcon name={name}/><span>{labels[i]}</span></button>)}</div>
+    <SeaTabBar label="버튼 사용법 미리보기" items={seaMainTabs} active={seaMainTabs[active]?.id||'sea'} onSelect={id=>setActive(seaMainTabs.findIndex(t=>t.id===id))}/>
     <div className="sea-start-actions"><button className="sea-start-back">이전</button><button className="sea-start-primary">바다 시작하기</button></div>
    </section>
    <section className="kit-card"><h2>게임 하단바</h2>
-    <MobileDock actionLabel="쉬기" actionIcon="rest" seated={false} diving={false} cruise={false} sound={sound} settingsOpen={active===4} wardrobeOpen={active===0} onWardrobe={()=>setActive(0)} onTravel={()=>setActive(1)} onBeach={()=>setActive(2)} onSound={()=>setSound(!sound)} onSettings={()=>setActive(4)}/>
-    <p>실제 게임과 같은 하단바 컴포넌트입니다. 소리 버튼과 선택 상태를 확인할 수 있습니다.</p>
+    <SeaTabBar items={seaMainTabs} active={seaMainTabs[active]?.id||'sea'} onSelect={id=>setActive(seaMainTabs.findIndex(t=>t.id===id))}/>
+    <p>실제 게임과 같은 하단바 컴포넌트입니다. 기본 탭의 선택 상태와 아이콘·글자 간격을 확인할 수 있습니다.</p>
    </section>
   </div>
   <p>이 페이지는 공통 게임 UI의 검토 화면입니다. ASMR의 화면 배치와 기존 개별 컴포넌트 스타일은 별도 검토가 필요합니다.</p>
