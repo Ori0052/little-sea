@@ -1,0 +1,31 @@
+/* Snow-only travel and original Christmas decorations. */
+.winter-world{position:absolute;inset:0;pointer-events:none}
+.winter-decoration{position:absolute;transform:translate(-50%,-94%);pointer-events:none}
+.winter-decoration svg{display:block;width:100%;height:auto}
+.winter-gift{position:absolute;transform:translate(-50%,-85%);min-width:44px;min-height:44px;padding:0;pointer-events:auto;z-index:12;background:none;border:0}
+.winter-gift svg{display:block;width:100%;height:auto;filter:drop-shadow(0 2px 4px #839ea833)}
+.winter-gift span{display:block;width:max-content;max-width:140px;margin:3px auto 0;padding:5px 9px;border:1px solid var(--sea-line);border-radius:12px;background:var(--sea-glass);color:var(--sea-text);font-size:12px;line-height:1.5;white-space:nowrap}
+.sea .winter-riding .person-art>svg{overflow:visible;animation:none;clip-path:none}
+.sea .winter-moving .person-art>svg{animation:winter-glide 2.2s ease-in-out infinite}
+.sea .winter-moving .winter-reindeer{animation:reindeer-glide .85s ease-in-out infinite}
+.sea .my-person[data-snow=true] .avatar-footprint{width:54px;height:10px;left:50%;top:81%;border:0;transform:translateX(-50%);background:radial-gradient(ellipse,#789aaa28,transparent 70%);animation:none;box-shadow:none}
+.sea .my-person.winter-riding .avatar-footprint:before,.sea .my-person.winter-riding .avatar-footprint:after{content:'';position:absolute;width:36px;height:2px;border-radius:50%;background:#f4f9f0b8;top:2px;left:4px;transform:rotate(-8deg);box-shadow:3px 3px 0 #7c9aaa30}
+.sea .my-person.winter-riding .avatar-footprint:after{left:17px;top:8px}
+.sea .my-person.winter-moving .avatar-footprint:before,.sea .my-person.winter-moving .avatar-footprint:after{width:46px;animation:ski-tracks 1.2s ease-in-out infinite}
+.winter-equipment{margin:20px 0;padding:18px 0;border-block:1px solid var(--sea-line);text-align:left}
+.winter-equipment h3{margin:0 0 10px;font-size:16px;font-weight:500;color:var(--sea-text)}
+.winter-equipment>div{display:grid;gap:10px;margin-top:14px}
+.sea .winter-equipment button{display:flex;align-items:center;gap:12px;width:100%;min-height:76px;padding:12px;text-align:left;font-size:14px}
+.winter-equipment button svg{width:84px;height:48px;flex:none;overflow:visible}
+.winter-equipment button span{display:block;min-width:0;line-height:1.6}
+.winter-equipment button small,.winter-collected small{display:block;margin-top:4px;font-size:12px;line-height:1.7;color:inherit;white-space:normal}
+.sea .winter-equipment button[aria-pressed=true]:not(:disabled){background:var(--sea-action);border-color:var(--sea-action);color:var(--sea-action-ink)}
+@media(hover:hover){.sea .winter-equipment button[aria-pressed=true]:not(:disabled):hover{background:var(--sea-action-hover);border-color:var(--sea-action-hover);color:var(--sea-action-ink)}}
+.sea .winter-equipment button[aria-pressed=true]:not(:disabled):active{background:var(--sea-action-pressed);border-color:var(--sea-action-pressed);color:var(--sea-action-ink)}
+.winter-collected{display:flex;align-items:center;gap:14px;margin:14px 0 24px;padding:16px;border:1px solid var(--sea-line);border-radius:16px;background:var(--sea-soft);color:var(--sea-soft-ink)}
+.winter-collected svg{width:104px;height:60px;flex:none;overflow:visible}
+@keyframes winter-glide{50%{transform:translateY(-1.2px) rotate(-1.5deg)}}
+@keyframes reindeer-glide{50%{transform:translateY(-1.8px)}}
+@keyframes ski-tracks{50%{opacity:.55;translate:-3px 1px}}
+@media(max-width:380px){.sea .winter-equipment button{gap:10px;padding:10px}.winter-equipment button svg{width:64px}}
+@media(prefers-reduced-motion:reduce){.sea .winter-moving .person-art>svg,.sea .winter-moving .winter-reindeer,.sea .my-person.winter-moving .avatar-footprint:before,.sea .my-person.winter-moving .avatar-footprint:after{animation:none}}

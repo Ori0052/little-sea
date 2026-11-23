@@ -12,8 +12,8 @@ export function useGameSounds({sound,volume,mood,thunder,actor,boat,paused,biteA
  useEffect(()=>{let nextStep=0,nextThunder=Date.now()+45000,lastSeat:number|null=null,initialized=false,blocked=false,lastRest=false,lastStorm=false;const biteSeen=new Set<number>();const timer=setInterval(()=>{const s=latest.current,a=actor.current,now=Date.now(),away=document.hidden&&!!seaPlatform(),audible=s.sound&&!s.paused&&!away&&!blocked;setSeaSoundEnabled(audible,s.volume);const seat=s.boat?.selfSeat??null;
  if(initialized&&seat!==lastSeat&&audible)playSeaSound('boarding');lastSeat=seat;initialized=true;
  const moving=s.boat&&seat!==null?boatPosition(s.boat,now+offset.current).moving:!!a?.raft&&!!a.moving;
- if(audible&&moving)playSeaSound('rowing',{loop:true});else stopSeaSound('rowing');
- if(audible&&a?.moving&&!a.raft&&seat===null&&(a.depth??0)<.7&&seaLand(a.x,a.z,a.view)&&now>=nextStep){nextStep=now+620;playSeaSound('step')}
+ if(audible&&moving&&s.mood!=='snow')playSeaSound('rowing',{loop:true});else stopSeaSound('rowing');
+ if(audible&&s.mood!=='snow'&&a?.moving&&!a.raft&&seat===null&&(a.depth??0)<.7&&seaLand(a.x,a.z,a.view)&&now>=nextStep){nextStep=now+620;playSeaSound('step')}
  if(audible&&s.biteAt!==null&&now+s.clockOffset>=s.biteAt&&now+s.clockOffset<s.biteAt+30000&&!biteSeen.has(s.biteAt)){biteSeen.add(s.biteAt);if(biteSeen.size>8)biteSeen.delete(biteSeen.values().next().value!);playSeaSound('discovery')}
  const storm=hasThunder(s.mood,s.thunder);if(storm&&!lastStorm)nextThunder=now+thunderDelay(true);lastStorm=storm;if(storm&&!s.paused&&!document.hidden&&!blocked&&now>=nextThunder){nextThunder=now+thunderDelay(false);if(audible)playSeaSound('thunder');else window.dispatchEvent(new Event('sea-lightning'))}if(!storm){nextThunder=now+4500;stopSeaSound('thunder')}
  if(audible&&a?.rest&&!lastRest)playSeaSound('discovery');lastRest=!!a?.rest;

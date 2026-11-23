@@ -235,3 +235,6 @@
 .sea .audio input{accent-color:var(--sea-brand-primary)}
 @media(hover:hover){.sea :is(.sea-night-entry,.moods>button[aria-pressed=true],.view-switch>button[aria-pressed=true]):not(:disabled):hover{background:var(--sea-action-hover);border-color:var(--sea-action-hover);color:var(--sea-action-ink)}}
 .sea :is(.sea-night-entry,.moods>button[aria-pressed=true],.view-switch>button[aria-pressed=true]):not(:disabled):active{background:var(--sea-action-pressed);border-color:var(--sea-action-pressed);color:var(--sea-action-ink)}
+
+/* Desktop controls wrap as complete controls instead of squeezing labels vertically. */
+@media(min-width:641px){.sea footer .controls{flex-wrap:wrap;gap:10px 14px;max-width:1320px;margin-inline:auto}.sea footer .controls>:is(button,.audio,.moods){flex-shrink:0}.sea footer .controls>button{white-space:nowrap;word-break:keep-all}.sea footer .controls .moods{max-width:100%}.sea footer .controls .audio{flex-wrap:nowrap}}

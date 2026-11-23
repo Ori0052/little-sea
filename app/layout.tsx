@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import './sea-design-system.css';
+import './sea-winter.css';
 import './sea-asmr.css';
 const siteUrl='https://little-sea.rhfenrdltkfk.chatgpt.site';
 const title='나의 작은 바다';
