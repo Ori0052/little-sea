@@ -1,7 +1,7 @@
 /* ASMR layout uses a shared 8 / 12 / 16 / 24 / 32 / 48px spacing scale. */
 .sea-asmr {
  --asmr-ink:#273353; --asmr-muted:#616681; --asmr-line:#c9c4d9;
- --asmr-card:#fffaf6bc; --asmr-accent:#7963a2; --asmr-button-ink:#fff;
+ --asmr-card:#fffaf6bc; --asmr-accent:var(--sea-brand-primary); --asmr-button-ink:var(--sea-brand-ink);
  --asmr-gutter:24px; --asmr-section-gap:32px; --asmr-control-gap:12px;
  position:relative; min-height:100svh; box-sizing:border-box;
  background:radial-gradient(ellipse at 82% 40%,#e7e0f3 0,transparent 65%),linear-gradient(150deg,#fbf3e9,#f1e9ed);
@@ -44,14 +44,14 @@
 .asmr-sound-detail label>svg {flex-shrink:0}
 .asmr-sound-detail input {width:100%;min-width:0;accent-color:var(--asmr-accent);height:28px}
 .asmr-sound-detail .sr-only {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-.asmr-play {display:grid;place-items:center;flex-shrink:0;width:52px;height:52px;border-radius:50%;background:#e2d8ef;color:#635181}
+.asmr-play {display:grid;place-items:center;flex-shrink:0;width:52px;height:52px;border-radius:50%;background:var(--sea-brand-primary);color:var(--sea-brand-ink)}
 .asmr-tools {display:flex;gap:var(--asmr-control-gap);margin:var(--asmr-section-gap) 0}
 .asmr-tools button {flex:1;min-width:0;min-height:80px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--asmr-ink);padding:16px 8px;border:1px solid #ffffff80;border-radius:20px;background:#ffffff35}
 .asmr-tools button:hover {background:#ffffff70}
 .asmr-tools svg {width:23px;height:23px;stroke-width:1.6}
 .asmr-tools span {font-size:14px;line-height:1.6}
 .asmr-primary,.asmr-secondary {border-radius:28px;min-height:56px;padding:16px 24px;display:flex;align-items:center;justify-content:center;gap:12px;text-align:center}
-.asmr-primary {background:linear-gradient(120deg,#8a73ae,#716296);color:var(--asmr-button-ink);font:500 19px/1.5 'Maru Buri',serif;box-shadow:0 6px 16px #6652821a}
+.asmr-primary {background:var(--sea-brand-primary);color:var(--asmr-button-ink);font:500 19px/1.5 'Maru Buri',serif;box-shadow:0 6px 16px #6652821a}
 .asmr-secondary {border:1px solid var(--asmr-line);background:#ffffff66;color:var(--asmr-ink)}
 .asmr-game-link {align-self:center;font-size:14px;line-height:1.8;color:var(--asmr-muted);margin-top:24px;padding:12px 16px;text-decoration:underline;text-underline-offset:4px}
 .asmr-error {font-size:14px;line-height:1.9;color:#8b3c58;text-align:center;margin:16px 0}
@@ -64,18 +64,18 @@
 .sea-experience-choice .asmr-heading {margin-top:48px}
 .asmr-night {
  --asmr-ink:#eee9f4;--asmr-muted:#c1bed5;--asmr-line:#7e769e;
- --asmr-card:#343654ac;--asmr-accent:#b5a2d6;--asmr-button-ink:#172039;
+ --asmr-card:#343654ac;--asmr-accent:var(--sea-brand-primary);--asmr-button-ink:var(--sea-brand-ink);
  background:radial-gradient(ellipse at 55% 52%,#242e4d,transparent 75%),#131b30;color:var(--asmr-ink);color-scheme:dark;
 }
 .asmr-night .asmr-sound-symbol {background:linear-gradient(140deg,#655d8e,#354a65);color:#dfdcf3}
-.asmr-night .asmr-play {background:#695c8c;color:#f1edf8}
+.asmr-night .asmr-play {background:var(--sea-brand-primary);color:var(--sea-brand-ink)}
 .asmr-night .asmr-primary {color:#fff}
 .asmr-night .asmr-secondary {background:#34355266}
 .asmr-night .asmr-sound-card {border-color:#6a6281}
 .asmr-night .asmr-tools button {background:#34365466;border-color:#7e769e66}
 .asmr-night .asmr-tools button:hover,.asmr-night .asmr-icon-button:hover {background:#b5a2d622}
 .asmr-dialog {
- --asmr-ink:#273353;--asmr-muted:#616681;--asmr-accent:#7963a2;--asmr-line:#c9c4d9;
+ --asmr-ink:#273353;--asmr-muted:#616681;--asmr-accent:var(--sea-brand-primary);--asmr-line:#c9c4d9;
  width:min(480px,calc(100% - 40px));max-height:80svh;overflow:auto;padding:28px;
  border:1px solid #d5cde2;border-radius:26px;background:#fbf5f3;color:var(--asmr-ink);font:400 16px/1.8 'Noto Sans KR',sans-serif;
 }
@@ -85,7 +85,7 @@
 .asmr-dialog-heading>button {display:grid;place-items:center;width:48px;border-radius:50%;background:#eae2f2;flex-shrink:0}
 .asmr-options {display:grid;gap:16px}
 .asmr-options>button,.asmr-archive>button {min-height:56px;padding:16px 20px;border:1px solid var(--asmr-line);border-radius:16px;background:#fff9;color:var(--asmr-ink)}
-.asmr-options>button[aria-pressed=true] {background:#7963a2;color:white}
+.asmr-options>button[aria-pressed=true] {background:var(--sea-brand-primary);color:var(--sea-brand-ink)}
 .asmr-options p,.asmr-archive p {font-size:14px;line-height:1.9;color:var(--asmr-muted);margin:8px 0}
 .asmr-archive>button {display:flex;width:100%;gap:16px;align-items:center;text-align:left;margin-bottom:16px}
 .asmr-archive time {font-size:12px;color:var(--asmr-muted);white-space:nowrap}
@@ -111,17 +111,17 @@
 .sea-sleep-panel .sleep-sources {margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .sea-sleep-panel .sleep-sources button {display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:16px 8px;border:1px solid var(--asmr-line);border-radius:18px;font-size:14px;line-height:1.6;min-height:88px;white-space:nowrap;background:#242b46;color:#ddd9ee}
 .sea-sleep-panel .sleep-sources button span {font-size:24px;line-height:1;flex-shrink:0}
-.sea-sleep-panel .sleep-sources button[aria-pressed=true] {background:#7c6a9e;color:#fff;border-color:#b6a8ce}
+.sea-sleep-panel .sleep-sources button[aria-pressed=true] {background:var(--sea-brand-primary);color:var(--sea-brand-ink);border-color:var(--sea-brand-primary)}
 .sea-sleep-panel .sleep-volume {font-size:14px;line-height:1.8;color:var(--asmr-muted);display:flex;gap:20px;align-items:center;justify-content:space-between;margin:24px 0 0;min-height:44px}
-.sea-sleep-panel .sleep-volume input {width:65%;min-width:0;max-width:300px;height:32px;accent-color:#b5a2d6}
+.sea-sleep-panel .sleep-volume input {width:65%;min-width:0;max-width:300px;height:32px;accent-color:var(--sea-brand-primary)}
 .sea-sleep-panel .sleep-timer-controls {margin-top:var(--asmr-section-gap)}
 .sea-sleep-panel .sleep-timers {margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .sea-sleep-panel .sleep-timers button {border-radius:24px;min-width:0;min-height:48px;padding:12px 8px;font-size:14px;line-height:1.6;white-space:nowrap;color:#e5dff0;border:1px solid #7c7698;background:transparent}
-.sea-sleep-panel .sleep-timers button[aria-pressed=true] {background:#7c6a9e;color:white}
+.sea-sleep-panel .sleep-timers button[aria-pressed=true] {background:var(--sea-brand-primary);color:var(--sea-brand-ink)}
 .sea-sleep-panel .sea-sleep-content .sleep-timer-status {font-size:13px;line-height:1.9;margin:16px 0 0;color:#c9c1d9}
 .sea-sleep-panel .sleep-actions {display:grid;gap:16px;margin-top:var(--asmr-section-gap)}
 .sea-sleep-panel :is(.sleep-primary,.sleep-dim-button) {display:block;min-height:56px;width:100%;padding:16px 24px;border:1px solid #a796c6;border-radius:28px;font-size:16px;line-height:1.5;margin:0}
-.sea-sleep-panel .sleep-primary {background:#776298;color:white}
+.sea-sleep-panel .sleep-primary {background:var(--sea-brand-primary);color:var(--sea-brand-ink)}
 .sea-sleep-panel .sleep-dim-button {background:transparent;color:#f0ebf7}
 .sea-sleep-panel .sea-sleep-content>small {display:block;font-size:12px;line-height:1.9;color:#b1acc2;margin-top:24px}
 .sea-sleep-panel.is-dimmed .sea-sleep-content {display:none}
@@ -149,3 +149,12 @@
  .asmr-edition {max-width:80px}
 }
 @media(prefers-reduced-motion:reduce) {.asmr-scene{animation:none}.asmr-scene img{transition:none}}
+
+/* One filled action color across entry, rest, sleep and game; outline actions keep their role. */
+.sea-sleep-panel .sleep-primary{border-color:var(--sea-brand-primary)}
+@media(hover:hover){
+ .sea-asmr :is(.asmr-primary,.asmr-play,.sleep-primary,.sleep-sources button[aria-pressed=true],.sleep-timers button[aria-pressed=true]):not(:disabled):hover,.asmr-dialog .asmr-options>button[aria-pressed=true]:hover{background:var(--sea-brand-hover);border-color:var(--sea-brand-hover);color:var(--sea-brand-ink)}
+}
+.sea-asmr :is(.asmr-primary,.asmr-play,.sleep-primary,.sleep-sources button[aria-pressed=true],.sleep-timers button[aria-pressed=true]):not(:disabled):active,.asmr-dialog .asmr-options>button[aria-pressed=true]:active{background:var(--sea-brand-pressed);border-color:var(--sea-brand-pressed);color:var(--sea-brand-ink)}
+.sea-asmr :is(.asmr-primary,.asmr-play,.sleep-primary):disabled{background:var(--sea-disabled);border-color:var(--sea-disabled);color:var(--sea-disabled-ink);box-shadow:none;cursor:not-allowed}
+.asmr-night :is(button,a,input):focus-visible{outline-color:var(--sea-brand-focus-dark)}
