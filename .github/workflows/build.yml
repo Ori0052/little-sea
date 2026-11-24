@@ -52,6 +52,7 @@ jobs:
           node tests/winter-carol.test.mjs
           node tests/sea-live-weather.test.mjs
           node tests/sea-sleep.test.mjs
+          node tests/sea-rest-journal.test.mjs
       - name: Build web
         run: npm run build
       - name: Build Apps in Toss

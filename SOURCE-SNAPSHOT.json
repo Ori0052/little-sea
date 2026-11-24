@@ -1,5 +1,5 @@
 {
-  "sourceCommit": "059c9e34c0302f08eee7f13cd595f8dd53b617bc",
+  "sourceCommit": "96d1e42b4eb0bddb3849eb2a841143b9c5803f5c",
   "site": "https://little-sea.rhfenrdltkfk.chatgpt.site",
-  "note": "Game-first entry with one-time onboarding; two plain play/rest choices in the shared bottom bar; compact rest controls and a single sleep flow."
+  "note": "Source snapshot for nightly ocean rest player and optional local sleep diary; web + Apps in Toss builds."
 }

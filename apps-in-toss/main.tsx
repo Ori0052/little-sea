@@ -8,6 +8,7 @@ import '../app/sea-design-system.css';
 import '../app/sea-winter.css';
 import '../app/sea-asmr.css';
 import '../app/sea-navigation.css';
+import '../app/sea-rest.css';
 class GameBoundary extends Component<{children:ReactNode},{failed:boolean}>{state={failed:false};static getDerivedStateFromError(){return{failed:true}}render(){return this.state.failed?<section className="toss-start-message"><h1>바다를 다시 불러올게요.</h1><p>잠시 연결을 확인하고 다시 시작해 주세요.</p><button className="sea-button sea-button--primary" onClick={()=>location.reload()}>다시 시작하기</button></section>:this.props.children}}
 function App(){const[exit,setExit]=useState(false),[closing,setClosing]=useState(false),[error,setError]=useState(''),dialog=useRef<HTMLDialogElement>(null);
  useEffect(()=>subscribeHost(()=>{if(!dismissSeaLayer())setExit(true)}),[]);

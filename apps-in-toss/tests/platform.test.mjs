@@ -31,3 +31,6 @@ test('native Back restores dimmed sleep before leaving ASMR and backups include 
 
 
 test('seasonal carol is bundled with its exact hash and its separate opt-out is backed up',async()=>{const {AppsInTossBundle}=await import('@apps-in-toss/ait-format');const {createHash}=await import('node:crypto');const manifest=JSON.parse(await readFile(new URL('../../public/audio/seasonal/manifest.json',import.meta.url),'utf8'));const reader=AppsInTossBundle.reader(await readFile(new URL('../little-sea.ait',import.meta.url)));const bytes=await reader.readEntry('sources'+manifest.file);assert.equal(createHash('sha256').update(bytes).digest('hex'),manifest.outputSha256);assert.equal(bytes.length,manifest.outputBytes);assert(runtime.savedKeys.includes('little-sea-winter-carol-v1'))});
+
+
+test('nightly preferences are backed up while private diary and playback histories stay local',()=>{assert(runtime.savedKeys.includes('little-sea-rest-preferences-v1'));assert(runtime.savedKeys.includes('little-sea-entry-v1'));assert(!runtime.savedKeys.includes('little-sea-sleep-diary-v1'));assert(!runtime.savedKeys.includes('little-sea-rest-sessions-v1'))});
