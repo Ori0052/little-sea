@@ -53,6 +53,12 @@ jobs:
           node tests/sea-live-weather.test.mjs
           node tests/sea-sleep.test.mjs
           node tests/sea-rest-journal.test.mjs
+          node tests/cozy-fishing.test.mjs
+          node tests/cozy-character.test.mjs
+          node tests/cozy-projection.test.mjs
+          node tests/cozy-ocean.test.mjs
+          node tests/cozy-landscape.test.mjs
+          node tests/cozy-underwater.test.mjs
       - name: Build web
         run: npm run build
       - name: Build Apps in Toss

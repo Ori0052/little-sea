@@ -1,0 +1,15 @@
+{
+  "file": "/models/cozy-character.glb",
+  "source": "scripts/blender/build_cozy_character.py",
+  "authoringTool": "Blender 4.3.2",
+  "provenance": "Original procedural human model for My Little Sea; no third-party meshes or textures",
+  "sha256": "b4b75a6e146c2262cdba0f1a68422ee0c8781461c215c35eeb357c042d9f5165",
+  "sizeBytes": 982392,
+  "triangles": 34940,
+  "meshNodes": 23,
+  "materials": 3,
+  "front": "+Z",
+  "up": "+Y",
+  "feetOrigin": 0,
+  "seatHipHeight": 0.305
+}

@@ -1,0 +1,58 @@
+/* One Blender / Three.js world. DOM layers retain interaction, labels and focus. */
+.cozy-world{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity .65s ease}
+.cozy-world>canvas{display:block;width:100%;height:100%;pointer-events:none}
+.sea.cozy-ready .cozy-world{opacity:1}
+.sea.cozy-ready>.sea-world-content>.grain{display:none}
+.sea.cozy-ready.shore:after{display:none}
+.sea.cozy-ready .cozy-world canvas{filter:none}
+
+/* Replace artwork, never its hit area: these wrappers own the game actions. */
+.sea.cozy-ready .my-person .person-art,
+.sea.cozy-ready .remote-person>div,
+.sea.cozy-ready .party-boat-hull,
+.sea.cozy-ready .island-campfire,
+.sea.cozy-ready .beach-camp>svg,
+.sea.cozy-ready .paper-boat .boat-visual>svg{visibility:hidden}
+.sea.cozy-ready .my-person{filter:none}
+.sea.cozy-ready .my-person>.my-name{background:#fffaf0de;border:1px solid #fff9;color:#4d625d;box-shadow:0 3px 12px #32483d12;text-shadow:none}
+.sea.cozy-ready .remote-person{filter:none}
+.sea.cozy-ready .remote-person>.peer-name{background:#fffaf0ed;color:#4d625d;border:1px solid #fff9}
+.sea.cozy-ready .paper-boat .boat-sparkle{color:#fff4cf;text-shadow:0 0 9px #edca80;filter:drop-shadow(0 0 3px #fff7d3)}
+.sea.cozy-ready .beach-camp{filter:none}
+.sea.cozy-ready .beach-camp>span{border:1px solid #fff8;background:#fff9eddd;color:#52685e;border-radius:12px;padding:3px 8px;box-shadow:0 3px 14px #35534112}
+.sea.cozy-ready .ground-ping{filter:drop-shadow(0 1px 5px #4b777c55)}
+.sea.cozy-ready .ground-ping>i{border-color:#fff9db;background:#fff6ce18;box-shadow:0 0 8px #fff5d258,inset 0 0 5px #fff7dc42}
+
+/* The same navigation and lavender action palette, softened against warm scenery. */
+.sea.cozy-ready{--cozy-glass:#fffaf0c9;--cozy-glass-line:#fff9;--cozy-glass-ink:#344f50}
+.sea.cozy-ready:is(.night,.auto-weather-night,.thunder,.submerged){--cozy-glass:#203349d9;--cozy-glass-line:#70809355;--cozy-glass-ink:#e8eef5}
+.sea.cozy-ready .view-switch{background:var(--cozy-glass);border-color:var(--cozy-glass-line);box-shadow:0 8px 28px #233e4312;backdrop-filter:blur(18px);color:var(--cozy-glass-ink)}
+.sea.cozy-ready .view-switch>button{color:var(--cozy-glass-ink)}
+.sea.cozy-ready .view-switch>button[aria-pressed=true]{background:var(--sea-brand-primary);color:var(--sea-brand-ink);box-shadow:0 3px 9px #43315f15}
+.sea.cozy-ready .sea-main-tabs{box-shadow:0 12px 36px #233f4624}
+.sea.cozy-ready .sea-game-actions>button{box-shadow:0 5px 22px #24434b20}
+.sea.cozy-ready .online-badge{padding:7px 11px;border:1px solid var(--cozy-glass-line);border-radius:24px;background:var(--cozy-glass);color:var(--cozy-glass-ink);box-shadow:0 5px 20px #2a4b4910;backdrop-filter:blur(14px);text-shadow:none}
+.sea.cozy-ready .intro{text-shadow:0 2px 24px #fff8}
+.sea.cozy-ready:is(.night,.auto-weather-night,.thunder) .intro{text-shadow:0 2px 20px #0d1b3b66}
+.sea.cozy-ready:is(.night,.auto-weather-night,.thunder) .my-person>.my-name,
+.sea.cozy-ready:is(.night,.auto-weather-night,.thunder) .remote-person>.peer-name{background:#253a51e8;color:#e9edf6;border-color:#62768660}
+@media(prefers-reduced-motion:reduce){.cozy-world{transition:none}.sea.cozy-ready .paper-boat .boat-sparkle{animation:none}}
+
+.sea.cozy-ready .beach-shell .boat-visual>svg,
+.sea.cozy-ready .drifting-raft>svg,
+.sea.cozy-ready .winter-gift>svg,
+.sea.cozy-ready .winter-decoration,
+.sea.cozy-ready .island-treasure>svg{visibility:hidden}
+
+.sea.cozy-ready .sea-find>svg{visibility:hidden}
+.sea.cozy-ready .player-world.dream-world{bottom:0}
+
+/* Leave the scenery and the character room to breathe after the first-visit guide. */
+.sea.cozy-ready .intro{left:5.2%;top:148px;max-width:310px;padding:16px 20px;border-radius:22px;background:linear-gradient(110deg,#f5f5e9c2,#f7f6ed66 72%,#fff0);backdrop-filter:blur(4px)}
+.sea.cozy-ready .intro h1{font-size:36px;line-height:1.4;margin:12px 0}
+.sea.cozy-ready .intro p{font-size:12px;margin:10px 0}.sea.cozy-ready .rotation-hint{font-size:10px;line-height:1.7}
+.sea.cozy-ready:is(.night,.auto-weather-night,.thunder) .intro{background:linear-gradient(110deg,#182d46c2,#20364d66 72%,#fff0)}
+@media(max-width:640px){.sea.cozy-ready .intro{left:20px;top:138px;max-width:235px;padding:12px 16px}.sea.cozy-ready .intro h1{font-size:28px;line-height:1.35;margin:10px 0}.sea.cozy-ready .intro p{font-size:11px;line-height:1.7}.sea.cozy-ready .intro .eyebrow{font-size:9px;letter-spacing:.08em}}
+@media(max-height:640px){.sea.cozy-ready .intro{top:108px;padding:10px 14px}.sea.cozy-ready .intro h1{font-size:24px;margin:6px 0}.sea.cozy-ready .intro p{display:none}.sea.cozy-ready .intro .rotation-hint{font-size:9px}}
+
+.sea.cozy-ready .fishing-lines>g>path,.sea.cozy-ready .fishing-lines>g>ellipse,.sea.cozy-ready .fishing-lines>g>g{visibility:hidden}

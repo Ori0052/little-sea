@@ -1,0 +1,114 @@
+{
+  "generator": "Blender 4.3.2",
+  "style": "Original soft coastal diorama kit",
+  "front": "Three +Z",
+  "up": "Three +Y",
+  "origins": "ground center; every kit root at local 0,0,0",
+  "nodes": [
+    {
+      "name": "CozyPalm",
+      "meshes": 38,
+      "triangles": 4748,
+      "sizeThree": [
+        2.53,
+        3.047,
+        2.683
+      ]
+    },
+    {
+      "name": "CozyOak",
+      "meshes": 137,
+      "triangles": 8604,
+      "sizeThree": [
+        2.755,
+        3.54,
+        2.315
+      ]
+    },
+    {
+      "name": "CozyPine",
+      "meshes": 7,
+      "triangles": 2468,
+      "sizeThree": [
+        1.926,
+        3.14,
+        1.95
+      ]
+    },
+    {
+      "name": "CozyRock",
+      "meshes": 1,
+      "triangles": 288,
+      "sizeThree": [
+        1.08,
+        0.618,
+        0.832
+      ]
+    },
+    {
+      "name": "CozyCampfire",
+      "meshes": 67,
+      "triangles": 7388,
+      "sizeThree": [
+        1.233,
+        0.406,
+        1.247
+      ]
+    },
+    {
+      "name": "CozyLantern",
+      "meshes": 9,
+      "triangles": 1832,
+      "sizeThree": [
+        0.31,
+        0.65,
+        0.28
+      ]
+    },
+    {
+      "name": "CozyGrass",
+      "meshes": 20,
+      "triangles": 1018,
+      "sizeThree": [
+        0.285,
+        0.333,
+        0.34
+      ]
+    },
+    {
+      "name": "CozyBoat",
+      "meshes": 34,
+      "triangles": 7352,
+      "sizeThree": [
+        6.34,
+        0.835,
+        4.595
+      ]
+    },
+    {
+      "name": "CozyTent",
+      "meshes": 21,
+      "triangles": 3189,
+      "sizeThree": [
+        2.114,
+        1.2,
+        1.98
+      ]
+    },
+    {
+      "name": "CozyPaperboat",
+      "meshes": 3,
+      "triangles": 8,
+      "sizeThree": [
+        0.36,
+        0.18,
+        0.12
+      ]
+    }
+  ],
+  "triangles": 36895,
+  "bytes": 1207180,
+  "sha256": "3806107c07a1f54fe437fbcfbb3cccc6d97bdb5d0918ea5d905de2bafaa1c655",
+  "source": "scripts/blender/build_cozy_world.py",
+  "license": "Original authored geometry and materials; no external textures or downloads"
+}

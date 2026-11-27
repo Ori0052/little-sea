@@ -34,3 +34,6 @@ test('seasonal carol is bundled with its exact hash and its separate opt-out is 
 
 
 test('nightly preferences are backed up while private diary and playback histories stay local',()=>{assert(runtime.savedKeys.includes('little-sea-rest-preferences-v1'));assert(runtime.savedKeys.includes('little-sea-entry-v1'));assert(!runtime.savedKeys.includes('little-sea-sleep-diary-v1'));assert(!runtime.savedKeys.includes('little-sea-rest-sessions-v1'))});
+
+
+test('both authored Blender models are bundled with their exact provenance hashes and no remote resources',async()=>{const {AppsInTossBundle}=await import('@apps-in-toss/ait-format');const {createHash}=await import('node:crypto');const reader=AppsInTossBundle.reader(await readFile(new URL('../little-sea.ait',import.meta.url)));for(const name of ['cozy-character','cozy-world']){const manifest=JSON.parse(await readFile(new URL('../../public/models/'+name+'-manifest.json',import.meta.url),'utf8'));const bytes=await reader.readEntry('sources/models/'+name+'.glb');assert.equal(createHash('sha256').update(bytes).digest('hex'),manifest.sha256);assert(bytes.length<1300000);const n=new DataView(bytes.buffer,bytes.byteOffset,bytes.byteLength).getUint32(12,true);const gltf=JSON.parse(new TextDecoder().decode(bytes.slice(20,20+n)));assert(!(gltf.images||[]).length);assert(gltf.buffers.every(b=>!b.uri));}});
